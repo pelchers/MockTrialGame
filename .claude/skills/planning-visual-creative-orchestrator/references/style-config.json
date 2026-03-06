@@ -1,0 +1,283 @@
+{
+  "version": "1.0.0",
+  "passesPerStyle": 2,
+  "outputRoot": ".docs/design/concepts",
+  "domains": {
+    "data-vis": {
+      "description": "Interactive data visualizations using charting and graphing libraries",
+      "styles": {
+        "bar-chart": {
+          "displayName": "Bar / Column Chart",
+          "direction": "Classic bar and column charts showing categorical comparisons. Grouped, stacked, and horizontal variants.",
+          "preferredLibraries": ["chart-js", "echarts", "d3"],
+          "mockDataset": "project-metrics",
+          "passes": {
+            "1": {
+              "palette": { "primary": "#6366F1", "secondary": "#EC4899", "background": "#0F172A", "surface": "#1E293B", "text": "#F8FAFC" },
+              "direction": "Dark theme with gradient-filled bars, animated entrance, hover tooltips with data details. Grouped bar layout comparing 6 projects across 4 metrics.",
+              "library": "chart-js",
+              "antiRepeat": []
+            },
+            "2": {
+              "palette": { "primary": "#059669", "secondary": "#D97706", "background": "#FFFFFF", "surface": "#F0FDF4", "text": "#1A1A2E" },
+              "direction": "Light editorial theme with horizontal bars, clean typography, inline data labels. Stacked bar showing task composition per project.",
+              "library": "echarts",
+              "antiRepeat": ["dark theme", "grouped vertical bars", "gradient fills"]
+            }
+          }
+        },
+        "network-graph": {
+          "displayName": "Network / Force-Directed Graph",
+          "direction": "Node-link diagrams showing relationships between entities. Force simulation, zoom/pan, node clustering.",
+          "preferredLibraries": ["d3", "echarts"],
+          "mockDataset": "entity-relationships",
+          "passes": {
+            "1": {
+              "palette": { "primary": "#8B5CF6", "secondary": "#06B6D4", "background": "#030712", "surface": "#111827", "text": "#E5E7EB" },
+              "direction": "Deep space theme with glowing nodes, pulsing connections, force simulation. Nodes are IDEA-MANAGEMENT entities (User, Project, Idea, KanbanCard). Click to expand relationships.",
+              "library": "d3",
+              "antiRepeat": []
+            },
+            "2": {
+              "palette": { "primary": "#F59E0B", "secondary": "#EF4444", "background": "#FFFBEB", "surface": "#FEF3C7", "text": "#292524" },
+              "direction": "Warm paper/ink style with hand-drawn-feel edges (Rough.js overlay), circular layout, entity labels as handwritten notes. Schema planner data model visualization.",
+              "library": "d3",
+              "antiRepeat": ["dark theme", "glowing effects", "force simulation layout"]
+            }
+          }
+        },
+        "treemap": {
+          "displayName": "Treemap / Hierarchical",
+          "direction": "Nested rectangles showing hierarchical data proportions. Drill-down interaction, breadcrumb trail.",
+          "preferredLibraries": ["d3", "echarts"],
+          "mockDataset": "project-hierarchy",
+          "passes": {
+            "1": {
+              "palette": { "primary": "#3B82F6", "secondary": "#10B981", "background": "#020617", "surface": "#0F172A", "text": "#F1F5F9" },
+              "direction": "Neon-bordered treemap cells on dark background. Shows project → ideas → kanban cards hierarchy. Click to zoom into subtrees. Animated transitions between levels.",
+              "library": "d3",
+              "antiRepeat": []
+            },
+            "2": {
+              "palette": { "primary": "#7C3AED", "secondary": "#F472B6", "background": "#FAF5FF", "surface": "#EDE9FE", "text": "#1E1B4B" },
+              "direction": "Pastel gradient fills with rounded corners on cells. Same hierarchy but as a sunburst/radial treemap variant. Hover reveals detail tooltip with entity metadata.",
+              "library": "echarts",
+              "antiRepeat": ["dark background", "neon borders", "rectangular treemap layout"]
+            }
+          }
+        }
+      }
+    },
+    "animation": {
+      "description": "Continuous motion, interactive animations, and animated scenes using JavaScript animation libraries",
+      "styles": {
+        "nature-landscape": {
+          "displayName": "Nature Landscape Scene",
+          "direction": "Animated natural landscape with environmental effects — clouds drifting, leaves falling, water flowing, day/night cycle.",
+          "preferredLibraries": ["gsap", "p5js", "anime-js"],
+          "passes": {
+            "1": {
+              "palette": { "primary": "#22C55E", "secondary": "#3B82F6", "background": "#0C4A6E", "surface": "#164E63", "text": "#F0FDFA", "accent": "#FBBF24" },
+              "direction": "Autumn landscape in a decorative picture frame. Rolling hills with orange/red trees, falling leaves (30+ individual leaf particles with rotation and drift), layered clouds moving at different speeds, subtle wind effect on grass. Canvas-based rendering. The scene is housed inside an ornate golden picture frame border with shadow effect.",
+              "library": "p5js",
+              "sceneDescription": "A framed autumn landscape: golden picture frame border (CSS), inside is a p5.js canvas showing rolling green-to-brown hills, 5-8 deciduous trees with orange/red/yellow foliage, falling leaves (randomized size, rotation, horizontal drift, different fall speeds), 3 cloud layers moving left-to-right at different velocities, a soft gradient sky transitioning from blue to warm sunset orange near the horizon. Optional: a small animated stream or river in the valley.",
+              "antiRepeat": []
+            },
+            "2": {
+              "palette": { "primary": "#6EE7B7", "secondary": "#93C5FD", "background": "#1E3A5F", "surface": "#0F172A", "text": "#F8FAFC", "accent": "#FDE68A" },
+              "direction": "Spring meadow landscape in a modern minimalist white frame. Bright green grass, wildflowers swaying, butterflies (SVG animated paths), puffy cumulus clouds, birds flying in V-formation. GSAP-driven with timeline sequencing. Parallax depth layers.",
+              "library": "gsap",
+              "sceneDescription": "A framed spring meadow: clean white/silver modern frame (CSS), inside is a multi-layer parallax scene. Back layer: gradient sky with 4-5 fluffy clouds moving slowly. Mid layer: green rolling hills with scattered wildflowers (CSS or SVG) gently swaying. Front layer: tall grass blades swaying with wind effect. Animated elements: 3-5 butterflies following bezier paths (GSAP motionPath), 2-3 birds in V-formation crossing the sky, occasional flower petals carried by wind. All driven by GSAP master timeline with staggered starts.",
+              "antiRepeat": ["autumn colors", "canvas rendering", "falling leaves", "golden frame"]
+            }
+          }
+        },
+        "particle-systems": {
+          "displayName": "Particle Systems",
+          "direction": "Abstract particle animations with emergent behavior — flocking, attraction, repulsion, trails.",
+          "preferredLibraries": ["p5js", "three-js", "gsap"],
+          "passes": {
+            "1": {
+              "palette": { "primary": "#A78BFA", "secondary": "#F472B6", "background": "#020617", "surface": "#0F172A", "text": "#E2E8F0" },
+              "direction": "200+ particles with mouse-reactive attraction/repulsion. Particles leave fading trails. Color based on velocity. Click spawns burst of new particles. WebGL rendering for performance.",
+              "library": "p5js",
+              "sceneDescription": "Full-viewport particle system on dark background. 200 particles with: position, velocity, acceleration. Mouse cursor acts as attractor (particles drift toward it). Click creates explosion burst of 50 new particles. Particles have fading trails (low alpha background clear). Color mapped to speed (slow=purple, medium=pink, fast=white). Particles wrap around screen edges.",
+              "antiRepeat": []
+            },
+            "2": {
+              "palette": { "primary": "#34D399", "secondary": "#FCD34D", "background": "#000000", "surface": "#111111", "text": "#FAFAFA" },
+              "direction": "3D particle cloud using Three.js. 5000 particles forming a rotating sphere that deforms on mouse hover. Depth-of-field blur effect. Particles connect with lines when close together.",
+              "library": "three-js",
+              "sceneDescription": "Three.js 3D particle system. 5000 particles arranged in a sphere (radius 300). Sphere rotates slowly. On mouse hover, particles near cursor are repelled outward creating a deformation. Particles within distance 30 connect with semi-transparent lines. Color: green-to-yellow gradient based on Y position. OrbitControls for camera rotation. Post-processing bloom effect if possible.",
+              "antiRepeat": ["2D canvas", "mouse attraction", "fading trails", "velocity-based color"]
+            }
+          }
+        },
+        "wave-motion": {
+          "displayName": "Wave / Fluid Motion",
+          "direction": "Sinusoidal waves, fluid simulation, liquid-like motion with mathematical underpinnings.",
+          "preferredLibraries": ["p5js", "gsap", "anime-js"],
+          "passes": {
+            "1": {
+              "palette": { "primary": "#0EA5E9", "secondary": "#6366F1", "background": "#0C0A1D", "surface": "#1A1637", "text": "#E0E7FF" },
+              "direction": "Layered ocean waves with depth — 5 wave layers at different frequencies, amplitudes, and speeds. Front waves are opaque, back waves are translucent. Mouse Y position controls wave height. Ambient foam particles on wave crests.",
+              "library": "p5js",
+              "sceneDescription": "Full-viewport ocean wave scene. 5 sine wave layers with increasing frequency and decreasing amplitude from back to front. Colors progress from deep blue (back) to bright cyan (front). Each wave uses perlin noise for organic variation. Mouse Y position scales wave amplitude. White foam particles spawn at wave crests and drift down. Subtle gradient sky above waves.",
+              "antiRepeat": []
+            },
+            "2": {
+              "palette": { "primary": "#F97316", "secondary": "#EF4444", "background": "#1C1917", "surface": "#292524", "text": "#FDE68A" },
+              "direction": "Audio-reactive equalizer waves — simulate sound frequencies as animated bar waves. Warm fire colors. GSAP-driven with elastic easing. Click changes 'track' (different wave pattern presets).",
+              "library": "gsap",
+              "sceneDescription": "64 vertical bars arranged in an arc/circle or horizontal row, each representing a frequency band. Heights animate using GSAP with elastic easing to simulate audio frequencies. Colors shift from orange (low freq) to red (high freq) with glow effect. 4 preset 'tracks' cycling on click: bass-heavy, vocal, electronic, ambient. Each track defines different height distributions. Bars have reflection effect below. Background has subtle radial gradient.",
+              "antiRepeat": ["ocean/water theme", "sine waves", "blue palette", "p5.js canvas"]
+            }
+          }
+        }
+      }
+    },
+    "graphic-design": {
+      "description": "Static and interactive visual compositions — generative art, 3D renders, illustrations",
+      "styles": {
+        "globe-3d": {
+          "displayName": "3D Interactive Globe",
+          "direction": "Rotating Earth globe with data points, connections, and interactive controls.",
+          "preferredLibraries": ["three-js", "d3"],
+          "passes": {
+            "1": {
+              "palette": { "primary": "#3B82F6", "secondary": "#10B981", "background": "#030712", "surface": "#111827", "text": "#F9FAFB" },
+              "direction": "Wireframe globe with glowing connection arcs between major cities. Each arc represents an IDEA-MANAGEMENT user connection. Auto-rotates, drag to spin. Dots pulse on hover showing city name and user count.",
+              "library": "three-js",
+              "sceneDescription": "Three.js scene with wireframe Earth sphere (radius 200). Globe rendered as wireframe with subtle blue glow. 15-20 city points placed at lat/lng coordinates as small glowing spheres. Curved arcs (QuadraticBezierCurve3) connecting pairs of cities with animated dash pattern (flowing along the arc). Auto-rotation on Y axis. OrbitControls for manual spin. Hover on city dot shows tooltip with city name + user count. Star field background (2000 tiny white dots on a large background sphere). Ambient blue-white lighting.",
+              "antiRepeat": []
+            },
+            "2": {
+              "palette": { "primary": "#F59E0B", "secondary": "#8B5CF6", "background": "#FFFBEB", "surface": "#FEF3C7", "text": "#1C1917" },
+              "direction": "Flat/paper-craft style globe using D3 orthographic projection. Hand-drawn borders, warm earth tones, animated rotation. Data pins for project locations. Click country to zoom. Illustrated clouds floating over the map.",
+              "library": "d3",
+              "sceneDescription": "D3 orthographic projection globe on a warm cream background. Countries filled with muted earth tones (tan, sage, terracotta). Country borders as slightly rough/hand-drawn lines (strokeDasharray variation). Auto-rotation via d3.timer. 8-10 data pins (small illustrated markers) at cities showing project names. Click any country to zoom-rotate to center it. 3-4 illustrated cloud SVGs floating across the globe surface with CSS animation. Drag to manually rotate. Clean typography for labels.",
+              "antiRepeat": ["dark theme", "wireframe", "Three.js", "glowing effects", "star field"]
+            }
+          }
+        },
+        "generative-geometry": {
+          "displayName": "Generative Geometric Art",
+          "direction": "Procedural geometric compositions using mathematical rules — fractals, tiling, symmetry, recursion.",
+          "preferredLibraries": ["p5js", "two-js", "paper-js"],
+          "passes": {
+            "1": {
+              "palette": { "primary": "#E11D48", "secondary": "#7C3AED", "background": "#FAFAF9", "surface": "#F5F5F4", "text": "#1C1917" },
+              "direction": "Recursive circle-packing composition. Circles of varying sizes fill the canvas, each containing smaller circles. Color varies by depth level. Click to regenerate with new seed. Gentle breathing animation — circles slowly pulse in size.",
+              "library": "p5js",
+              "sceneDescription": "p5.js canvas filling the showcase area. Circle-packing algorithm: start with canvas bounds, place circles that don't overlap, recursively fill remaining space with smaller circles (min radius 3px). Color palette: depth 0 = rose-500, depth 1 = violet-600, depth 2 = pink-400, depth 3+ = neutral grays. Each circle has a thin stroke. Gentle pulse animation: circles oscillate between 0.95x and 1.05x their radius using sin(frameCount * 0.02 + depthOffset). 'Regenerate' button creates new random seed and re-runs packing. Display seed number in corner.",
+              "antiRepeat": []
+            },
+            "2": {
+              "palette": { "primary": "#0891B2", "secondary": "#4F46E5", "background": "#020617", "surface": "#0F172A", "text": "#E2E8F0" },
+              "direction": "Islamic-inspired geometric tiling with animated construction. Start from a central point, tiles expand outward with staggered animation. SVG-based with crisp vector lines. Infinite zoom on scroll wheel.",
+              "library": "two-js",
+              "sceneDescription": "Two.js SVG rendering. Central star/rosette pattern that tiles outward in concentric rings. Each ring animates in with a 200ms stagger after the previous ring completes. Tile pattern: 8-pointed star with interlocking kite shapes (classic Islamic geometric pattern). Colors: cyan lines on dark navy background, occasional indigo fills on alternate shapes. Scroll wheel zooms in/out revealing more detail levels. 'Regenerate' button changes the base polygon (6, 8, 10, 12-sided variants). Display current tiling parameters.",
+              "antiRepeat": ["circle packing", "organic shapes", "light background", "p5.js"]
+            }
+          }
+        }
+      }
+    }
+  },
+  "mockDatasets": {
+    "project-metrics": {
+      "description": "IDEA-MANAGEMENT project performance metrics",
+      "data": [
+        { "name": "Wavz.fm Music Platform", "tasks_total": 47, "tasks_done": 31, "ideas_count": 23, "collaborators": 5, "status": "active" },
+        { "name": "Campus Learning App", "tasks_total": 62, "tasks_done": 18, "ideas_count": 41, "collaborators": 8, "status": "active" },
+        { "name": "RepoSaver Backup Tool", "tasks_total": 28, "tasks_done": 28, "ideas_count": 12, "collaborators": 2, "status": "done" },
+        { "name": "Storyboarder Video Editor", "tasks_total": 85, "tasks_done": 42, "ideas_count": 56, "collaborators": 12, "status": "active" },
+        { "name": "Event Invites System", "tasks_total": 34, "tasks_done": 20, "ideas_count": 15, "collaborators": 4, "status": "active" },
+        { "name": "Portfolio Builder Pro", "tasks_total": 19, "tasks_done": 19, "ideas_count": 8, "collaborators": 1, "status": "archived" }
+      ]
+    },
+    "entity-relationships": {
+      "description": "IDEA-MANAGEMENT data model entity relationships",
+      "nodes": [
+        { "id": "user", "label": "User", "group": "core", "fields": ["id", "email", "displayName", "role", "subscriptionTier"] },
+        { "id": "project", "label": "Project", "group": "core", "fields": ["id", "name", "slug", "description", "status", "tags"] },
+        { "id": "idea", "label": "Idea", "group": "content", "fields": ["id", "title", "body", "tags", "priority", "projectId"] },
+        { "id": "kanban-card", "label": "KanbanCard", "group": "content", "fields": ["id", "title", "description", "column", "priority", "assignee"] },
+        { "id": "kanban-column", "label": "KanbanColumn", "group": "content", "fields": ["id", "name", "order", "boardId"] },
+        { "id": "whiteboard-node", "label": "WhiteboardNode", "group": "content", "fields": ["id", "type", "content", "x", "y", "width", "height"] },
+        { "id": "audit-log", "label": "AuditLog", "group": "system", "fields": ["id", "action", "entityType", "entityId", "userId", "timestamp"] },
+        { "id": "subscription", "label": "Subscription", "group": "system", "fields": ["id", "userId", "tier", "status", "expiresAt"] }
+      ],
+      "edges": [
+        { "source": "user", "target": "project", "label": "owns", "type": "1:N" },
+        { "source": "user", "target": "subscription", "label": "has", "type": "1:1" },
+        { "source": "project", "target": "idea", "label": "contains", "type": "1:N" },
+        { "source": "project", "target": "kanban-column", "label": "has board", "type": "1:N" },
+        { "source": "kanban-column", "target": "kanban-card", "label": "contains", "type": "1:N" },
+        { "source": "idea", "target": "kanban-card", "label": "promotes to", "type": "1:1" },
+        { "source": "project", "target": "whiteboard-node", "label": "contains", "type": "1:N" },
+        { "source": "user", "target": "audit-log", "label": "generates", "type": "1:N" }
+      ]
+    },
+    "project-hierarchy": {
+      "description": "Hierarchical project data for treemap visualization",
+      "tree": {
+        "name": "All Projects",
+        "children": [
+          {
+            "name": "Wavz.fm Music Platform",
+            "children": [
+              { "name": "Ideas", "value": 23 },
+              { "name": "Backlog", "value": 8 },
+              { "name": "In Progress", "value": 5 },
+              { "name": "Review", "value": 3 },
+              { "name": "Done", "value": 31 }
+            ]
+          },
+          {
+            "name": "Campus Learning App",
+            "children": [
+              { "name": "Ideas", "value": 41 },
+              { "name": "Backlog", "value": 20 },
+              { "name": "In Progress", "value": 14 },
+              { "name": "Review", "value": 10 },
+              { "name": "Done", "value": 18 }
+            ]
+          },
+          {
+            "name": "Storyboarder Video Editor",
+            "children": [
+              { "name": "Ideas", "value": 56 },
+              { "name": "Backlog", "value": 18 },
+              { "name": "In Progress", "value": 15 },
+              { "name": "Review", "value": 10 },
+              { "name": "Done", "value": 42 }
+            ]
+          },
+          {
+            "name": "Event Invites System",
+            "children": [
+              { "name": "Ideas", "value": 15 },
+              { "name": "Backlog", "value": 6 },
+              { "name": "In Progress", "value": 5 },
+              { "name": "Review", "value": 3 },
+              { "name": "Done", "value": 20 }
+            ]
+          }
+        ]
+      }
+    },
+    "timeline-data": {
+      "description": "Time-series data for line/area charts",
+      "data": [
+        { "date": "2026-01-06", "new_ideas": 5, "completed_tasks": 3, "active_users": 12 },
+        { "date": "2026-01-13", "new_ideas": 8, "completed_tasks": 6, "active_users": 15 },
+        { "date": "2026-01-20", "new_ideas": 12, "completed_tasks": 9, "active_users": 18 },
+        { "date": "2026-01-27", "new_ideas": 7, "completed_tasks": 11, "active_users": 20 },
+        { "date": "2026-02-03", "new_ideas": 15, "completed_tasks": 14, "active_users": 22 },
+        { "date": "2026-02-10", "new_ideas": 10, "completed_tasks": 8, "active_users": 19 },
+        { "date": "2026-02-17", "new_ideas": 18, "completed_tasks": 16, "active_users": 25 }
+      ]
+    }
+  }
+}

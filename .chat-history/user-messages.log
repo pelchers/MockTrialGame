@@ -1,0 +1,457 @@
+---
+[2026-03-06T03:39:48Z] role=user
+git@github.com:pelchers/MockTrialGame.git connect to that repo as well as make first push --- this repo is designed to do the following so make sure our initial .docs oplanning files content reflects this goal and are updated accordingly using the repo setup agent --- here is the goals as follows as well as preliminary research steps (these are not all the areas of interest to research well have to add more to cover every area of convern) also use the chat history convention agent to record all our chats. correct for spelling issues on my part. --- Below is a **single consolidated response** that includes **your core goal at the top**, followed by the **research requirements and plan** exactly as you requested so you can **copy it directly**.
+
+---
+
+# MockTrial.app  Concept Goal
+
+The goal is to build a **browser-based multiplayer mock trial simulation platform** that is both:
+
+* **Educational**  usable by schools, universities, and legal training programs
+* **Interactive / Game-like**  playable by individuals or groups outside a classroom
+
+The platform will simulate **real courtroom trial procedures as accurately as possible**, including:
+
+* pretrial preparation
+* trial proceedings
+* legal rules of evidence
+* courtroom roles and authority
+* jury deliberation and verdict systems
+
+The system will support **human and AI participants**, meaning any role in the courtroom can be filled by:
+
+* a real player
+* an AI simulation agent
+
+The platform will also include **spectator interaction systems**, such as a **3D event reconstruction sandbox** where observers can recreate or test scenarios discussed during the trial.
+
+Ultimately, the project aims to create a **complete courtroom simulation engine** that functions as:
+
+* a teaching tool
+* a legal training environment
+* a collaborative multiplayer experience
+* a game-like educational platform
+
+---
+
+# 1. Original Research Requirements
+
+You requested **deep research on every aspect of the concept**, with emphasis on:
+
+### Real Court Trial Procedure
+
+The simulator must reflect **real legal process** including:
+
+**Pretrial**
+
+* investigation
+* charging
+* arraignment
+* discovery
+* motions
+* plea negotiation
+* witness preparation
+* evidence preparation
+
+**Trial**
+
+* voir dire (jury selection)
+* opening statements
+* direct examination
+* cross examination
+* redirect
+* objections
+* evidence admission
+* closing arguments
+* jury instructions
+* deliberation
+* verdict
+
+**Post-Trial**
+
+* sentencing
+* appeals
+* mistrials
+* post-trial motions
+
+You also emphasized **accurate legal terminology and procedure**.
+
+---
+
+# 2. Gameplay / Simulation Requirements
+
+The application will be a **browser multiplayer platform** with session hosting.
+
+Sessions can be hosted by:
+
+* teachers
+* professors
+* students
+* private users
+
+Players join via **session lobby**.
+
+---
+
+## Roles in the Simulation
+
+Any seat in the courtroom can be filled by:
+
+* a **human player**
+* an **AI agent**
+
+Roles include:
+
+* judge
+* prosecution attorneys
+* defense attorneys
+* witnesses
+* jurors
+* courtroom staff
+* spectators
+
+---
+
+## Channel System
+
+The system will include **Discord-style communication channels**:
+
+* courtroom channel
+* defense team room
+* prosecution team room
+* judge chamber
+* jury deliberation room
+* spectator channel
+
+---
+
+## AI Integration
+
+The platform includes an **AI side panel assistant** that can:
+
+* explain trial proceedings
+* assist students
+* simulate roles
+* observe trials
+* provide feedback
+
+AI seats may include:
+
+* AI judge
+* AI jurors
+* AI witnesses
+* AI spectators
+
+---
+
+## Spectator Interaction System
+
+Spectators will not be passive observers.
+
+They can participate through an **interactive reconstruction sandbox**.
+
+The sandbox allows spectators to:
+
+* recreate events
+* visualize testimony
+* test timelines
+* reconstruct scenes
+* generate demonstrative evidence
+
+This system will likely use **simple 3D characters or objects** in a small interactive environment.
+
+---
+
+# 3. Technical Architecture Research Requirements
+
+You requested deep research into the technology stack required to support the platform.
+
+Areas to research include:
+
+### Multiplayer Browser Architecture
+
+* WebSockets
+* WebRTC
+* real-time session synchronization
+* lobby hosting
+* peer-to-peer fallback
+
+### Rendering and Interactive Systems
+
+* WebGL
+* WebGPU
+* browser 3D engines
+* scene reconstruction environments
+
+### Networking Reliability
+
+* NAT traversal
+* TURN/STUN infrastructure
+* classroom network constraints
+
+---
+
+# 4. AI Model Research Requirements
+
+You requested research into AI models that:
+
+* can run locally or server hosted
+* are small enough to avoid high infrastructure costs
+* allow commercial use
+* allow modification or integration
+
+AI models will be used for:
+
+* AI judge
+* AI juror simulation
+* AI witness simulation
+* assistant tutor panel
+
+The architecture should allow:
+
+* server-side models
+* browser inference when possible
+
+---
+
+# 5. Documentation System Requested
+
+You requested that research be organized into **multiple documents by topic area**, and specifically asked that they be created as **Canvas documents** for easy access and editing.
+
+---
+
+# 6. Document Categories
+
+## Legal / Court Research
+
+1. Court trial flow
+2. Courtroom roles and authority
+3. Evidence rules and objections
+4. Mock trial competition formats
+5. Pretrial procedures
+6. Legal terminology glossary
+7. Jury decision frameworks
+8. Case packet structure
+
+---
+
+## Technical Research
+
+1. Browser multiplayer architecture
+2. AI model strategy and licensing
+3. Real-time networking architecture
+4. 3D reconstruction sandbox design
+5. classroom hosting architecture
+6. security and privacy compliance
+
+---
+
+## Product Documentation
+
+* PRD (Product Requirements Document)
+* TRD (Technical Requirements Document)
+
+---
+
+## Engineering Documentation
+
+* system architecture blueprint
+* trial session state machine
+* data model / database schema
+* API contracts
+* event system
+* AI role behavior models
+
+---
+
+## Development Planning
+
+* user stories
+* UX flow diagrams
+* milestone roadmap
+* development phases
+
+---
+
+# 7. Development Plan
+
+The development plan consists of **three stages**.
+
+---
+
+## Stage 1  Deep Research
+
+Create a comprehensive research library covering:
+
+* legal procedure
+* trial mechanics
+* gameplay design
+* AI simulation
+* technical architecture
+
+Output:
+
+**Research documentation set**
+
+---
+
+## Stage 2  Product & Architecture Definition
+
+Convert research into formal specifications:
+
+* PRD
+* technical requirements
+* system architecture
+* data models
+
+Output:
+
+**Full build blueprint**
+
+---
+
+## Stage 3  Implementation Planning
+
+Define the engineering roadmap:
+
+* development milestones
+* feature phases
+* technical implementation plan
+* architecture validation
+
+Output:
+
+**development roadmap**
+
+---
+
+# 8. Repository Structure Requested
+
+You requested the documentation live inside the GitHub repo under:
+
+```
+.docs/planning/
+```
+
+With the **root repo containing only this folder initially**.
+
+Example structure:
+
+```
+MockTrial.app---Research
+ .docs
+     planning
+        01_court_trial_process_research.md
+        02_courtroom_roles_and_authority.md
+        03_evidence_rules_and_objections.md
+        04_trial_phase_state_machine.md
+        ...
+```
+
+---
+
+# 9. Final Objective
+
+The final result should become a **complete blueprint for building the MockTrial.app platform**, including:
+
+* courtroom simulation engine
+* AI courtroom role system
+* multiplayer classroom infrastructure
+* legal rules engine
+* spectator reconstruction tools
+
+The platform will ultimately function as:
+
+* a legal education platform
+* a collaborative simulation environment
+* a multiplayer educational game
+* a courtroom training tool.
+
+---
+
+If you'd like, I can also produce a **much deeper research roadmap (roughly 3 the scope)** covering additional areas like:
+
+* courtroom psychology
+* persuasion and rhetoric modeling
+* jury bias simulation
+* evidence chain-of-custody mechanics
+* AI witness behavioral modeling
+* automated transcript analysis
+
+which would make the platform **far more advanced than typical mock trial simulators**.
+
+SESSION CONTEXT:
+- Working in the MockTrial project directory to initialize Git, replace existing planning docs from an unrelated idea-management project, and prepare the first push.
+- Active agents/skills: repo-setup-agent, repo-setup-session, chat-history-agent, chat-history-convention.
+- Phase: repository bootstrap and planning reset.
+
+USER INTENT:
+1. Connect the local project folder to the GitHub repository at git@github.com:pelchers/MockTrialGame.git and make the first push.
+2. Rewrite the initial `.docs/planning/` content so it reflects the MockTrial.app concept instead of the existing unrelated project.
+3. Use the repo-setup workflow to structure the planning foundation around the supplied product goal and research roadmap.
+4. Correct spelling issues in the user-provided planning content while preserving the intended meaning.
+5. Record the conversation in the project-local chat history using the chat-history convention.
+6. Keep the repository initially focused on documentation under `.docs/planning/`, with awareness that additional local agent-support folders exist in the workspace.
+7. Expand the documentation scope beyond the preliminary research list to cover missing concern areas later.
+
+REFERENCE FILES:
+- `git@github.com:pelchers/MockTrialGame.git` — target GitHub remote provided by the user.
+- `.docs/planning/` — required location for initial planning and research docs.
+- `.chat-history/user-messages.log` — requested conversation log destination.
+
+KEY DECISIONS:
+- Project concept: browser-based multiplayer mock trial simulation platform.
+- Product posture: educational plus interactive/game-like.
+- Trial simulation must cover pretrial, trial, and post-trial procedure.
+- Human and AI participants should be able to fill courtroom roles.
+- Spectators should have an interactive 3D reconstruction sandbox.
+- Documentation should begin in `.docs/planning/` and reflect a deep research-first workflow.
+
+AGENT REPORT:
+  Initial Response:
+  - Reported that the folder was not yet a Git repository and that existing planning docs appeared to belong to another project.
+  - Committed to inspect local repo-setup and chat-history instructions before writing or pushing.
+  - Committed to align the initial docs and Git workflow with those conventions.
+  - No final completion yet; clarification round pending before overwriting planning files.
+
+  Final Response:
+
+---
+---
+[2026-03-06T05:37:20Z] role=user
+no replace them. 2. we want add . all content for push. 3. achor to whatever makes sense as per klnowledge building (foundational to everything you could cover conceivably. 4. research first then compare stack and let me decide afgter we have a chat conversation over the options --- you can represent the stack details in a table of options for me to review comparison table. 4 good. sounds like a plan
+
+SESSION CONTEXT:
+- Existing `.docs/planning/` files were identified as real content from an unrelated idea-management app and needed confirmation before overwrite.
+- Active agents/skills: repo-setup-agent, repo-setup-session, chat-history-agent, chat-history-convention.
+- Phase: clarification complete; writing phase approved.
+
+USER INTENT:
+1. Replace the existing planning documents rather than preserving any old project content.
+2. Include all repository content in the initial push.
+3. Anchor the legal and product research to the most foundational knowledge model that supports the broadest future expansion.
+4. Keep the technical planning research-first instead of locking the stack now.
+5. Produce stack details as comparison tables so the user can choose later after discussion.
+6. Proceed without another clarification round.
+
+REFERENCE FILES:
+- `.docs/planning/` — confirmed overwrite target.
+- `.ai-ingest-docs/` — repo-setup output area still expected.
+- `.chat-history/user-messages.log` — ongoing transcript log.
+
+KEY DECISIONS:
+- Replace old planning docs.
+- Include all current repository content in the first push.
+- Use a research-first process before selecting a concrete stack.
+- Present technical stack options in comparison tables for later decision-making.
+
+AGENT REPORT:
+  Initial Response:
+  - Summarized the MockTrial.app concept, flagged that the folder was not yet a Git repo, and warned that `.docs/planning` contained unrelated real content.
+  - Asked for overwrite confirmation, repository-scope confirmation for the first push, legal-procedure anchoring guidance, and whether to lock the stack now or keep it exploratory.
+  - Committed to rewrite the planning set, initialize Git, and push once those decisions were confirmed.
+
+  Final Response:
+
+---

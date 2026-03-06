@@ -1,0 +1,10 @@
+# Codex team config (repo-scoped).
+# Keep this minimal and override as needed.
+
+# Example defaults (uncomment and edit as desired):
+# sandbox_mode = "read-only"
+# approval_policy = "on-request"
+# model = "gpt-5"
+
+# Advanced example:
+# file_opener = "vscode"

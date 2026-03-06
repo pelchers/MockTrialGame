@@ -1,0 +1,21 @@
+# ADR Template (Structure)
+
+This is a template layout for ADR orchestration.
+
+```
+.adr/
+── README
+── orchestration/
+│  └── <SESSION_NAME>/
+│     ├── primary_task_list.md
+│     ├── prd.md
+│     ├── technical_requirements.md
+│     └── notes.md
+── current/
+│  └── <SESSION_NAME>/
+│     └── phase_1.md
+── history/
+   └── <SESSION_NAME>/
+      ├── phase_1.md
+      └── phase_1_review.md
+```

@@ -1,0 +1,75 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".codex/hooks/scripts/session-start-setup.sh",
+            "description": "Project context and environment checks"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".codex/hooks/scripts/pre-bash-validator.sh",
+            "description": "Validate bash commands before execution"
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".codex/hooks/scripts/block-sensitive-files.sh",
+            "description": "Block edits to sensitive files"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".codex/hooks/scripts/post-format-code.sh",
+            "description": "Auto-format supported files after edits"
+          },
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.file_path' | { read file_path; if [ -n \"$file_path\" ]; then .codex/hooks/scripts/scan-secrets.sh \"$file_path\"; fi; }",
+            "description": "Scan edited files for secrets"
+          },
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.file_path' | { read file_path; if [ -n \"$file_path\" ] && [ -f \"$file_path\" ]; then .codex/hooks/scripts/large-file-guard.sh \"$file_path\" 512; fi; }",
+            "description": "Block overly large files"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": ".codex/hooks/scripts/git-context-report.sh",
+            "description": "Capture a git context report"
+          },
+          {
+            "type": "command",
+            "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .codex/hooks/scripts/orchestrator-poke.ps1",
+            "description": "Spawn next phase subagent if queued"
+          }
+        ]
+      }
+    ]
+  }
+}

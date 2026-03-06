@@ -1,0 +1,242 @@
+[
+  {
+    "jobId": "signal-brutalist-pass-1",
+    "jobKey": "signal-brutalist/pass-1",
+    "styleId": "signal-brutalist",
+    "styleLabel": "Signal Brutalist",
+    "styleNotes": "Hard-edged poster systems, anti-polish typography, zero-softness component geometry.",
+    "pass": 1,
+    "variantSeed": "slab-grid-ruleset-v2",
+    "styleLayoutArchetypes": [
+      "slab-grid",
+      "stamp-ops-ledger"
+    ],
+    "outputDir": ".docs/planning/concepts/signal-brutalist/pass-1",
+    "validationDir": ".docs/planning/concepts/signal-brutalist/pass-1/validation",
+    "screenshotsDir": ".docs/planning/concepts/signal-brutalist/pass-1/validation/screenshots",
+    "handoffFile": ".docs/planning/concepts/signal-brutalist/pass-1/validation/handoff.json",
+    "inspirationFile": ".docs/planning/concepts/signal-brutalist/pass-1/validation/inspiration-crossreference.json",
+    "flags": [
+      "--style-id signal-brutalist",
+      "--pass 1",
+      "--output-dir .docs/planning/concepts/signal-brutalist/pass-1",
+      "--variant-seed slab-grid-ruleset-v2"
+    ]
+  },
+  {
+    "jobId": "signal-brutalist-pass-2",
+    "jobKey": "signal-brutalist/pass-2",
+    "styleId": "signal-brutalist",
+    "styleLabel": "Signal Brutalist",
+    "styleNotes": "Hard-edged poster systems, anti-polish typography, zero-softness component geometry.",
+    "pass": 2,
+    "variantSeed": "stamp-ops-ledger-v2",
+    "styleLayoutArchetypes": [
+      "slab-grid",
+      "stamp-ops-ledger"
+    ],
+    "outputDir": ".docs/planning/concepts/signal-brutalist/pass-2",
+    "validationDir": ".docs/planning/concepts/signal-brutalist/pass-2/validation",
+    "screenshotsDir": ".docs/planning/concepts/signal-brutalist/pass-2/validation/screenshots",
+    "handoffFile": ".docs/planning/concepts/signal-brutalist/pass-2/validation/handoff.json",
+    "inspirationFile": ".docs/planning/concepts/signal-brutalist/pass-2/validation/inspiration-crossreference.json",
+    "flags": [
+      "--style-id signal-brutalist",
+      "--pass 2",
+      "--output-dir .docs/planning/concepts/signal-brutalist/pass-2",
+      "--variant-seed stamp-ops-ledger-v2"
+    ]
+  },
+  {
+    "jobId": "aurora-glass-pass-1",
+    "jobKey": "aurora-glass/pass-1",
+    "styleId": "aurora-glass",
+    "styleLabel": "Aurora Glass",
+    "styleNotes": "Translucent spatial UI with atmospheric depth and premium command-surface polish.",
+    "pass": 1,
+    "variantSeed": "floating-dock-window-v2",
+    "styleLayoutArchetypes": [
+      "floating-dock-window",
+      "orbital-rail-prism"
+    ],
+    "outputDir": ".docs/planning/concepts/aurora-glass/pass-1",
+    "validationDir": ".docs/planning/concepts/aurora-glass/pass-1/validation",
+    "screenshotsDir": ".docs/planning/concepts/aurora-glass/pass-1/validation/screenshots",
+    "handoffFile": ".docs/planning/concepts/aurora-glass/pass-1/validation/handoff.json",
+    "inspirationFile": ".docs/planning/concepts/aurora-glass/pass-1/validation/inspiration-crossreference.json",
+    "flags": [
+      "--style-id aurora-glass",
+      "--pass 1",
+      "--output-dir .docs/planning/concepts/aurora-glass/pass-1",
+      "--variant-seed floating-dock-window-v2"
+    ]
+  },
+  {
+    "jobId": "aurora-glass-pass-2",
+    "jobKey": "aurora-glass/pass-2",
+    "styleId": "aurora-glass",
+    "styleLabel": "Aurora Glass",
+    "styleNotes": "Translucent spatial UI with atmospheric depth and premium command-surface polish.",
+    "pass": 2,
+    "variantSeed": "orbital-rail-prism-v2",
+    "styleLayoutArchetypes": [
+      "floating-dock-window",
+      "orbital-rail-prism"
+    ],
+    "outputDir": ".docs/planning/concepts/aurora-glass/pass-2",
+    "validationDir": ".docs/planning/concepts/aurora-glass/pass-2/validation",
+    "screenshotsDir": ".docs/planning/concepts/aurora-glass/pass-2/validation/screenshots",
+    "handoffFile": ".docs/planning/concepts/aurora-glass/pass-2/validation/handoff.json",
+    "inspirationFile": ".docs/planning/concepts/aurora-glass/pass-2/validation/inspiration-crossreference.json",
+    "flags": [
+      "--style-id aurora-glass",
+      "--pass 2",
+      "--output-dir .docs/planning/concepts/aurora-glass/pass-2",
+      "--variant-seed orbital-rail-prism-v2"
+    ]
+  },
+  {
+    "jobId": "ledger-editorial-pass-1",
+    "jobKey": "ledger-editorial/pass-1",
+    "styleId": "ledger-editorial",
+    "styleLabel": "Ledger Editorial",
+    "styleNotes": "Publication-grade storytelling shells with strong reading hierarchy and low-chrome controls.",
+    "pass": 1,
+    "variantSeed": "broadsheet-columns-v2",
+    "styleLayoutArchetypes": [
+      "broadsheet-columns",
+      "tabbed-legal-notebook"
+    ],
+    "outputDir": ".docs/planning/concepts/ledger-editorial/pass-1",
+    "validationDir": ".docs/planning/concepts/ledger-editorial/pass-1/validation",
+    "screenshotsDir": ".docs/planning/concepts/ledger-editorial/pass-1/validation/screenshots",
+    "handoffFile": ".docs/planning/concepts/ledger-editorial/pass-1/validation/handoff.json",
+    "inspirationFile": ".docs/planning/concepts/ledger-editorial/pass-1/validation/inspiration-crossreference.json",
+    "flags": [
+      "--style-id ledger-editorial",
+      "--pass 1",
+      "--output-dir .docs/planning/concepts/ledger-editorial/pass-1",
+      "--variant-seed broadsheet-columns-v2"
+    ]
+  },
+  {
+    "jobId": "ledger-editorial-pass-2",
+    "jobKey": "ledger-editorial/pass-2",
+    "styleId": "ledger-editorial",
+    "styleLabel": "Ledger Editorial",
+    "styleNotes": "Publication-grade storytelling shells with strong reading hierarchy and low-chrome controls.",
+    "pass": 2,
+    "variantSeed": "tabbed-legal-notebook-v2",
+    "styleLayoutArchetypes": [
+      "broadsheet-columns",
+      "tabbed-legal-notebook"
+    ],
+    "outputDir": ".docs/planning/concepts/ledger-editorial/pass-2",
+    "validationDir": ".docs/planning/concepts/ledger-editorial/pass-2/validation",
+    "screenshotsDir": ".docs/planning/concepts/ledger-editorial/pass-2/validation/screenshots",
+    "handoffFile": ".docs/planning/concepts/ledger-editorial/pass-2/validation/handoff.json",
+    "inspirationFile": ".docs/planning/concepts/ledger-editorial/pass-2/validation/inspiration-crossreference.json",
+    "flags": [
+      "--style-id ledger-editorial",
+      "--pass 2",
+      "--output-dir .docs/planning/concepts/ledger-editorial/pass-2",
+      "--variant-seed tabbed-legal-notebook-v2"
+    ]
+  },
+  {
+    "jobId": "industrial-terminal-pass-1",
+    "jobKey": "industrial-terminal/pass-1",
+    "styleId": "industrial-terminal",
+    "styleLabel": "Industrial Terminal",
+    "styleNotes": "Operator-heavy control environments, telemetry density, and machine-instrument metaphors.",
+    "pass": 1,
+    "variantSeed": "crt-command-console-v2",
+    "styleLayoutArchetypes": [
+      "crt-command-console",
+      "scada-wallboard-grid"
+    ],
+    "outputDir": ".docs/planning/concepts/industrial-terminal/pass-1",
+    "validationDir": ".docs/planning/concepts/industrial-terminal/pass-1/validation",
+    "screenshotsDir": ".docs/planning/concepts/industrial-terminal/pass-1/validation/screenshots",
+    "handoffFile": ".docs/planning/concepts/industrial-terminal/pass-1/validation/handoff.json",
+    "inspirationFile": ".docs/planning/concepts/industrial-terminal/pass-1/validation/inspiration-crossreference.json",
+    "flags": [
+      "--style-id industrial-terminal",
+      "--pass 1",
+      "--output-dir .docs/planning/concepts/industrial-terminal/pass-1",
+      "--variant-seed crt-command-console-v2"
+    ]
+  },
+  {
+    "jobId": "industrial-terminal-pass-2",
+    "jobKey": "industrial-terminal/pass-2",
+    "styleId": "industrial-terminal",
+    "styleLabel": "Industrial Terminal",
+    "styleNotes": "Operator-heavy control environments, telemetry density, and machine-instrument metaphors.",
+    "pass": 2,
+    "variantSeed": "scada-wallboard-grid-v2",
+    "styleLayoutArchetypes": [
+      "crt-command-console",
+      "scada-wallboard-grid"
+    ],
+    "outputDir": ".docs/planning/concepts/industrial-terminal/pass-2",
+    "validationDir": ".docs/planning/concepts/industrial-terminal/pass-2/validation",
+    "screenshotsDir": ".docs/planning/concepts/industrial-terminal/pass-2/validation/screenshots",
+    "handoffFile": ".docs/planning/concepts/industrial-terminal/pass-2/validation/handoff.json",
+    "inspirationFile": ".docs/planning/concepts/industrial-terminal/pass-2/validation/inspiration-crossreference.json",
+    "flags": [
+      "--style-id industrial-terminal",
+      "--pass 2",
+      "--output-dir .docs/planning/concepts/industrial-terminal/pass-2",
+      "--variant-seed scada-wallboard-grid-v2"
+    ]
+  },
+  {
+    "jobId": "playful-clay-pass-1",
+    "jobKey": "playful-clay/pass-1",
+    "styleId": "playful-clay",
+    "styleLabel": "Playful Clay",
+    "styleNotes": "Expressive, tactile, characterful systems with playful interaction language.",
+    "pass": 1,
+    "variantSeed": "sticker-workbench-v2",
+    "styleLayoutArchetypes": [
+      "sticker-workbench",
+      "comic-panel-workspace"
+    ],
+    "outputDir": ".docs/planning/concepts/playful-clay/pass-1",
+    "validationDir": ".docs/planning/concepts/playful-clay/pass-1/validation",
+    "screenshotsDir": ".docs/planning/concepts/playful-clay/pass-1/validation/screenshots",
+    "handoffFile": ".docs/planning/concepts/playful-clay/pass-1/validation/handoff.json",
+    "inspirationFile": ".docs/planning/concepts/playful-clay/pass-1/validation/inspiration-crossreference.json",
+    "flags": [
+      "--style-id playful-clay",
+      "--pass 1",
+      "--output-dir .docs/planning/concepts/playful-clay/pass-1",
+      "--variant-seed sticker-workbench-v2"
+    ]
+  },
+  {
+    "jobId": "playful-clay-pass-2",
+    "jobKey": "playful-clay/pass-2",
+    "styleId": "playful-clay",
+    "styleLabel": "Playful Clay",
+    "styleNotes": "Expressive, tactile, characterful systems with playful interaction language.",
+    "pass": 2,
+    "variantSeed": "comic-panel-workspace-v2",
+    "styleLayoutArchetypes": [
+      "sticker-workbench",
+      "comic-panel-workspace"
+    ],
+    "outputDir": ".docs/planning/concepts/playful-clay/pass-2",
+    "validationDir": ".docs/planning/concepts/playful-clay/pass-2/validation",
+    "screenshotsDir": ".docs/planning/concepts/playful-clay/pass-2/validation/screenshots",
+    "handoffFile": ".docs/planning/concepts/playful-clay/pass-2/validation/handoff.json",
+    "inspirationFile": ".docs/planning/concepts/playful-clay/pass-2/validation/inspiration-crossreference.json",
+    "flags": [
+      "--style-id playful-clay",
+      "--pass 2",
+      "--output-dir .docs/planning/concepts/playful-clay/pass-2",
+      "--variant-seed comic-panel-workspace-v2"
+    ]
+  }
+]

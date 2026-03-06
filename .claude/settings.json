@@ -1,0 +1,38 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.command' | { read cmd; if echo \"$cmd\" | grep -qE '^rm\\s+-rf\\s+/'; then echo 'BLOCKED: Cannot rm -rf from root directory' >&2; exit 2; fi; }",
+            "description": "Block dangerous rm -rf commands"
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "jq -r '.tool_input.file_path' | { read file_path; if echo \"$file_path\" | grep -qE '\\.(env|secret|key|pem)$'; then echo 'BLOCKED: Cannot modify sensitive files' >&2; exit 2; fi; }",
+            "description": "Block edits to sensitive files"
+          }
+        ]
+      }
+    ]
+  },
+  "_comments": {
+    "hooks": "Adapted from .codex hooks for Claude Code",
+    "available_hooks": [
+      "SessionStart",
+      "UserPromptSubmit",
+      "PreToolUse",
+      "PostToolUse",
+      "Stop",
+      "SessionEnd",
+      "Notification"
+    ]
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "version": 1,
+  "notes": "Approved sources for downloading media assets during concept generation. Assets are OPTIONAL — use only when they genuinely enhance the design. Prefer transparent PNGs and lightweight SVGs. Store all downloaded assets in the pass's assets/ subfolder.",
+  "policy": {
+    "required": false,
+    "maxAssetsPerPass": 10,
+    "maxTotalSizeKb": 2000,
+    "preferTransparentBackground": true,
+    "preferSvgOverPng": true,
+    "storageDir": "assets/",
+    "attributionRequired": false,
+    "downloadPrompt": "Only download assets when they would genuinely enhance the design beyond what CSS alone can achieve. A well-crafted CSS gradient or shape is always preferable to a generic stock image. Assets should feel curated and intentional, not decorative filler."
+  },
+  "sources": {
+    "illustrations": [
+      {
+        "name": "unDraw",
+        "url": "https://undraw.co/illustrations",
+        "type": "svg",
+        "license": "MIT (free, no attribution)",
+        "traits": ["flat illustrations", "customizable accent color", "tech/business themes"],
+        "prompt": "Open-source SVG illustrations with customizable accent colors. Download the SVG and change the fill color to match your palette. Best for empty states, onboarding sections, and hero illustrations. Avoid overuse — one per view maximum.",
+        "styleFit": ["mid-century-modern", "liquid", "retro-50s"]
+      },
+      {
+        "name": "Storyset by Freepik",
+        "url": "https://storyset.com",
+        "type": "svg",
+        "license": "Free with attribution",
+        "traits": ["animated SVGs", "multiple art styles", "customizable colors"],
+        "prompt": "Animated SVG illustrations in multiple styles (Rafiki, Bro, Amico, Pana, Cuate). Each style has a distinct aesthetic. Download as animated SVG for built-in motion. Great for dashboard empty states and loading views.",
+        "styleFit": ["liquid", "retro-50s", "mid-century-modern"]
+      }
+    ],
+    "icons": [
+      {
+        "name": "Heroicons",
+        "url": "https://heroicons.com",
+        "cdn": "Copy SVG inline from heroicons.com",
+        "type": "svg-inline",
+        "license": "MIT",
+        "traits": ["outline and solid variants", "24x24 and 20x20", "Tailwind-designed"],
+        "prompt": "Clean, minimal icon set. Copy SVG markup directly into HTML — no download needed. Use outline variant for nav items and solid for active states. Consistent stroke width creates professional feel.",
+        "styleFit": ["liquid", "slate", "mid-century-modern"]
+      },
+      {
+        "name": "Phosphor Icons",
+        "url": "https://phosphoricons.com",
+        "cdn": "https://unpkg.com/@phosphor-icons/web@2.1.1/src/regular/style.css",
+        "type": "css-font",
+        "license": "MIT",
+        "traits": ["6 weights", "thin to fill", "1200+ icons"],
+        "prompt": "Flexible icon family with 6 weight variants (thin, light, regular, bold, fill, duotone). The duotone variant is unique — use it for mid-century or retro styles. Weight variety lets you match the style's typographic density.",
+        "styleFit": ["mid-century-modern", "retro-50s", "brutalist"]
+      },
+      {
+        "name": "Lucide Icons",
+        "url": "https://lucide.dev",
+        "cdn": "https://unpkg.com/lucide@latest",
+        "type": "svg-inline",
+        "license": "ISC",
+        "traits": ["fork of Feather", "consistent 24x24", "growing set"],
+        "prompt": "Community fork of Feather icons with a much larger set. Clean, consistent stroke width. Copy SVG inline for best performance. Good all-purpose icon set.",
+        "styleFit": ["liquid", "slate", "brutalist"]
+      }
+    ],
+    "photos": [
+      {
+        "name": "Unsplash",
+        "url": "https://unsplash.com",
+        "apiUrl": "https://source.unsplash.com/{width}x{height}/?{query}",
+        "type": "jpg/webp",
+        "license": "Unsplash License (free, no attribution required)",
+        "traits": ["high-quality photos", "diverse subjects", "API access"],
+        "prompt": "Use ONLY for specific contextual images that CSS cannot replicate — team avatars, project thumbnails, or hero photography. Download and store locally (do not hotlink). Optimize to webp format if possible. Avoid generic stock photo vibes.",
+        "styleFit": ["mid-century-modern", "retro-50s"]
+      }
+    ],
+    "video": [
+      {
+        "name": "Coverr",
+        "url": "https://coverr.co",
+        "type": "mp4/webm",
+        "license": "Free (no attribution)",
+        "traits": ["short loops", "background videos", "abstract/nature"],
+        "prompt": "Short video loops for ambient hero backgrounds. Use VERY sparingly — at most one video per entire pass, and only in the hero/dashboard section. Must be muted, autoplay, loop. Abstract/nature textures work best. Keep file size under 2MB.",
+        "styleFit": ["liquid", "slate"]
+      },
+      {
+        "name": "Pexels Videos",
+        "url": "https://www.pexels.com/videos",
+        "type": "mp4",
+        "license": "Pexels License (free)",
+        "traits": ["diverse catalog", "multiple resolutions", "abstract options"],
+        "prompt": "Alternative video source. Same rules as Coverr — one video max per pass, hero section only, muted autoplay loop. Download smallest resolution that looks good at viewport scale.",
+        "styleFit": ["liquid", "slate"]
+      }
+    ],
+    "lottie-animations": [
+      {
+        "name": "LottieFiles",
+        "url": "https://lottiefiles.com",
+        "type": "json",
+        "license": "Varies per animation (check individual license)",
+        "traits": ["vector animations", "tiny file size", "loading spinners", "micro-interactions"],
+        "prompt": "Download Lottie JSON animations for loading states, success/error feedback, decorative motion, and micro-interactions. Keep each file under 50kb. Use lottie-web library to play them. Best for polished micro-interactions that would be complex to code from scratch.",
+        "styleFit": ["mid-century-modern", "retro-50s", "liquid"]
+      }
+    ],
+    "textures-patterns": [
+      {
+        "name": "Transparent Textures",
+        "url": "https://www.transparenttextures.com",
+        "type": "png (tileable)",
+        "license": "Free",
+        "traits": ["tileable patterns", "transparent backgrounds", "subtle textures"],
+        "prompt": "Tileable PNG textures for subtle background patterns. Noise, paper, fabric, concrete textures. Apply at low opacity (5-15%) as CSS background-image over solid colors. Adds tactile depth without overwhelming the design. Brutalist loves concrete textures; mid-century loves paper/linen.",
+        "styleFit": ["brutalist", "mid-century-modern", "slate"]
+      },
+      {
+        "name": "Hero Patterns",
+        "url": "https://heropatterns.com",
+        "type": "svg (inline CSS)",
+        "license": "Free (CC BY 4.0)",
+        "traits": ["SVG patterns", "customizable colors", "inline CSS ready"],
+        "prompt": "SVG background patterns encoded as CSS data URIs. No download needed — copy the CSS directly. Customizable foreground and background colors. Use for section backgrounds, card textures, or nav surfaces. Geometric patterns fit mid-century; circuit patterns fit brutalist.",
+        "styleFit": ["mid-century-modern", "brutalist", "retro-50s"]
+      }
+    ]
+  }
+}

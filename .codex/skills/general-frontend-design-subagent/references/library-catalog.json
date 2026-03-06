@@ -1,0 +1,168 @@
+{
+  "version": "1.0.0",
+  "notes": "CDN-available libraries for general-purpose frontend concept generation. Subagents pick 0-5 libraries per pass based on style fit and pass needs. Libraries are OPTIONAL — pure CSS is always valid. Three.js MUST use v0.160.0 (v0.170.0+ dropped UMD builds).",
+  "categories": {
+    "3d-rendering": {
+      "description": "WebGL and 3D rendering libraries for globes, scenes, and visual effects",
+      "libraries": [
+        {
+          "name": "Three.js",
+          "version": "0.160.0",
+          "cdn": "https://unpkg.com/three@0.160.0/build/three.min.js",
+          "note": "CRITICAL: Use v0.160.0 specifically. v0.170.0+ dropped UMD/IIFE builds and require ES module bundlers.",
+          "size": "~600KB",
+          "purpose": "3D globe rendering, wireframe geometry, particle systems, atmospheric shaders"
+        },
+        {
+          "name": "Zdog",
+          "version": "1.1.3",
+          "cdn": "https://cdn.jsdelivr.net/npm/zdog@1.1.3/dist/zdog.dist.min.js",
+          "size": "~28KB",
+          "purpose": "Lightweight pseudo-3D engine for illustrations and icons"
+        }
+      ]
+    },
+    "animation": {
+      "description": "Animation engines for timelines, scroll effects, and choreography",
+      "libraries": [
+        {
+          "name": "GSAP",
+          "version": "3.12.5",
+          "cdn": "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js",
+          "plugins": [
+            { "name": "ScrollTrigger", "cdn": "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" },
+            { "name": "Flip", "cdn": "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Flip.min.js" },
+            { "name": "MotionPath", "cdn": "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js" }
+          ],
+          "size": "~70KB + plugins",
+          "purpose": "Complex animation timelines, scroll-driven choreography, spring physics"
+        },
+        {
+          "name": "Anime.js",
+          "version": "3.2.2",
+          "cdn": "https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js",
+          "size": "~17KB",
+          "purpose": "Lightweight staggered animations, SVG path drawing, timeline sequences"
+        },
+        {
+          "name": "AOS (Animate On Scroll)",
+          "version": "2.3.4",
+          "cdn": "https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js",
+          "csscdn": "https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css",
+          "size": "~14KB",
+          "purpose": "Zero-config scroll reveal via data attributes"
+        }
+      ]
+    },
+    "scroll": {
+      "description": "Smooth scrolling and scroll behavior libraries",
+      "libraries": [
+        {
+          "name": "Lenis",
+          "version": "1.1.18",
+          "cdn": "https://unpkg.com/lenis@1.1.18/dist/lenis.min.js",
+          "size": "~15KB",
+          "purpose": "Premium smooth-scroll with inertia. Luxury feel for premium aesthetics."
+        }
+      ]
+    },
+    "interaction": {
+      "description": "Drag-and-drop, gestures, tooltips, carousels",
+      "libraries": [
+        {
+          "name": "SortableJS",
+          "version": "1.15.6",
+          "cdn": "https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.6/Sortable.min.js",
+          "size": "~40KB",
+          "purpose": "Drag-to-reorder for kanban cards, lists, directory trees"
+        },
+        {
+          "name": "Tippy.js",
+          "version": "6.3.7",
+          "cdn": "https://unpkg.com/tippy.js@6.3.7/dist/tippy-bundle.umd.min.js",
+          "csscdn": "https://unpkg.com/tippy.js@6.3.7/dist/tippy.css",
+          "size": "~20KB",
+          "purpose": "Polished tooltips and popovers for contextual info"
+        },
+        {
+          "name": "Swiper",
+          "version": "11.1.15",
+          "cdn": "https://cdn.jsdelivr.net/npm/swiper@11.1.15/swiper-bundle.min.js",
+          "csscdn": "https://cdn.jsdelivr.net/npm/swiper@11.1.15/swiper-bundle.min.css",
+          "size": "~140KB",
+          "purpose": "Touch-friendly carousel and slider for galleries and card browsing"
+        }
+      ]
+    },
+    "visual-effects": {
+      "description": "Particle systems, animated backgrounds, SVG effects",
+      "libraries": [
+        {
+          "name": "tsParticles",
+          "version": "3.7.1",
+          "cdn": "https://cdn.jsdelivr.net/npm/tsparticles-engine@3.7.1/tsparticles.engine.min.js",
+          "presets": {
+            "confetti": "https://cdn.jsdelivr.net/npm/tsparticles-preset-confetti@3.0.2/tsparticles.preset.confetti.min.js",
+            "stars": "https://cdn.jsdelivr.net/npm/tsparticles-preset-stars@3.0.2/tsparticles.preset.stars.min.js",
+            "snow": "https://cdn.jsdelivr.net/npm/tsparticles-preset-snow@3.0.2/tsparticles.preset.snow.min.js"
+          },
+          "size": "~50KB + presets",
+          "purpose": "Ambient particle backgrounds. Use sparingly — 20-50 particles max."
+        },
+        {
+          "name": "Rough.js",
+          "version": "4.6.6",
+          "cdn": "https://cdn.jsdelivr.net/npm/roughjs@4.6.6/bundled/rough.min.js",
+          "size": "~50KB",
+          "purpose": "Hand-drawn/sketchy rendering for organic aesthetics"
+        },
+        {
+          "name": "Vivus",
+          "version": "0.4.6",
+          "cdn": "https://cdnjs.cloudflare.com/ajax/libs/vivus/0.4.6/vivus.min.js",
+          "size": "~10KB",
+          "purpose": "SVG line-drawing animation for decorative illustrations"
+        }
+      ]
+    },
+    "typography": {
+      "description": "Text animation and typographic effects",
+      "libraries": [
+        {
+          "name": "Splitting.js",
+          "version": "1.0.6",
+          "cdn": "https://unpkg.com/splitting@1.0.6/dist/splitting.min.js",
+          "csscdn": "https://unpkg.com/splitting@1.0.6/dist/splitting.css",
+          "size": "~5KB",
+          "purpose": "Per-character CSS animation for hero headlines and text reveals"
+        },
+        {
+          "name": "Typed.js",
+          "version": "2.1.0",
+          "cdn": "https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.js",
+          "size": "~12KB",
+          "purpose": "Typewriter text animation for chat interfaces and terminal aesthetics"
+        }
+      ]
+    },
+    "data-visualization": {
+      "description": "Chart and data rendering libraries (for dashboard/analytics concepts)",
+      "libraries": [
+        {
+          "name": "Chart.js",
+          "version": "4.4.7",
+          "cdn": "https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js",
+          "size": "~200KB",
+          "purpose": "Responsive charts for dashboard stat cards and analytics views"
+        },
+        {
+          "name": "D3.js",
+          "version": "7.9.0",
+          "cdn": "https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js",
+          "size": "~280KB",
+          "purpose": "Custom data visualizations, force graphs, treemaps"
+        }
+      ]
+    }
+  }
+}

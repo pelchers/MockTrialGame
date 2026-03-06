@@ -1,0 +1,179 @@
+{
+  "version": 2,
+  "notes": "CDN-available libraries for frontend concept generation. Agents pick 0-5 libraries per pass based on style fit. Each library has style-fit tags and a usage prompt to guide the agent. Libraries are OPTIONAL — pure CSS is always valid. The agent should choose libraries that genuinely enhance the design, not use them for the sake of using them.",
+  "categories": {
+    "animation": {
+      "description": "Core animation engines for timelines, morphing, spring physics, and complex choreography",
+      "libraries": [
+        {
+          "name": "GSAP",
+          "version": "3.12.5",
+          "cdn": "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js",
+          "plugins": [
+            { "name": "ScrollTrigger", "cdn": "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" },
+            { "name": "MorphSVG", "note": "Club plugin — use CSS clip-path morphing as free alternative" },
+            { "name": "Flip", "cdn": "https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Flip.min.js" }
+          ],
+          "styleFit": ["liquid", "mid-century-modern", "retro-50s"],
+          "prompt": "Use GSAP for complex multi-step animation timelines, scroll-driven choreography, and spring physics. Best when you need precise control over timing, staggering, and easing. Pair with ScrollTrigger for scroll-driven reveals."
+        },
+        {
+          "name": "Anime.js",
+          "version": "3.2.2",
+          "cdn": "https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.2/anime.min.js",
+          "styleFit": ["brutalist", "slate", "mid-century-modern"],
+          "prompt": "Use Anime.js for lightweight staggered animations, SVG path drawing, and timeline sequences. Good alternative to GSAP when you need less weight. Excellent for staggered grid reveals and SVG line animations."
+        },
+        {
+          "name": "Motion One",
+          "version": "10.18.0",
+          "cdn": "https://cdn.jsdelivr.net/npm/motion@10.18.0/dist/motion.min.js",
+          "styleFit": ["liquid", "slate"],
+          "prompt": "Ultra-lightweight (~3kb) animation library with spring physics built in. Use when you want buttery smooth micro-interactions without the weight of GSAP. Great for hover states, toggle animations, and entrance effects."
+        }
+      ]
+    },
+    "scroll": {
+      "description": "Scroll behavior libraries for smooth scrolling, parallax, and scroll-triggered effects",
+      "libraries": [
+        {
+          "name": "Lenis",
+          "version": "1.1.18",
+          "cdn": "https://unpkg.com/lenis@1.1.18/dist/lenis.min.js",
+          "styleFit": ["slate", "mid-century-modern", "liquid"],
+          "prompt": "Premium smooth-scroll library that replaces native scrolling with butter-smooth inertia. Creates a luxury feel. Pair with GSAP ScrollTrigger for scroll-driven animations. Best for styles that feel heavy, premium, or fluid."
+        },
+        {
+          "name": "AOS (Animate On Scroll)",
+          "version": "2.3.4",
+          "cdn": "https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js",
+          "csscdn": "https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css",
+          "styleFit": ["mid-century-modern", "retro-50s", "liquid", "slate"],
+          "prompt": "Zero-config scroll reveal library. Add data-aos attributes to HTML elements and they animate on scroll. Great for quick, consistent scroll reveals without writing JS animation code. Supports fade, slide, zoom, and flip presets."
+        },
+        {
+          "name": "ScrollReveal",
+          "version": "4.0.9",
+          "cdn": "https://unpkg.com/scrollreveal@4.0.9/dist/scrollreveal.min.js",
+          "styleFit": ["mid-century-modern", "slate", "brutalist"],
+          "prompt": "Scroll-triggered reveal library with more control than AOS. Configure origin direction, distance, rotation, and scale per element. Good for cascading card reveals and staggered content entrances."
+        }
+      ]
+    },
+    "visual-effects": {
+      "description": "Particle systems, animated backgrounds, and visual effect libraries",
+      "libraries": [
+        {
+          "name": "tsParticles",
+          "version": "3.7.1",
+          "cdn": "https://cdn.jsdelivr.net/npm/tsparticles-engine@3.7.1/tsparticles.engine.min.js",
+          "presets": {
+            "confetti": "https://cdn.jsdelivr.net/npm/tsparticles-preset-confetti@3.0.2/tsparticles.preset.confetti.min.js",
+            "stars": "https://cdn.jsdelivr.net/npm/tsparticles-preset-stars@3.0.2/tsparticles.preset.stars.min.js",
+            "bubbles": "https://cdn.jsdelivr.net/npm/tsparticles-preset-bubbles@3.0.2/tsparticles.preset.bubbles.min.js",
+            "snow": "https://cdn.jsdelivr.net/npm/tsparticles-preset-snow@3.0.2/tsparticles.preset.snow.min.js"
+          },
+          "styleFit": ["liquid", "retro-50s", "slate"],
+          "prompt": "Particle engine for ambient background effects. Use sparingly — particles should enhance atmosphere, not distract. Bubbles fit liquid, stars/dust fit slate, confetti fits retro-50s celebrations. Keep particle counts low (20-50) for performance."
+        },
+        {
+          "name": "Vanta.js",
+          "version": "0.5.24",
+          "cdn": "https://cdn.jsdelivr.net/npm/vanta@0.5.24/dist/vanta.waves.min.js",
+          "variants": ["waves", "fog", "dots", "net", "cells"],
+          "dependency": "https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js",
+          "styleFit": ["liquid", "slate"],
+          "prompt": "Animated 3D backgrounds using Three.js. Waves for liquid style, fog for slate, dots for mid-century. Use as a hero section background or full-page ambient layer. Performance-heavy — use in hero sections only, not full page. Requires Three.js as dependency."
+        },
+        {
+          "name": "Canvas Confetti",
+          "version": "1.9.3",
+          "cdn": "https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js",
+          "styleFit": ["retro-50s"],
+          "prompt": "Lightweight confetti burst library. Use for celebration moments — idea submitted, project completed, milestone reached. Fire from specific button positions for targeted feedback. Very retro-50s energy."
+        },
+        {
+          "name": "Rough.js",
+          "version": "4.6.6",
+          "cdn": "https://cdn.jsdelivr.net/npm/roughjs@4.6.6/bundled/rough.min.js",
+          "styleFit": ["brutalist", "mid-century-modern"],
+          "prompt": "Renders graphics with a hand-drawn, sketchy look using canvas. Use for whiteboard view, schema planner connections, or chart rendering. Creates an organic, imperfect aesthetic that contrasts with digital precision."
+        },
+        {
+          "name": "Vivus",
+          "version": "0.4.6",
+          "cdn": "https://cdnjs.cloudflare.com/ajax/libs/vivus/0.4.6/vivus.min.js",
+          "styleFit": ["mid-century-modern", "retro-50s", "liquid"],
+          "prompt": "SVG line-drawing animation library. Animates SVG paths as if being drawn by hand. Perfect for schema planner entity connections, whiteboard sketches, or decorative illustrations that draw themselves on view entrance."
+        }
+      ]
+    },
+    "interaction": {
+      "description": "Drag-and-drop, gestures, tooltips, and interactive element libraries",
+      "libraries": [
+        {
+          "name": "SortableJS",
+          "version": "1.15.6",
+          "cdn": "https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.15.6/Sortable.min.js",
+          "styleFit": ["brutalist", "mid-century-modern", "retro-50s", "liquid", "slate"],
+          "prompt": "Drag-to-reorder library. Essential for kanban card reordering, directory tree rearrangement, and idea prioritization. Lightweight and framework-agnostic. Add drag handles for visual affordance."
+        },
+        {
+          "name": "Interact.js",
+          "version": "1.10.27",
+          "cdn": "https://cdn.jsdelivr.net/npm/interactjs@1.10.27/dist/interact.min.js",
+          "styleFit": ["liquid", "mid-century-modern", "retro-50s"],
+          "prompt": "Full interaction library for drag, resize, and multi-touch gestures. Use for whiteboard node dragging, panel resizing, and gesture-driven navigation. More powerful than SortableJS but heavier."
+        },
+        {
+          "name": "Tippy.js",
+          "version": "6.3.7",
+          "cdn": "https://unpkg.com/tippy.js@6.3.7/dist/tippy-bundle.umd.min.js",
+          "csscdn": "https://unpkg.com/tippy.js@6.3.7/dist/tippy.css",
+          "styleFit": ["mid-century-modern", "slate", "liquid"],
+          "prompt": "Polished tooltip and popover library. Use for contextual information, abbreviation expansion, and action previews. Supports animation themes, interactive content, and positioning. Adds premium feel to any style."
+        },
+        {
+          "name": "Swiper",
+          "version": "11.1.15",
+          "cdn": "https://cdn.jsdelivr.net/npm/swiper@11.1.15/swiper-bundle.min.js",
+          "csscdn": "https://cdn.jsdelivr.net/npm/swiper@11.1.15/swiper-bundle.min.css",
+          "styleFit": ["retro-50s", "liquid", "mid-century-modern"],
+          "prompt": "Touch-friendly carousel and slider library. Use for project card browsing, image galleries, or horizontal content scrolling. Supports parallax, creative effects, and pagination. Mobile-first design."
+        }
+      ]
+    },
+    "typography": {
+      "description": "Text animation and typographic effect libraries",
+      "libraries": [
+        {
+          "name": "Splitting.js",
+          "version": "1.0.6",
+          "cdn": "https://unpkg.com/splitting@1.0.6/dist/splitting.min.js",
+          "csscdn": "https://unpkg.com/splitting@1.0.6/dist/splitting.css",
+          "styleFit": ["brutalist", "liquid", "retro-50s"],
+          "prompt": "Splits text into individual characters, words, or lines for per-character CSS animation. Use for hero headlines that cascade in letter-by-letter, staggered word reveals, or glitch effects. Brutalist loves character-level disruption; liquid loves flowing cascades."
+        },
+        {
+          "name": "Typed.js",
+          "version": "2.1.0",
+          "cdn": "https://cdn.jsdelivr.net/npm/typed.js@2.1.0/dist/typed.umd.js",
+          "styleFit": ["brutalist", "slate", "retro-50s"],
+          "prompt": "Typewriter text animation. Use for AI chat view to simulate typing responses, for hero section taglines, or for command-line style interfaces. Brutalist + terminal aesthetic is a natural fit."
+        }
+      ]
+    },
+    "lottie": {
+      "description": "Vector animation playback for complex pre-made animations",
+      "libraries": [
+        {
+          "name": "Lottie Web",
+          "version": "5.12.2",
+          "cdn": "https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.12.2/lottie.min.js",
+          "styleFit": ["mid-century-modern", "retro-50s", "liquid"],
+          "prompt": "Plays After Effects animations exported as JSON. Use for loading spinners, micro-interaction feedback, decorative illustrations, and onboarding animations. Download Lottie JSON files from LottieFiles.com and store in assets/ folder. Keep file sizes under 50kb each."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "id": "case_template_foundation",
+  "name": "MockTrial Case Template",
+  "description": "Structured metadata for a trial scenario, case packet, and hosted session defaults.",
+  "caseType": "criminal",
+  "jurisdictionMode": "us-foundational",
+  "difficulty": "intermediate",
+  "supportedModes": [
+    "classroom",
+    "competition-overlay",
+    "open-play"
+  ],
+  "roles": [
+    "judge",
+    "prosecution",
+    "defense",
+    "witness",
+    "juror",
+    "spectator"
+  ],
+  "features": {
+    "aiSeats": true,
+    "spectatorSandbox": true,
+    "juryDeliberation": true,
+    "teacherOverrides": true
+  }
+}

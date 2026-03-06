@@ -1,0 +1,10 @@
+{
+  "session": "<SESSION_KEY>",
+  "phase": "<PHASE_N>",
+  "agent": "longrunning-worker-subagent",
+  "workdir": "",
+  "fullAuto": true,
+  "autoSpawn": true,
+  "dryRun": false,
+  "prompt": "Complete <PHASE_N> of <SESSION_KEY> using longrunning-session workflow."
+}
