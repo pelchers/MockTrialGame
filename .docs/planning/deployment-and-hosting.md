@@ -10,7 +10,7 @@
 - **Client delivery:** CDN-hosted web app
 - **API and session services:** region-aware application hosts
 - **Database:** managed relational store
-- **Realtime support:** websocket/session service and optional media service
+- **Realtime support:** websocket/session service plus default media service for voice/video
 - **Object storage:** exhibits, transcripts, exports, reconstruction assets
 - **AI runtime:** managed inference or self-hosted inference depending model choice and cost profile
 
@@ -24,7 +24,7 @@
 ## Planning Recommendation
 Prototype with a topology that preserves architectural separation:
 - web app and API/session layer separated logically
-- media optional and degradable
+- media present by default but degradable without affecting core trial-state continuity
 - AI inference isolated behind service boundaries
 - storage separated by structured data vs asset data
 

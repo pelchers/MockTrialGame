@@ -65,7 +65,8 @@ Need observational tools, transcripts, timeline views, and reconstruction intera
 
 ### 7. Communication Channels
 - Provide courtroom-wide, team-private, judicial, jury, and spectator communication spaces.
-- Support text first; evaluate voice/video later.
+- Support voice, video, and text together by default during live sessions.
+- Allow participants to fall back to text-only or selectively disable audio/video when needed.
 - Preserve auditable records where appropriate.
 
 ### 8. AI Assistance and Role Simulation
@@ -86,10 +87,10 @@ Need observational tools, transcripts, timeline views, and reconstruction intera
 - Real-time latency should feel immediate for courtroom actions under classroom conditions.
 - Session state must remain authoritative and auditable.
 - The system must support graceful degradation when AI services are unavailable.
+- The system must degrade gracefully from voice/video+tandem text to text-only participation when bandwidth, hardware, privacy, or accessibility needs require it.
 - Privacy controls must account for minors, classrooms, and sensitive educational data.
 
 ## Open Product Questions
-- When should voice/video become a first-class feature instead of an optional overlay?
 - How much jurisdiction-specific realism should be exposed in beginner mode?
 - Should case authoring be part of phase one planning or a later platform layer?
 - How much freedom should spectators have before sandbox actions risk distracting from the trial?

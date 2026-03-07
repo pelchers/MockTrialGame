@@ -6,6 +6,8 @@
 - **Product posture:** educational and game-like, with educational integrity taking priority
 - **Participation model:** both human and AI participants are first-class
 - **Spectator role:** interactive, not passive
+- **Media posture:** voice, video, and text operate together by default, with text-only fallback required
+- **3D posture:** one primary runtime should ship the reconstruction sandbox; multiple engines remain evaluation candidates, not the default implementation
 
 ## Key Risks
 ### Legal Fidelity Risk
@@ -32,8 +34,8 @@ Mitigation:
 ### Classroom Network Risk
 School networks may degrade media or realtime reliability.
 Mitigation:
-- Make text/state sync the primary dependency.
-- Treat voice/video as optional and separately degradable.
+- Make text/state sync the primary dependency even when media is on by default.
+- Degrade from full media to text-only participation without breaking the session.
 - Plan for reconnect and low-bandwidth modes.
 
 ### Safety and Privacy Risk
@@ -52,7 +54,6 @@ Mitigation:
 - Support educator-created scenarios later.
 
 ## Deferred Decisions
-- Voice/video in phase one or later
 - Institutional billing model
 - Exact case-authoring workflow
 - Final AI model portfolio

@@ -11,6 +11,7 @@ The authoritative source of truth should be server-side session state plus durab
 - Trial phase and progression state
 - Evidence status and rulings
 - Channel messages and notes
+- Voice/video session state and media presence metadata
 - Jury deliberation state
 - Transcript/event stream
 - Spectator sandbox state within its own boundary
@@ -27,3 +28,4 @@ The authoritative source of truth should be server-side session state plus durab
 
 ## Recommendation
 Use a command-plus-event model with targeted snapshots. Do not rely on peer-to-peer state authority for the courtroom core.
+Voice/video should run alongside text by default, but media degradation must never break access to the authoritative session. Users must be able to continue in text-only mode.

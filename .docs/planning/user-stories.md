@@ -44,6 +44,13 @@
     - Examination turns are tracked.
     - Testimony becomes part of the transcript.
 
+### Media Participation
+- As a participant, I want voice, video, and text available together by default so that live courtroom interaction feels natural.
+  - Acceptance Criteria:
+    - I can join with voice and video enabled while still using text chat.
+    - I can disable audio, disable video, or switch to text-only without leaving the session.
+    - My media changes do not interrupt the authoritative trial state.
+
 ## Jurors
 ### Deliberation
 - As a juror, I want a private deliberation space so that I can discuss the case outside the public courtroom.

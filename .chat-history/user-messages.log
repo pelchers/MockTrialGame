@@ -464,3 +464,44 @@ AGENT REPORT:
 ---
 
 
+---
+[2026-03-07T04:53:54Z] role=user
+ill approve of all strong defauklt candidate selections but as per the 3d options, is there not a case that we can use all of them where needed if needed? or is that not good --- ten we want optional voice and video as default with text as a compliment (they work in tandem by default) and if someone cant use audio or video then they just use text option
+
+SESSION CONTEXT:
+- The initial planning foundation has already been written and pushed to GitHub.
+- Active agents/skills: repo-setup-agent, chat-history-agent, chat-history-convention.
+- Phase: planning refinement after initial bootstrap.
+
+USER INTENT:
+1. Approve the currently identified strong default candidate stack directions unless there is a strong reason to change them.
+2. Ask whether multiple 3D engines should be used together in the same product where helpful.
+3. Update the product communication model so voice and video are enabled by default and text operates alongside them.
+4. Require a text-only fallback path for users who cannot or do not want to use audio/video.
+5. Reflect these decisions in the planning direction.
+
+REFERENCE FILES:
+- `.docs/planning/06_architecture-options-comparison.md` — contains the 3D/runtime comparison and default-candidate framing.
+- `.docs/planning/prd.md` — communication and product requirements.
+- `.docs/planning/technical-specification.md` — transport and subsystem assumptions.
+- `.chat-history/user-messages.log` — transcript log.
+
+KEY DECISIONS:
+- Strong default candidates are approved unless a stronger later finding changes them.
+- Voice/video should be available by default, with text running in tandem.
+- Text-only access must remain supported as a fallback mode.
+- Multi-engine 3D usage is being questioned rather than approved outright.
+
+AGENT REPORT:
+  Initial Response:
+  - Committed to answer the 3D architecture question directly and then update the planning docs to reflect the new communication requirement.
+  - Planned to adjust the architecture, PRD, technical, sync, and hosting documents so the repo stays aligned with the latest direction.
+
+  Final Response:
+  - Clarified that using all three browser 3D engines as equal runtime dependencies is not a good default; the planning docs now recommend one primary shipped runtime with others kept as evaluation candidates or isolated experiments.
+  - Updated 7 planning docs to reflect the approved direction that voice, video, and text work together by default, with text-only fallback and selective media disable support.
+  - Systems affected: architecture comparison, PRD, technical specification, sync strategy, hosting plan, risks register, and user stories.
+  - Pending items: final 3D runtime choice remains open between the approved strong candidates until the architecture review conversation happens.
+
+---
+

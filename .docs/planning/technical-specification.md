@@ -1,7 +1,7 @@
 # Technical Specification
 
 ## Technical Posture
-The system should be planned as a browser-first, real-time, event-driven platform with a clear separation between authoritative trial state, participant communication, AI orchestration, and optional 3D reconstruction. The stack remains deliberately undecided until the option-comparison phase is reviewed.
+The system should be planned as a browser-first, real-time, event-driven platform with a clear separation between authoritative trial state, participant communication, AI orchestration, and 3D reconstruction. The stack remains deliberately undecided until the option-comparison phase is reviewed.
 
 ## Architecture Principles
 - **Authoritative session core:** one trusted source of truth for courtroom state, evidence status, and role permissions.
@@ -31,7 +31,8 @@ Responsibilities:
 - reliable event delivery for trial actions
 - presence tracking and reconnection support
 - channel segmentation for courtroom, teams, judge, jury, and spectators
-- optional media signaling if voice/video is introduced
+- media signaling and participant-state handling for voice/video sessions
+- graceful fallback to text-only participation without breaking courtroom state
 
 ### 4. Persistence Layer
 Responsibilities:
@@ -77,7 +78,7 @@ Responsibilities:
 - TypeScript is the most likely application language due to browser-first delivery and ecosystem fit, but this is not final.
 - A relational data model is likely appropriate because sessions, roles, evidence, rulings, and transcripts are highly structured.
 - Separate storage strategies will be needed for structured data, transcripts, and larger media assets.
-- Voice/video, if added, should be decoupled from authoritative trial-state transport.
+- Voice/video should be decoupled from authoritative trial-state transport even though it is enabled by default in the product experience.
 
 ## Decision Inputs Still Needed
 - Selected frontend framework
