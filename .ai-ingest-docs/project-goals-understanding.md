@@ -44,7 +44,7 @@ The system will likely require a web frontend, real-time session backend, persis
 ## Scope & Constraints
 - **In scope:** planning, legal research structure, architecture comparison, product definition, phased roadmap, AI role system planning, session-state design
 - **Out of scope for the initial repo state:** implementation of the production app, final stack lock-in, final jurisdiction-specific legal engine behavior, final monetization decisions
-- **Constraints:** browser-first UX, multiplayer support, educational credibility, future support for both human and AI participants, manageable AI infrastructure cost, commercial viability, need for legally literate terminology without presenting the product as legal advice
+- **Constraints:** browser-first UX, multiplayer support, educational credibility, future support for both human and AI participants, manageable AI infrastructure cost, commercial viability, production-launch readiness, need for legally literate terminology without presenting the product as legal advice, no architecture that depends on mock data as a default operating assumption
 
 ## Key Decisions Made
 - Replace prior project planning docs completely.
@@ -52,6 +52,8 @@ The system will likely require a web frontend, real-time session backend, persis
 - Present stack candidates in comparison-table form for later review.
 - Anchor legal research in broad foundational U.S. trial procedure first, then layer jurisdiction and competition variations afterward.
 - Include all current repository content in the first push.
+- Treat the project as a production-launch effort rather than an MVP track.
+- Plan around real data models and real deployment readiness instead of mock-data-first workflows.
 
 ## Open Questions & Assumptions
 - The first legal baseline assumes broad U.S. criminal trial concepts because that best supports the requested foundational knowledge buildout.

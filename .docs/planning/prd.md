@@ -12,6 +12,7 @@ Existing mock trial experiences are usually fragmented across classroom handouts
 - Provide a role-flexible system where seats can be filled by humans or AI agents.
 - Create a reusable courtroom simulation engine that can support multiple educational and training scenarios.
 - Produce a planning blueprint strong enough to support implementation without premature stack lock-in.
+- Deliver a production-ready system that can launch once the build is complete and validated through testing.
 
 ## Success Criteria
 - A teacher can host a structured trial session and assign roles within minutes.
@@ -88,6 +89,8 @@ Need observational tools, transcripts, timeline views, and reconstruction intera
 - Session state must remain authoritative and auditable.
 - The system must support graceful degradation when AI services are unavailable.
 - The system must degrade gracefully from voice/video+tandem text to text-only participation when bandwidth, hardware, privacy, or accessibility needs require it.
+- The production build must rely on real data contracts, real service boundaries, and real content flows rather than mock data dependencies.
+- Deployment should be expected immediately after build completion and successful launch-gate testing, not as a distant post-build phase.
 - Privacy controls must account for minors, classrooms, and sensitive educational data.
 
 ## Open Product Questions

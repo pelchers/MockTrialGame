@@ -3,6 +3,12 @@
 ## Technical Posture
 The system should be planned as a browser-first, real-time, event-driven platform with a clear separation between authoritative trial state, participant communication, AI orchestration, and 3D reconstruction. The stack remains deliberately undecided until the option-comparison phase is reviewed.
 
+## Delivery Posture
+- The target is a production-ready build, not an MVP or disposable prototype.
+- System planning should assume launch-grade data flows, security boundaries, observability, and operational readiness.
+- Mock data may be useful only for narrow internal development checks, but it must not define product architecture or launch assumptions.
+- Deployment should follow directly after implementation reaches the agreed testing bar.
+
 ## Architecture Principles
 - **Authoritative session core:** one trusted source of truth for courtroom state, evidence status, and role permissions.
 - **Event-first design:** all major courtroom actions should be represented as durable events.
@@ -79,6 +85,7 @@ Responsibilities:
 - A relational data model is likely appropriate because sessions, roles, evidence, rulings, and transcripts are highly structured.
 - Separate storage strategies will be needed for structured data, transcripts, and larger media assets.
 - Voice/video should be decoupled from authoritative trial-state transport even though it is enabled by default in the product experience.
+- Planning should assume production integrations and real data contracts from the start rather than a mock-data-first path.
 
 ## Decision Inputs Still Needed
 - Selected frontend framework

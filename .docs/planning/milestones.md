@@ -12,7 +12,7 @@ Deliverables:
 - Expand legal-procedure research into jurisdiction overlays
 - Add evidence-rule matrices and objection taxonomies
 - Research mock trial competition formats and education workflows
-- Expand architecture options with prototype criteria
+- Expand architecture options with production-selection criteria
 - Expand AI model research with licensing, latency, and cost notes
 
 Exit Criteria:
@@ -25,31 +25,32 @@ Deliverables:
 - Lock an initial stack
 - Finalize system architecture blueprint
 - Define case-authoring assumptions
-- Define MVP vs later-phase features
+- Define launch-scope features versus post-launch expansions
 - Create fuller API contracts and schema specification
 
 Exit Criteria:
 - One preferred implementation path is chosen
 - Major risks are accepted, mitigated, or deferred intentionally
 
-## Phase 3 - Prototype Validation
+## Phase 3 - Production Build Validation
 Deliverables:
-- Session-core prototype
-- Trial-phase state machine prototype
-- Evidence/objection interaction prototype
-- Basic AI tutor integration prototype
-- Basic spectator reconstruction proof of concept
+- Session core built against real service contracts
+- Trial-phase state machine implemented in launch architecture
+- Evidence/objection interaction implemented against production data models
+- AI tutor integration validated in the production service pattern
+- Spectator reconstruction implemented in the chosen runtime and tested on target hardware
 
 Exit Criteria:
-- Core interaction loop is validated with representative users or self-tests
+- Core interaction loop is validated through launch-gate testing against production expectations
 - Technical risks have empirical evidence
 
-## Phase 4 - Production Build Planning
+## Phase 4 - Launch Readiness and Deployment
 Deliverables:
-- Engineering roadmap by milestone and staffing assumption
 - Test strategy and quality gates
 - Hosting and security implementation plan
 - Observability and moderation plan
+- Deployment runbooks and operational checklists
+- Launch-readiness review and cutover plan
 
 Exit Criteria:
-- Build roadmap is implementation-ready
+- Build is complete, tested, and ready for deployment

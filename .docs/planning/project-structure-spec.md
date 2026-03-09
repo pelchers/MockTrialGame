@@ -36,4 +36,4 @@ The repository currently acts as a planning-first workspace. It should evolve in
 Case packets, exhibits, witness briefs, and reconstruction templates should eventually live in a structured content area with versioning and publication states.
 
 ## Planning Rule
-Do not create implementation directories yet unless a prototype phase explicitly begins. Keep the repo documentation-led for now.
+Do not create implementation directories until build execution formally begins. Keep the repo documentation-led until the production build phase starts.
