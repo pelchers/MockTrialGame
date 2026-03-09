@@ -15,7 +15,7 @@ No stack is selected yet. The goal of this document is to frame sensible options
 | Option | Summary | Strengths | Weaknesses | Fit |
 |---|---|---|---|---|
 | Node/TypeScript + WebSocket framework | Straightforward custom command/event architecture | Flexible, ecosystem fit with TS frontend | Requires disciplined state modeling | Strong default candidate |
-| Colyseus-based room model | Purpose-built multiplayer room abstractions | Good for stateful session orchestration | Game-centric patterns may need adaptation for legal workflow rigor | Strong prototype candidate |
+| Colyseus-based room model | Purpose-built multiplayer room abstractions | Good for stateful session orchestration | Game-centric patterns may need adaptation for legal workflow rigor | Strong implementation candidate |
 | Go realtime service | High performance and concurrency | Efficient for session core | Higher split-stack cost | Good later option if performance pressure demands it |
 | Peer-to-peer core using WebRTC data channels | Low server state cost | Interesting for informal play | Harder authority, moderation, audit, and school-network reliability | Poor primary fit |
 
@@ -53,7 +53,7 @@ Current planning default:
 ## Preliminary Recommendation
 Start evaluation around:
 - Next.js or SvelteKit for the client
-- Node/TypeScript authoritative session service, with Colyseus considered during prototyping
+- Node/TypeScript authoritative session service, with Colyseus considered during final stack selection
 - PostgreSQL-class relational persistence
 - Three.js or Babylon.js as the single primary reconstruction runtime
 - Voice + video + text enabled together by default, with text-only fallback when needed

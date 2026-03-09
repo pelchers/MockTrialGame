@@ -4,7 +4,7 @@
 - Tutor/explainer side panel
 - AI witness simulation
 - AI juror reasoning support or juror fill-ins
-- AI judge prototype behavior under strict constraints
+- AI judge behavior under strict constraints
 - Transcript summarization and feedback generation
 
 ## Evaluation Criteria
@@ -18,7 +18,7 @@
 ## Model Family Options
 | Model Family | Typical Strengths | Key Risks | Best Early Uses | Notes |
 |---|---|---|---|---|
-| Mistral Small / Ministral class | Good balance of quality and cost | Need careful evaluation for legal-role consistency | tutor, summarization, some witness prototypes | Strong candidate for server-hosted assistant flows |
+| Mistral Small / Ministral class | Good balance of quality and cost | Need careful evaluation for legal-role consistency | tutor, summarization, some witness simulation paths | Strong candidate for server-hosted assistant flows |
 | Gemma family | Good ecosystem and smaller-size flexibility | May need more prompt scaffolding for complex roleplay | tutor, glossary, lightweight analysis | Good research candidate for lower-cost experimentation |
 | Phi family | Efficient small models | Smaller reasoning ceiling on harder adversarial flows | helper tools, rubric generation, constrained assistants | Good utility-model option |
 | Qwen family | Broad open-model range and strong multilingual potential | Licensing/version review needed per release | tutor, role simulation experiments | Strong candidate set to evaluate carefully |
@@ -28,7 +28,7 @@
 - **Tutor panel:** prioritize low latency, clarity, structured explanation
 - **AI witness:** prioritize bounded memory and consistency over broad creativity
 - **AI juror:** prioritize explainable reasoning and configurable deliberation styles
-- **AI judge:** keep highly constrained; likely advisory or prototype-only early on
+- **AI judge:** keep highly constrained; likely advisory-only early on
 
 ## Deployment Pattern Options
 | Pattern | Strengths | Weaknesses | Fit |

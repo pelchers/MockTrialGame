@@ -25,7 +25,7 @@ The product spans schools, private users, and potentially minors. Authentication
 
 ## Subscription Thinking
 This should remain open until product scope is tighter, but likely models include:
-- free individual sandbox tier
+- free individual starter tier
 - educator subscription tier
 - classroom or school-seat licensing
 - institutional licensing with admin controls and reporting

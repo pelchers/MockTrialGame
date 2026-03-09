@@ -22,11 +22,12 @@
 | Split architecture with separate media/AI services | Best long-term modularity | Clear isolation of risky subsystems | More moving parts |
 
 ## Planning Recommendation
-Prototype with a topology that preserves architectural separation:
+Build with a topology that preserves architectural separation:
 - web app and API/session layer separated logically
 - media present by default but degradable without affecting core trial-state continuity
 - AI inference isolated behind service boundaries
 - storage separated by structured data vs asset data
+- operational readiness should support launch immediately after the build passes testing
 
 ## Unknowns
 - Region requirements for schools

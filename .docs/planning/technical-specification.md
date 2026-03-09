@@ -6,7 +6,7 @@ The system should be planned as a browser-first, real-time, event-driven platfor
 ## Delivery Posture
 - The target is a production-ready build, not an MVP or disposable prototype.
 - System planning should assume launch-grade data flows, security boundaries, observability, and operational readiness.
-- Mock data may be useful only for narrow internal development checks, but it must not define product architecture or launch assumptions.
+- The planning baseline must not depend on mock-data-first workflows or fake service assumptions.
 - Deployment should follow directly after implementation reaches the agreed testing bar.
 
 ## Architecture Principles

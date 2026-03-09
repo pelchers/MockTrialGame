@@ -21,7 +21,7 @@ Mitigation:
 The concept spans legal simulation, realtime systems, AI orchestration, and 3D tools.
 Mitigation:
 - Maintain phased scope boundaries.
-- Prototype risky subsystems independently.
+- Validate risky subsystems early with production-aligned implementation slices.
 - Separate must-have session core from advanced features.
 
 ### AI Reliability Risk
