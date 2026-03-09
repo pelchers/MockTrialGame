@@ -505,3 +505,45 @@ AGENT REPORT:
 
 ---
 
+---
+[2026-03-09T04:08:49Z] role=user
+ok i approve of your plan. and this is not an mvp. we ae building for production and launch. no mock data. we build to deploy as soon as the build is done and ttested. amke sure this is known and well established in all plannign documents. reconvene in chat with next steps once your done. make frequenmt commits
+
+SESSION CONTEXT:
+- The planning docs were just refined to establish media defaults and 3D runtime strategy.
+- Active agents/skills: repo-setup-agent, chat-history-agent, chat-history-convention.
+- Phase: planning hardening before architecture selection and implementation planning.
+
+USER INTENT:
+1. Approve the current planning direction.
+2. Remove any MVP framing from the project and establish that the product is being built for production launch.
+3. Remove any mock-data assumptions from the planning set.
+4. Establish that deployment should happen as soon as the build is complete and tested.
+5. Propagate these decisions consistently across the planning documents.
+6. Return with next-step recommendations after the documentation updates are complete.
+7. Make frequent commits while doing this work.
+
+REFERENCE FILES:
+- `.docs/planning/` — planning documents that need posture updates.
+- `.chat-history/user-messages.log` — transcript log.
+
+KEY DECISIONS:
+- This is not an MVP.
+- The project is intended for production build and launch.
+- Mock data should not be part of the planning posture.
+- Deployment should follow immediately after build completion and testing readiness.
+- Frequent commits are preferred during planning updates.
+
+AGENT REPORT:
+  Initial Response:
+  - Committed to scan the planning docs for MVP, prototype, mock-data, and delayed-deployment assumptions.
+  - Planned to patch the affected documents and commit the changes in batches so the repo history reflects the refinement cleanly.
+
+  Final Response:
+  - Updated the planning baseline to establish a production-launch posture across 11 planning/AI-memory files, explicitly removing MVP framing and mock-data-first assumptions.
+  - Added the requirement that deployment should follow as soon as the build is complete and passes testing, and rewrote milestone language away from prototype/MVP terminology.
+  - Git activity: committed in two planning-focused commits, `9e575c1` and `d5207b9`, then pushed successfully to `origin/main`.
+  - Pending items: architecture selection and launch-scope definition are the next planning conversation, now on top of the corrected production baseline.
+
+---
+
