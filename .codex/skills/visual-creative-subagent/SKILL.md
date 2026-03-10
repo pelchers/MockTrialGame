@@ -1,6 +1,11 @@
 ---
 name: visual-creative-subagent
-description: Generate one isolated visual/creative concept pass as a self-contained browser-renderable showcase using HTML/CSS/JS with domain-appropriate libraries. Domains: data-vis (charts/graphs), animation (motion/physics), graphic-design (generative art/3D/illustration). Each pass is written from scratch by the AI agent, not stamped from a template.
+description: >-
+  Generate one isolated visual/creative concept pass as a self-contained
+  browser-renderable showcase using HTML/CSS/JS with domain-appropriate
+  libraries. Domains: data-vis (charts/graphs), animation (motion/physics),
+  graphic-design (generative art/3D/illustration). Each pass is written
+  from scratch by the AI agent, not stamped from a template.
 ---
 
 # Visual Creative Subagent
