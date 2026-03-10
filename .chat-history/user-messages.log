@@ -547,3 +547,44 @@ AGENT REPORT:
 
 ---
 
+---
+[2026-03-10T23:33:37Z] role=user
+ok proceed
+
+SESSION CONTEXT:
+- The YAML parse issue in the `visual-creative-subagent` skill was explained but not yet modified.
+- Active agents/skills: chat-history-agent, chat-history-convention.
+- Phase: approved fix and cross-repo sync.
+
+USER INTENT:
+1. Approve the proposed YAML-header fix.
+2. Apply the fix to both `.codex` and `.claude` skill copies.
+3. Reflect the fix across the listed repositories, not just the current repo.
+4. Proceed with implementation now.
+
+REFERENCE FILES:
+- `.codex/skills/visual-creative-subagent/SKILL.md`
+- `.claude/skills/visual-creative-subagent/SKILL.md`
+- `C:\Template\Claude+Codex Agent+Skill Sync\All`
+- `C:\Game\MockTrial.game`
+- `C:\App\AppDock`
+- `C:\App\PortfolioV1`
+- `C:\Ideas\IDEA-MANAGEMENT`
+
+KEY DECISIONS:
+- Approved the YAML-header repair.
+- Approved syncing the fix across the listed repos.
+
+AGENT REPORT:
+  Initial Response:
+  - Explained that the parse failure comes from an unquoted `description` line with embedded `Domains:` text in YAML front matter.
+  - Proposed replacing it with a folded multiline YAML string in both `.codex` and `.claude`, then syncing the same fix across the listed repos if approved.
+
+  Final Response:
+  - Rewrote the YAML front matter for the `visual-creative-subagent` skill to use a folded `description: >-` block in 10 files across the template and four project repos.
+  - Verified that all 10 headers parse successfully with a YAML parser after the change.
+  - Git commits created: `867c254` in MockTrial, `f7991e9` in AppDock, `2064b5b` in PortfolioV1, and `cbc52b9` in IDEA-MANAGEMENT. The template repo was updated on disk but is not a Git repo.
+  - Pending items: push the non-MockTrial repos if desired; the functional YAML issue itself is fixed everywhere listed.
+
+---
+
