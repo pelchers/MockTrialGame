@@ -588,3 +588,93 @@ AGENT REPORT:
 
 ---
 
+---
+[2026-03-11T00:08:05Z] role=user
+it would be great if you site sources as well a
+
+SESSION CONTEXT:
+- The planning docs had just been updated to clarify that classroom, competition, and open-play are audience overlays rather than separate core modes.
+- Active agents/skills: chat-history-agent, chat-history-convention.
+- Phase: documentation refinement.
+
+USER INTENT:
+1. Request that ongoing documentation include cited sources.
+2. Increase the research traceability of the planning material.
+
+REFERENCE FILES:
+- `.docs/planning/` — the active planning set being refined.
+- `.chat-history/user-messages.log` — transcript log.
+
+KEY DECISIONS:
+- Source citation is preferred in research documentation.
+
+AGENT REPORT:
+  Initial Response:
+  - Switched the ongoing documentation pass toward source-backed research notes and planned to add cited research docs rather than only unsourced planning summaries.
+
+  Final Response:
+  - Added source-backed research notes to the planning set rather than leaving the new research only in chat.
+  - Created cited docs for legal baseline, realtime/media, 3D runtime evaluation, and AI model strategy.
+  - Pending items at that point were committing the log update and pushing the latest documentation commits.
+
+---
+---
+[2026-03-11T00:08:05Z] role=user
+you can document anything you research as well
+
+SESSION CONTEXT:
+- Source citation had just been requested for the planning work.
+- Active agents/skills: chat-history-agent, chat-history-convention.
+- Phase: expanding the scope of documentation to include explicit research notes.
+
+USER INTENT:
+1. Approve adding dedicated research documentation for anything investigated during the planning pass.
+2. Encourage capturing research outputs directly in the repo rather than only summarizing them in chat.
+
+REFERENCE FILES:
+- `.docs/planning/` — destination for additional research notes.
+- `.chat-history/user-messages.log` — transcript log.
+
+KEY DECISIONS:
+- Research outputs should be documented directly in the repo.
+
+AGENT REPORT:
+  Initial Response:
+  - Confirmed the shift from planning-only language to source-backed research notes and committed to adding dedicated cited research docs to the planning set.
+
+  Final Response:
+  - Documented the research directly in `.docs/planning/` through new sourced research files and linked them from the planning index.
+  - The repo now captures both planning decisions and the source-backed research that informed them.
+  - Pending items at that point were completion logging and push.
+
+---
+---
+[2026-03-11T00:08:05Z] role=user
+resume
+
+SESSION CONTEXT:
+- The source-backed research docs and audience-overlay clarification had already been written and committed locally.
+- Active agents/skills: chat-history-agent, chat-history-convention.
+- Phase: completion and push.
+
+USER INTENT:
+1. Continue the paused documentation workflow from the current state.
+2. Finish any remaining commit, push, and reporting steps.
+
+REFERENCE FILES:
+- `.docs/planning/` — recently updated planning and research docs.
+- `.chat-history/user-messages.log` — transcript log.
+
+KEY DECISIONS:
+- None — continuation request only.
+
+AGENT REPORT:
+  Initial Response:
+  - Stated that the remaining work was to record the latest chat messages, commit the chat-history update, and push the new planning and research commits to `MockTrial`.
+
+  Final Response:
+  - Resumed the paused workflow, updated the chat-history log for the recent documentation requests, and prepared the repo for the final log commit and push.
+  - Pending items at that point were only the final log commit and remote push.
+
+---
+
