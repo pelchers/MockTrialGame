@@ -8,6 +8,7 @@
 - **Spectator role:** interactive, not passive
 - **Media posture:** voice, video, and text operate together by default, with text-only fallback required
 - **3D posture:** one primary runtime should ship the reconstruction sandbox; multiple engines remain evaluation candidates, not the default implementation
+- **Audience posture:** classroom, competition, and open-play are audience overlays on one core platform, not separate core modes unless a concrete rules difference forces it
 
 ## Key Risks
 ### Legal Fidelity Risk

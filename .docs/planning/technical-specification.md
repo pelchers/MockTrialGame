@@ -72,7 +72,7 @@ Responsibilities:
 - Start with a domain model, not hardcoded UI branching.
 - Represent trial phases, procedural gates, evidence states, and role permissions explicitly.
 - Treat jurisdiction-specific rules as overlays or policy packs.
-- Distinguish educational simplification from full-fidelity simulation through configurable modes.
+- Distinguish facilitation overlays from true rule differences so audience targeting does not fracture the core platform.
 
 ## Performance Expectations
 - Fast join and reconnect for classroom sessions.

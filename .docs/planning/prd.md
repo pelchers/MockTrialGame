@@ -3,6 +3,8 @@
 ## Product Summary
 MockTrial.app is a browser-based multiplayer simulation platform for mock trials, courtroom education, and legal-skills training. It supports hosted sessions, human and AI role participation, rules-aware trial flow, jury systems, and an interactive spectator reconstruction environment.
 
+The product should be treated as one core platform serving multiple audiences rather than three separate product modes. Classroom, competition, and open-play usage should share the same underlying system unless a narrow rules or facilitation distinction is necessary.
+
 ## Problem Statement
 Existing mock trial experiences are usually fragmented across classroom handouts, video calls, static scripts, or narrowly scoped educational tools. They rarely combine realistic courtroom flow, multiplayer orchestration, structured evidence handling, AI augmentation, and spectator learning tools in one system. MockTrial.app aims to close that gap.
 
@@ -37,7 +39,7 @@ Need observational tools, transcripts, timeline views, and reconstruction intera
 ## Functional Requirements
 ### 1. Session Creation and Hosting
 - Create hosted sessions with lobby codes or invite links.
-- Configure case type, participant count, AI seat usage, and audience permissions.
+- Configure case type, participant count, AI seat usage, facilitation settings, and audience permissions.
 - Allow private team rooms and observer access settings.
 
 ### 2. Role Assignment and Permissions

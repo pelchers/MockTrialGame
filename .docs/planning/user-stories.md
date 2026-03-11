@@ -4,7 +4,7 @@
 ### Session Setup
 - As a teacher, I want to create a trial session with predefined roles so that a class can begin quickly.
   - Acceptance Criteria:
-    - I can choose a case/scenario and session mode.
+    - I can choose a case/scenario and facilitation preset.
     - I can assign humans and AI participants by role.
     - I can configure whether spectators and private rooms are enabled.
 
@@ -13,7 +13,7 @@
   - Acceptance Criteria:
     - I can see the current phase and next legal transition points.
     - I can pause the session without data loss.
-    - I can override progression when teaching mode is enabled.
+    - I can override progression when facilitation settings allow it.
 
 ### Review
 - As a teacher, I want post-session transcripts and event summaries so that I can assess performance.

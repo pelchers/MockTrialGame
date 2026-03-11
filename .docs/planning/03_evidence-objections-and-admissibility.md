@@ -25,10 +25,10 @@ Evidence handling is where courtroom fidelity becomes operational. If evidence a
 ## Product Modeling Implications
 - Objections should be structured actions with timing windows.
 - Rulings should update the evidence state and transcript.
-- Teaching mode can explain objection rationale in plain language.
-- Competition mode may restrict objection menus to supported formats.
+- Teaching overlays can explain objection rationale in plain language.
+- Competition overlays may restrict objection menus to supported formats.
 
 ## Research Expansion Priorities
 - Minimum viable objection set for broad educational value
-- Mapping of objection categories to beginner, intermediate, and advanced modes
+- Mapping of objection categories to audience overlays and facilitation settings
 - How to represent offers of proof, sidebar concepts, and limiting instructions later

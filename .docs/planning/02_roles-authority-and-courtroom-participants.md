@@ -27,7 +27,7 @@ Observe admitted evidence and testimony, receive instructions, deliberate, and v
 Observe proceedings and interact in separate learning/reconstruction tools without default authority over the official record.
 
 ### Host / Teacher Overlay
-May pause, annotate, override, or simplify procedure depending session mode.
+May pause, annotate, override, or simplify procedure depending facilitation settings and audience needs.
 
 ## AI Participation Model
 Any courtroom seat may be human- or AI-controlled, but the risk profile differs:

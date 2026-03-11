@@ -19,6 +19,7 @@ MockTrial.app is a courtroom simulation engine, not merely a chat room or branch
 - **AI-native but not AI-dependent:** any role may be filled by AI, but the platform must work with all-human participation.
 - **Research-led architecture:** planning stays comparative until stack choice is made explicitly.
 - **Jurisdiction-layered:** begin with broad U.S. criminal-trial foundations, then add jurisdiction and competition overlays.
+- **Audience-overlays, not separate products:** classroom, competition, and open-play use the same core platform, with only targeted policy or facilitation differences where truly necessary.
 - **Production-launch target:** this is not an MVP track; the intent is to build for production deployment and launch as soon as the build is complete and tested.
 - **No mock-data posture:** the system should be planned around real data models, real content flows, and launch-grade integrations rather than demo-only fake data.
 

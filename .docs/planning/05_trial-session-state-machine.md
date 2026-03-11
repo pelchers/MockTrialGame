@@ -42,5 +42,5 @@
 - AI fallback for absent humans
 - mistrial branch
 - jury deadlock
-- judge override in teaching mode
+- judge or host override under facilitation settings
 - late evidence dispute
