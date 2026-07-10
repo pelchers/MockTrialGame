@@ -1,22 +1,7 @@
-# Codex setup for this repo
-
-This repository uses Codex repo-scoped skills and agents. Place skills in `./.codex/skills/<skill-name>/SKILL.md` and agents in `./.codex/agents/<agent-name>/AGENT.md` so they travel with the repo.
-
-## Skill format (Codex)
-
-- Each skill is a folder with a required `SKILL.md`.
-- `SKILL.md` uses YAML front matter with `name` and `description`, plus optional Markdown instructions in the body.
-- Optional folders: `scripts/`, `references/`, `assets/`.
-
-## How to create or install skills
-
-- Use `$skill-creator` inside Codex to scaffold a new skill.
-- Use `$skill-installer` to install curated skills if needed.
-
-## Reference source for corollary skills
-
-Use the Claude workspace at `<PROJECT_ROOT>/.claude` as a reference for creating corollary Codex skills. Port concepts from that folder into Codex-style skills here (one folder per skill with `SKILL.md` plus optional `scripts/`, `references/`, `assets/`), adapting content to Codex conventions rather than copying wholesale.
-
+<!-- Paste this managed block into the target repo's CLAUDE.md / .claude/CLAUDE.md (Markdown, ##),
+     and adapt the heading depth for .codex/CODEX.md (####) and .codex/AGENTS.md (##).
+     Append idempotently between the BEGIN/END markers — do NOT duplicate if a block already exists.
+     Adjust the device list + working-lane branch names to the target project. -->
 
 <!-- BEGIN device-sync-and-handoff convention (managed; append idempotently — do not duplicate) -->
 ## Device Sync & Handoff Convention (Required)
@@ -33,3 +18,8 @@ Use the Claude workspace at `<PROJECT_ROOT>/.claude` as a reference for creating
   `git push origin <Device>-Work:main` (fast-forward only) → optional `/savepoint` at a milestone.
 - Full protocol: `.docs/runbooks/development/device-sync-and-handoff-protocol.md`. Log: `HANDOFF.md`.
 <!-- END device-sync-and-handoff convention -->
+
+<!-- Paste into all four always-loaded instruction files:
+       CLAUDE.md · .claude/CLAUDE.md · .codex/CODEX.md · .codex/AGENTS.md
+     This convention LAYERS ON TOP of the device-branch-routing "Device Branch Convention" block
+     (the working-lane resolver) — keep both; do not replace one with the other. -->

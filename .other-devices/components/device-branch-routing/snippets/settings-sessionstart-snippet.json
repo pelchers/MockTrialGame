@@ -1,0 +1,16 @@
+{
+  "_comment": "Merge the SessionStart entry into the target repo's .claude/settings.json hooks object. If a hooks.SessionStart array already exists, append this hook object to it.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/scripts/device-sync-check.sh",
+            "description": "Report this device + branch sync status vs main (device-branch-routing)"
+          }
+        ]
+      }
+    ]
+  }
+}

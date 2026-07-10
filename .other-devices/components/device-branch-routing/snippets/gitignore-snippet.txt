@@ -1,0 +1,6 @@
+﻿# device.local.md - device-branch-routing per-machine toggle.
+# POLICY (updated 2026-06-22, multi-agent-collaboration): device.local.md is TRACKED - do NOT ignore.
+# Per the no-gitignore + multi-agent conventions it is committed per-branch so each device lane
+# self-describes and is understood on the other device. There is intentionally NO .gitignore entry.
+# (Supersedes the prior "REQUIRED ignore" rule.) Reference template: device.local.example.md.
+# Retained for history only - do NOT append this to any .gitignore.
