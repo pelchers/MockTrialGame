@@ -45,6 +45,11 @@ PATHS=(
   ".codex/commands/pickup.md" ".codex/commands/winddown.md" ".codex/commands/device.md"
   ".codex/commands/sync-flush.md" ".codex/commands/sync-component.md"
   ".claude/hooks/scripts/device-sync-check.sh" ".codex/hooks/scripts/device-sync-check.sh"
+  ".claude/hooks/scripts/device-identity-heal.sh" ".codex/hooks/scripts/device-identity-heal.sh"
+  ".claude/hooks/scripts/branched-log-merge.py" ".codex/hooks/scripts/branched-log-merge.py"
+  ".claude/hooks/scripts/branched-logs.sh" ".codex/hooks/scripts/branched-logs.sh"
+  ".claude/skills/chat-history-convention" ".codex/skills/chat-history-convention"
+  ".codex/system_docs/branched_logs"
   ".claude/hooks/scripts/idle-handoff-monitor.sh" ".codex/hooks/scripts/idle-handoff-monitor.sh"
   ".claude/hooks/scripts/register-idle-handoff.ps1" ".codex/hooks/scripts/register-idle-handoff.ps1"
   ".claude/hooks/scripts/sync-flush.sh" ".codex/hooks/scripts/sync-flush.sh"
@@ -61,7 +66,8 @@ PATHS=(
   ".other-devices/components/device-branch-routing"
   ".other-devices/components/multi-agent-collaboration"
   ".other-devices/components/chat-history-convention"
-  "HANDOFF.md"
+  ".other-devices/components/branched-logs"
+  "HANDOFF.md" ".gitattributes"
   ".claude/CLAUDE.md" ".codex/CODEX.md" ".codex/AGENTS.md" "CLAUDE.md"
 )
 

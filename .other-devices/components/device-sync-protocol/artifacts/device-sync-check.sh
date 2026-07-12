@@ -21,6 +21,10 @@ if [ -z "$ROOT" ]; then
   exit 0
 fi
 
+# Ensure device.local.md survives cross-device merges (it is per-device but tracked
+# per the no-ignore policy; .gitattributes marks it merge=ours). Idempotent, one-time.
+git -C "$ROOT" config merge.ours.driver true 2>/dev/null || true
+
 TOGGLE="$ROOT/device.local.md"
 TEMPLATE="$ROOT/device.local.example.md"
 
@@ -52,6 +56,27 @@ method="$(pick 'direct-push|pr-release')"
 # hostname pin (toggle 4)
 pin="$(grep -E '^HOSTNAME=' "$TOGGLE" 2>/dev/null | head -1 | sed -E 's/^HOSTNAME=//' | tr -d '[:space:]')"
 host="$(hostname 2>/dev/null || echo "${COMPUTERNAME:-}")"
+
+# --- device identity heal + post-merge auto-heal install --------------------------
+# device.local.md is per-machine but TRACKED; a cross-device /pickup merge silently adopts the
+# OTHER device's copy (merge=ours only fires on a real conflict). Run the heal now (restores from
+# .git/device-identity, or captures it on a trusted first run), and install a git post-merge hook
+# so the heal ALSO fires the instant a merge/pull lands — before any commit can push the wrong
+# identity to the working lane or main. Then re-read the (possibly restored) toggle.
+HEAL="$ROOT/.claude/hooks/scripts/device-identity-heal.sh"
+[ -f "$HEAL" ] || HEAL="$ROOT/.codex/hooks/scripts/device-identity-heal.sh"   # harness-agnostic
+[ -f "$HEAL" ] && bash "$HEAL" || true
+PMH="$ROOT/.git/hooks/post-merge"
+if [ -d "$ROOT/.git/hooks" ] && ! grep -q device-identity-heal.sh "$PMH" 2>/dev/null; then
+  tmp="$PMH.tmp.$$"
+  if [ -f "$PMH" ]; then cat "$PMH" > "$tmp" 2>/dev/null; else echo '#!/usr/bin/env bash' > "$tmp"; fi
+  echo 'r="$(git rev-parse --show-toplevel)"; for h in "$r/.claude/hooks/scripts/device-identity-heal.sh" "$r/.codex/hooks/scripts/device-identity-heal.sh"; do [ -f "$h" ] && { bash "$h"; break; }; done 2>/dev/null || true' >> "$tmp"
+  mv "$tmp" "$PMH" 2>/dev/null && chmod +x "$PMH" 2>/dev/null || true
+fi
+# re-read device + pin after a possible heal
+checked="$(grep -E '^[[:space:]]*-[[:space:]]\[x\]' "$TOGGLE" 2>/dev/null | awk '{print $3}' | tr -d '\r')"
+device="$(pick 'home-desktop|asus-laptop')"
+pin="$(grep -E '^HOSTNAME=' "$TOGGLE" 2>/dev/null | head -1 | sed -E 's/^HOSTNAME=//' | tr -d '[:space:]')"
 
 # --- resolve default branch -------------------------------------------------
 if [ -z "$device" ]; then

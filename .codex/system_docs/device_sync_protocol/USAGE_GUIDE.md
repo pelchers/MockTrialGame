@@ -79,6 +79,40 @@ For an autonomous run, the `device-sync-agent` executes either ritual end-to-end
 `device-sync-protocol`, `device-branch-routing`, `managing-git-workflows`, and `chat-history-convention`
 skills). Use it when you want the pickup/wind-down done without step-by-step prompting.
 
+## Worked example: component work here + app work on the other device
+
+The exact case you hit when returning to a repo after doing unrelated work on each machine. Say
+🖥 home did heavy work on a **component** (`Home-Work`), and 💻 the laptop did **app features + savepoint
+branches** and already handed off to `main`.
+
+**On home, at session start** the banner shows:
+```
+[device-sync] device=home-desktop | branch=Home-Work | default-target=Home-Work | release=direct-push
+[device-sync] DIVERGED (ahead 3 / behind 5)          # home has 3 component commits; main has 5 app commits
+[device-sync] ⚠ origin/main ahead of your branch by 5 — run /pickup before working.
+```
+Run **`/pickup`**. It merges `origin/main` into `Home-Work`:
+- Disjoint files (component vs app) → **clean union**: home keeps its 3 component commits *and* gains the
+  laptop's 5 app commits. Same-file overlap → conflict is surfaced for you to reconcile (never dropped).
+- `HANDOFF.md` union-merges both devices' entries; `device.local.md` is **auto-healed** back to
+  `home-desktop` by the `post-merge` hook the instant the merge lands (see below).
+- The laptop's **savepoint branches** are now fetched locally (`git branch -a` shows them) — check any out
+  to inspect a "good app state."
+
+Finish, then **`/winddown`**: home pushes `Home-Work` and fast-forwards `main`. `main` now has **both**
+the component and the app work. Next time the laptop runs `/pickup`, it pulls `main` and gains the
+component work — full parity, zero loss.
+
+### Why your device identity survives the merge
+On the `/pickup` merge, git briefly adopts the laptop's `device.local.md` (merge=ours only fires on a true
+conflict). The installed **`post-merge` hook runs `device-identity-heal.sh` immediately**, restoring
+`device.local.md` to `home-desktop` from `.git/device-identity` — *before* your `/winddown` commit. So you
+never push the wrong device onto your lane or `main`. If you ever see:
+```
+[device-identity] self-heal: device.local.md was 'asus-laptop' but this clone is 'home-desktop' … restored to 'home-desktop'.
+```
+that is the safety net working as designed — no action needed.
+
 ## Troubleshooting
 
 **`<Device>-Work:main` push rejected (not a fast-forward)** — `main` moved via another device since your
@@ -86,6 +120,14 @@ last pull. Run `/pickup` to integrate `origin/main`, then push again. Never `--f
 
 **Lanes DIVERGED** — both your lane and another have unique commits `main` lacks. STOP; reconcile with
 the user (rebase/merge/cherry-pick). The protocol never discards a lane's commits.
+
+**`device.local.md` shows the *other* device after a `/pickup`** — expected transient: the merge adopted
+their tracked copy. The `post-merge` hook + `device-identity-heal.sh` restore it from `.git/device-identity`
+automatically (you'll see a `[device-identity] self-heal:` line). If it did *not* restore, the heal script
+or the `post-merge` hook is missing in this clone — re-run the `SessionStart` hook
+(`bash .claude/hooks/scripts/device-sync-check.sh`) to reinstall both, or run `/device` to re-pin manually.
+On a brand-new clone whose `device.local.md` came from the other device, the hook won't *guess* — set your
+device with `/device` once and it captures `.git/device-identity` for all future heals.
 
 **Banner says a device is ahead but `/pickup` finds nothing** — the bounded fetch may have been offline
 (look for a `(local ref, may be stale)` suffix). Re-run with a connection, or `git fetch origin` manually.

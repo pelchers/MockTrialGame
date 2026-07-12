@@ -25,7 +25,8 @@ repo-root/
 │   ├── commands/pickup.md ................................ NEW   (/pickup)
 │   ├── commands/winddown.md ............................. NEW   (/winddown)
 │   ├── agents/device-sync-agent/AGENT.md ................ NEW
-│   ├── hooks/scripts/device-sync-check.sh ............... EDIT  (extended: cross-device pickup signal + HANDOFF freshness + branch-model)
+│   ├── hooks/scripts/device-sync-check.sh ............... EDIT  (extended: cross-device pickup signal + HANDOFF freshness + branch-model; runs heal + installs post-merge hook)
+│   ├── hooks/scripts/device-identity-heal.sh ........... NEW   (restores device.local.md after a cross-device merge; auto-fired by SessionStart + post-merge)
 │   ├── skills/device-branch-routing/SKILL.md ............ EDIT  (working-lane default + main = handoff/savepoint/prod)
 │   └── commands/device.md ............................... EDIT  (resolved-target wording for the new branch model)
 ├── .codex/

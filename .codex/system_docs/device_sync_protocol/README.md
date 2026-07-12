@@ -20,6 +20,7 @@ commits to; this one layers the cross-device **sync + handoff** on top.
 | **Command** `/winddown` | `.claude/commands/winddown.md` · `.codex/commands/winddown.md` |
 | **Agent** `device-sync-agent` | `.claude/agents/device-sync-agent/AGENT.md` · `.codex/agents/device-sync-agent/AGENT.md` |
 | **Hook (extended, SessionStart)** | `.claude/hooks/scripts/device-sync-check.sh` · `.codex/hooks/scripts/device-sync-check.sh` |
+| **Identity auto-heal** | `.claude/hooks/scripts/device-identity-heal.sh` · `.codex/hooks/scripts/device-identity-heal.sh` — restores `device.local.md` after a cross-device merge; auto-fired by a git `post-merge` hook the SessionStart hook installs (+ `.git/device-identity` per-clone source of truth) |
 | **Hook wiring** | `.claude/settings.json` → `hooks.SessionStart` (already wired by `device-branch-routing`) |
 | **Convention block** | `CLAUDE.md` · `.claude/CLAUDE.md` · `.codex/CODEX.md` · `.codex/AGENTS.md` (managed `device-sync-and-handoff` block) |
 | **Runbook** | `.docs/runbooks/development/device-sync-and-handoff-protocol.md` |
@@ -63,6 +64,45 @@ commits to; this one layers the cross-device **sync + handoff** on top.
 4. (Optional) `/savepoint <name>` at a milestone (from `main`).
 5. Update `.chat-history/user-messages.md` + the status board. Verify `git status` clean and
    `git rev-list --left-right --count origin/main...HEAD` = `0 0`.
+
+## Both devices advanced — the reconciliation happy path (validated)
+
+The common real case: **this machine did work in one area (e.g. the device-sync component) while the
+other machine did unrelated work in another area (e.g. app features + `/savepoint` branches).** Both must
+survive; the goal is "get the most recent from **both**." Here is exactly how the protocol produces that.
+
+**Sequence (device B handed off first; device A picks up):**
+1. **Device B** (`/winddown`): pushes `B-Work` and fast-forwards `main` to it. `main` now carries B's work.
+2. **Device A** (`/pickup`): `git fetch`; sees `origin/main` ahead. Since A has its *own* un-handed-off
+   commits, this is a **merge / `git pull --rebase` of `origin/main` into `A-Work`**. Because A and B
+   touched **disjoint files**, git produces a **clean union** — A keeps its work *and* gains B's. (If they
+   touched the **same lines**, git raises a normal merge conflict → the protocol STOPS and reconciles with
+   the user; nothing is ever silently dropped.)
+3. **Device A** (`/winddown`): pushes `A-Work` and fast-forwards `main`. `main` now carries **both**.
+4. **Device B** (next `/pickup`): pulls `main`, gaining A's work. Both machines are now in full parity.
+
+**Append-only / per-device files reconcile, they don't collide:**
+- `HANDOFF.md` is `merge=union` — both devices' handoff entries are kept side by side (no conflict).
+- `device.local.md` is `merge=ours` **and** identity-healed (below) — each clone keeps its *own* device.
+- **Savepoint branches** made on the other device are ordinary refs — `git fetch` brings them down and the
+  lane/`main` sync never touches them; they remain available to check out.
+
+### Device-identity auto-heal (closes the pickup-merge window)
+`device.local.md` is per-machine but **tracked**. `.gitattributes merge=ours` only fires on a real
+*conflict*; on a `/pickup` that merges the other lane, only *their* copy changed, so git fast-adopts it —
+silently flipping this clone's device identity. Left unhealed, a `/winddown` in the **same session** could
+push the wrong identity to your lane and `main`. The fix:
+- **`device-identity-heal.sh`** keeps a per-clone source of truth at **`.git/device-identity`** (never
+  merged — it lives outside the work tree) and restores the section-1 checkbox + `HOSTNAME` pin from it.
+  It **captures** identity once on a *trusted* run (hostname pin matches, so a wrong toggle is never
+  trusted) and **restores** it whenever a merge clobbers it.
+- The `SessionStart` hook runs the heal **and installs a git `post-merge` hook**, so the heal **auto-fires
+  the instant a `/pickup` merge or any `git pull` lands** — before any commit can push the wrong identity.
+- `main`'s `device.local.md` is a don't-care: every clone self-heals locally from `.git/device-identity`.
+
+> This whole path is exercised end-to-end by the `ds-testlab` harness (`C:/Work/App/ds-testlab/run-tests.sh`,
+> scenarios G/H/I/J): disjoint union · both-advance-`main` union · same-file conflict surfaced ·
+> pickup→winddown-same-session identity integrity — **30/30 assertions green**.
 
 ## Usage
 ```

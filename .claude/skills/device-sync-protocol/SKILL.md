@@ -42,8 +42,20 @@ agent runs to (1) get onto the most-forward version before working, and (2) hand
    - Other device branch ahead of `main` (unreleased) → surface it; integrate per ADR/HANDOFF or ask
      the user to promote it. **Never force-push. Never discard a lane's commits.**
    - Genuinely DIVERGED (both lanes have unique commits) → **STOP, report, reconcile with the user.**
-5. **Read the newest `HANDOFF.md` entry** + skim the status board → rebuild understanding.
-6. **Proceed** — continue where the other agent left off.
+5. **Merge modes (from the user's prompt; default `both`):** `both` = integrate both devices' most-recent
+   work; `theirs` = adopt the other device's app code ("pull full from there, ignore the work here");
+   `ours` = keep this device's code. **In EVERY mode the logs still union (0 chat-history loss)** and you
+   still read the other device's handoff — the mode only changes which app *code* is adopted.
+6. **Integrate the LOGS (always, every mode):**
+   ```bash
+   bash .claude/hooks/scripts/branched-logs.sh absorb-all <other-device> origin/main
+   bash .claude/hooks/scripts/branched-logs.sh merge-all
+   ```
+   Pulls the other device's chat-history + HANDOFF entries into their segment and regenerates the merged
+   views — unioned, deduped, chronological (0 loss). See `branched-logs` + `.codex/system_docs/branched_logs/`.
+7. **Read the newest `HANDOFF.md` entry** (now unioned across both devices) + skim the status board →
+   rebuild understanding of where EACH device left off + what's next.
+8. **Proceed** — continue where the other agent left off.
 
 ## WIND-DOWN — run at the end of work (`/winddown`)
 

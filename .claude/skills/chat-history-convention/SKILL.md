@@ -1,17 +1,38 @@
 ---
 name: chat-history-convention
-description: Append every user message to .chat-history/user-messages.log with timestamp, role, raw message body, and structured USER INTENT analysis for project-local chat continuity.
+description: Append every user message to .chat-history/user-messages.md with timestamp, role, raw message body, and structured USER INTENT analysis for project-local chat continuity.
 ---
 
 # Chat History Convention
 
 Use this skill whenever the user asks for message logging, session continuity, or project-local chat transcripts.
 
+## Storage model — device-branched (multi-device, 0-loss)
+
+Chat history is a **device-branched append-log**. Each machine appends ONLY to its own segment file
+`.chat-history/user-messages.<device>.md` (its "branch"); the human/AI-facing
+`.chat-history/user-messages.md` is a **derived merged view**, regenerated deterministically
+(chronological, deduped, carrying BOTH devices' entries). Writes are physically disjoint per device, so a
+`git pull`/merge never conflicts and never loses an entry. You still **read** the single
+`user-messages.md` as always — the segments are write-side plumbing.
+
+- **Append:** `scripts/append-user-message.ps1` resolves this device from `device.local.md`, writes the
+  entry to `user-messages.<device>.md`, and regenerates `user-messages.md` (via `branched-log-merge.py`).
+  Do **NOT** hand-append to `user-messages.md` — it is regenerated and a direct edit would be overwritten.
+- **Merge/pull:** the `post-merge` hook auto-runs `branched-logs.sh merge-all`; `/pickup` runs
+  `branched-logs.sh absorb-all <other-device> origin/main` to pull the other device's entries in. The logs
+  **ALWAYS union both devices (0 loss)** regardless of the code-merge mode (`both`/`theirs`/`ours`).
+- Each entry carries a hidden `<!-- ENTRY ts=… device=… id=… -->` marker (invisible when rendered) for
+  deterministic sort + content-hash dedup. Same mechanism protects `HANDOFF.md`; `component-sync-log.md`
+  (a table/prose ledger) uses `merge=union`. Engine + success metrics: `.codex/system_docs/branched_logs/`.
+
 ## Workflow
 1. Ensure `.chat-history/` exists at repo root.
-2. Ensure `.chat-history/user-messages.log` exists.
-3. Append each incoming user message with the **full entry format** below.
-4. Separate entries with `---`.
+2. Ensure `.chat-history/user-messages.md` exists.
+3. Resolve the current authoring agent (`codex` or `claude`) and the current most recent commit
+   (`git rev-parse --short HEAD` + `git log -1 --pretty=%s`).
+4. Append each incoming user message with the **full entry format** below.
+5. Separate entries with `---`.
 
 ## Entry Format
 
@@ -20,6 +41,9 @@ Every log entry MUST include ALL of the following sections:
 ```text
 ---
 [TIMESTAMP] role=user
+Authored by: codex | claude
+Most recent commit: <short-hash> (<commit subject>)
+
 <raw user message — preserved verbatim, typos and all>
 
 SESSION CONTEXT:
@@ -64,6 +88,16 @@ AGENT REPORT:
 ### Raw Message
 - Always preserve the user's message exactly as typed, including typos and formatting
 - Do not edit, clean up, or paraphrase the raw message
+
+### Authorship + Commit Metadata
+- Every entry MUST include `Authored by: codex` or `Authored by: claude` immediately under the
+  `[TIMESTAMP] role=user` line.
+- Every entry MUST include `Most recent commit: <short-hash> (<commit subject>)` immediately under
+  the authored-by line.
+- Resolve the commit from the repo at logging time. If git is unavailable, write
+  `Most recent commit: unavailable (<reason>)`.
+- These fields are mandatory for posterity and for reconstructing which AI surface authored a log
+  entry after cross-tool handoffs.
 
 ### SESSION CONTEXT
 - Summarize what's currently happening in the session
@@ -150,6 +184,8 @@ AGENT REPORT:
 ## Formatting Notes
 - Use `---` as the entry separator (three dashes on their own line)
 - Timestamps should be ISO 8601 format: `[YYYY-MM-DDTHH:MM:SSZ]`
+- The first two metadata lines after the timestamp are mandatory:
+  `Authored by: <codex|claude>` and `Most recent commit: <short-hash> (<subject>)`
 - Keep USER INTENT bullets concise but complete — each should be independently understandable
 - If the user sends a very short message (e.g., "yes", "looks good"), still include all sections but keep them proportionally brief
 

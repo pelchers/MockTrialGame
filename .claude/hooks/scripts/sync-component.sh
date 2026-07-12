@@ -24,6 +24,12 @@ FILES=(
   ".codex/commands/pickup.md" ".codex/commands/winddown.md" ".codex/commands/device.md"
   ".codex/commands/sync-flush.md" ".codex/commands/sync-component.md"
   ".claude/hooks/scripts/device-sync-check.sh" ".codex/hooks/scripts/device-sync-check.sh"
+  ".claude/hooks/scripts/device-identity-heal.sh" ".codex/hooks/scripts/device-identity-heal.sh"
+  ".claude/hooks/scripts/branched-log-merge.py" ".codex/hooks/scripts/branched-log-merge.py"
+  ".claude/hooks/scripts/branched-logs.sh" ".codex/hooks/scripts/branched-logs.sh"
+  ".claude/skills/chat-history-convention/SKILL.md" ".codex/skills/chat-history-convention/SKILL.md"
+  ".claude/skills/chat-history-convention/scripts/append-user-message.ps1" ".codex/skills/chat-history-convention/scripts/append-user-message.ps1"
+  ".codex/system_docs/branched_logs/README.md" ".codex/system_docs/branched_logs/tests-explained.md"
   ".claude/hooks/scripts/idle-handoff-monitor.sh" ".codex/hooks/scripts/idle-handoff-monitor.sh"
   ".claude/hooks/scripts/register-idle-handoff.ps1" ".codex/hooks/scripts/register-idle-handoff.ps1"
   ".claude/hooks/scripts/sync-flush.sh" ".codex/hooks/scripts/sync-flush.sh"
@@ -46,7 +52,7 @@ done
 log "copied $copied reusable files"
 
 # --- portable packages ----------------------------------------------------------
-for pkg in device-sync-protocol device-branch-routing multi-agent-collaboration; do
+for pkg in device-sync-protocol device-branch-routing multi-agent-collaboration branched-logs; do
   [ -d "$SRC/.other-devices/components/$pkg" ] || continue
   mkdir -p "$TARGET/.other-devices/components"
   cp -r "$SRC/.other-devices/components/$pkg" "$TARGET/.other-devices/components/"
@@ -56,6 +62,13 @@ log "staged .other-devices packages"
 # --- HANDOFF.md — seed from template only if missing ----------------------------
 TPL="$SRC/.other-devices/components/device-sync-protocol/artifacts/HANDOFF.template.md"
 [ ! -f "$TARGET/HANDOFF.md" ] && [ -f "$TPL" ] && { cp "$TPL" "$TARGET/HANDOFF.md"; log "seeded HANDOFF.md"; }
+
+# --- protect per-device / append-only files across merges (append, don't clobber) ---
+GA="$TARGET/.gitattributes"
+grep -q "device.local.md merge=ours" "$GA" 2>/dev/null || printf 'device.local.md merge=ours\n' >> "$GA"
+grep -q "HANDOFF.md merge=union" "$GA" 2>/dev/null || printf 'HANDOFF.md merge=union\n' >> "$GA"
+git -C "$TARGET" config merge.ours.driver true 2>/dev/null || true
+log "ensured .gitattributes (device.local.md merge=ours) + merge driver"
 
 # --- WIRE the SessionStart hook into settings.json (idempotent) ------------------
 wire_hook() {
@@ -70,21 +83,31 @@ try:
     d=json.load(open(sj,encoding="utf-8")) if os.path.exists(sj) and os.path.getsize(sj) else {}
 except Exception:
     d={}
-def has(o):
-    if isinstance(o,dict):
-        if isinstance(o.get("command"),str) and "device-sync-check" in o["command"]: return True
-        return any(has(v) for v in o.values())
-    if isinstance(o,list): return any(has(v) for v in o)
-    return False
 d.setdefault("hooks",{})
-if has(d["hooks"].get("SessionStart",[])):
-    print("PRESENT"); sys.exit(0)
-d["hooks"].setdefault("SessionStart",[]).append({"hooks":[{"type":"command","command":"bash .claude/hooks/scripts/device-sync-check.sh","description":"Device + branch + cross-device sync status (device-branch-routing / device-sync-protocol)"}]})
-json.dump(d,open(sj,"w",encoding="utf-8"),indent=2)
-print("WIRED")
+def cmds(evt):
+    return " ".join(json.dumps(x) for x in d["hooks"].get(evt,[]))
+# (event, matcher-or-None, script, description)
+WANT=[
+    ("SessionStart", None, "device-sync-check.sh", "Device + branch + cross-device sync status (device-sync-protocol)"),
+    ("PostToolUse", "Edit|Write", "component-change-detector.sh", "Flag edited reusable-component files for cross-repo propagation"),
+    ("SessionEnd", None, "session-winddown.sh", "Auto safety-net: snapshot this repo's lane + report stranded component changes"),
+]
+added=[]
+for evt,matcher,script,desc in WANT:
+    if script in cmds(evt):  # already wired
+        continue
+    entry={"hooks":[{"type":"command","command":f"bash .claude/hooks/scripts/{script}","description":desc}]}
+    if matcher: entry={"matcher":matcher,**entry}
+    d["hooks"].setdefault(evt,[]).append(entry)
+    added.append(evt)
+if added:
+    json.dump(d,open(sj,"w",encoding="utf-8"),indent=2)
+    print("WIRED "+",".join(added))
+else:
+    print("PRESENT")
 PYEOF
 )" || { log "could not wire ${sj#$TARGET/} (python error) — leaving as-is"; return 0; }
-  log "SessionStart hook: $out → ${sj#$TARGET/}"
+  log "auto-fire hooks: $out → ${sj#$TARGET/}"
 }
 wire_hook "$TARGET/.claude/settings.json"
 

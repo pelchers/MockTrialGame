@@ -40,8 +40,10 @@ the hook script — no `settings.json` edit is needed. See `snippets/sessionstar
 | `artifacts/winddown.md` | `.codex/commands/winddown.md` | create (header → `Instructions for Codex`, paths `.claude`→`.codex`) |
 | `artifacts/AGENT.md` | `.claude/agents/device-sync-agent/AGENT.md` | create |
 | `artifacts/AGENT.md` | `.codex/agents/device-sync-agent/AGENT.md` | create (swap `.claude`→`.codex` in References) |
-| `artifacts/device-sync-check.sh` | `.claude/hooks/scripts/device-sync-check.sh` | **overwrite** (extends the device-branch-routing hook) |
+| `artifacts/device-sync-check.sh` | `.claude/hooks/scripts/device-sync-check.sh` | **overwrite** (extends the device-branch-routing hook; runs the identity heal + installs the `post-merge` hook) |
 | `artifacts/device-sync-check.sh` | `.codex/hooks/scripts/device-sync-check.sh` | **overwrite** |
+| `artifacts/device-identity-heal.sh` | `.claude/hooks/scripts/device-identity-heal.sh` | **overwrite** (restores `device.local.md` after a cross-device merge; called by the SessionStart + `post-merge` hooks) |
+| `artifacts/device-identity-heal.sh` | `.codex/hooks/scripts/device-identity-heal.sh` | **overwrite** |
 | `artifacts/runbook-device-sync-and-handoff-protocol.md` | `.docs/runbooks/development/device-sync-and-handoff-protocol.md` | create |
 | `artifacts/HANDOFF.template.md` | `HANDOFF.md` (repo root) | create (seed; first `/winddown` prepends the first real entry) |
 | `plans/device-sync-and-handoff-protocol-design.md` | `.docs/planning/plans/<n>-device-sync-and-handoff-protocol.md` | create (optional; renumber) |
