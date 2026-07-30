@@ -45,10 +45,10 @@
 - Include multi-role coverage (user, moderator, admin, owner) where relevant.
 - Never force passing tests. Investigate failures, document causes, and fix for production readiness.
 
-### Dev server cleanup
-- When done working, stop any dev servers that were started during the session (only the specific server used for testing, not all running servers).
-- Do not stop servers the user was already running before the session began.
-- Exception: if the user explicitly asks to leave the server running, leave it.
+### Dev servers
+- Leave dev servers running by default. Do NOT stop a dev server at the end of a session.
+- Stop a server ONLY when the user explicitly asks you to.
+- Never stop a server the user was already running before the session began.
 
 ### Subagent spawning (required)
 - Queue the next phase in `.codex/orchestration/queue/next_phase.json`.
