@@ -125,6 +125,41 @@ system_docs/
 │         .ai-ingest-docs/project-goals-understanding.md
 │         .docs/planning/
 │
+├── idea_logging/                      ← Idea Capture and Planning Folders
+│   ├── README.md
+│   ├── USAGE_GUIDE.md
+│   └── ARCHITECTURE.md
+│       Agents:
+│         .claude/agents/idea-logger/
+│       Skills:
+│         .claude/skills/logging-ideas/
+│       Output:
+│         .ideas/
+│
+├── dev_server_lifecycle/             ← Dev Server Lifecycle (leave-running policy)
+│   ├── README.md
+│   └── USAGE_GUIDE.md
+│       Agent:
+│         .claude/agents/dev-server-manager/
+│       Skill:
+│         .claude/skills/dev-server-lifecycle/
+│       Command:
+│         .claude/commands/dev-server.md
+│       Hook:
+│         .claude/hooks/scripts/dev-server-detect.sh
+│
+├── feature_planning_spec/             ← Feature-folder planning spec (scaffold/audit to full spec)
+│   ├── README.md
+│   └── USAGE_GUIDE.md
+│       Agents:
+│         .claude/agents/feature-planning-spec-agent/
+│       Skills:
+│         .claude/skills/feature-planning-spec/  (+ references/minimum-spec-checklist.md)
+│       Command:
+│         .claude/commands/feature-planning-spec.md
+│       Output:
+│         .docs/planning/<f#-feature>@<ver>/   (project-local — component syncs, folders do not)
+│
 └── deprecated/                        ← Superseded Systems
     ├── DEPRECATED.md
     └── frontend_planning/             (replaced by general_frontend/)
@@ -166,4 +201,7 @@ These skills are standalone utilities that don't warrant their own system docs f
 | Chat Reports | Session report generation | 1 | 1 |
 | Claude-Codex Sync | .claude ↔ .codex mirroring | 1 | 1 |
 | Repo Setup | Interactive project bootstrapper | 1 | 1 |
-| **Total** | | **9** | **18** |
+| Idea Logging | Repo-local idea capture and planning sync | 1 | 1 |
+| Dev Server Lifecycle | Local dev-server leave-running policy (+ command + hook) | 1 | 1 |
+| Feature Planning Spec | Scaffold/audit a feature folder to the full planning spec | 1 | 1 |
+| **Total** | | **12** | **21** |

@@ -10,13 +10,13 @@ system_docs/
 ├── general_frontend/                  ← General Frontend Concept Generation
 │   └── README.md
 │       Agents:
-│         .codex/agents/general-frontend-design-orchestrator/
-│         .codex/agents/general-frontend-design-subagent/
+│         .claude/agents/general-frontend-design-orchestrator/
+│         .claude/agents/general-frontend-design-subagent/
 │       Skills:
-│         .codex/skills/general-frontend-design-orchestrator/
-│         .codex/skills/general-frontend-design-subagent/
+│         .claude/skills/general-frontend-design-orchestrator/
+│         .claude/skills/general-frontend-design-subagent/
 │       Config:
-│         .codex/skills/general-frontend-design-orchestrator/references/style-config.json
+│         .claude/skills/general-frontend-design-orchestrator/references/style-config.json
 │       Output:
 │         .docs/planning/concepts/<style>/pass-<n>/
 │
@@ -27,13 +27,13 @@ system_docs/
 │   ├── component-reconciliation.md
 │   └── input-modes.md
 │       Agents:
-│         .codex/agents/production-frontend-orchestrator/
-│         .codex/agents/production-frontend-subagent/
+│         .claude/agents/production-frontend-orchestrator/
+│         .claude/agents/production-frontend-subagent/
 │       Skills:
-│         .codex/skills/production-frontend-orchestrator/
-│         .codex/skills/production-frontend-subagent/
+│         .claude/skills/production-frontend-orchestrator/
+│         .claude/skills/production-frontend-subagent/
 │       Config:
-│         .codex/skills/production-frontend-orchestrator/references/production-spec-template.md
+│         .claude/skills/production-frontend-orchestrator/references/production-spec-template.md
 │       Output:
 │         .docs/production/frontend/
 │
@@ -42,14 +42,14 @@ system_docs/
 │   ├── domain-families.md
 │   └── validation-pipeline.md
 │       Agents:
-│         .codex/agents/planning-visual-creative-orchestrator/
-│         .codex/agents/visual-creative-subagent/
+│         .claude/agents/planning-visual-creative-orchestrator/
+│         .claude/agents/visual-creative-subagent/
 │       Skills:
-│         .codex/skills/planning-visual-creative-orchestrator/
-│         .codex/skills/visual-creative-subagent/
+│         .claude/skills/planning-visual-creative-orchestrator/
+│         .claude/skills/visual-creative-subagent/
 │       Config:
-│         .codex/skills/planning-visual-creative-orchestrator/references/style-config.json
-│         .codex/skills/visual-creative-subagent/references/library-catalog.json
+│         .claude/skills/planning-visual-creative-orchestrator/references/style-config.json
+│         .claude/skills/visual-creative-subagent/references/library-catalog.json
 │       Output:
 │         .docs/design/concepts/<domain>/<style>/pass-<n>/
 │
@@ -59,13 +59,13 @@ system_docs/
 │   ├── subagent-spawning.md
 │   └── session-variants.md
 │       Skills:
-│         .codex/skills/longrunning-session/
-│         .codex/skills/orchestrator-session/
-│         .codex/skills/research-docs-session/
+│         .claude/skills/longrunning-session/
+│         .claude/skills/orchestrator-session/
+│         .claude/skills/research-docs-session/
 │       Hooks:
-│         .codex/hooks/scripts/orchestrator-poke.ps1
+│         .claude/hooks/scripts/orchestrator-poke.ps1
 │       Queue:
-│         .codex/orchestration/queue/next_phase.json
+│         .claude/orchestration/queue/next_phase.json
 │       Output:
 │         .adr/orchestration/
 │         .adr/current/
@@ -76,18 +76,18 @@ system_docs/
 │   ├── commit-conventions.md
 │   └── savepoint-workflow.md
 │       Skills:
-│         .codex/skills/managing-git-workflows/
-│         .codex/skills/savepoint-branching/
+│         .claude/skills/managing-git-workflows/
+│         .claude/skills/savepoint-branching/
 │
 ├── trinary_sync/                      ← Cross-Repo Synchronization
 │   └── README.md
 │       Skills:
-│         .codex/skills/maintaining-trinary-sync/
+│         .claude/skills/maintaining-trinary-sync/
 │       Scripts:
-│         .codex/skills/maintaining-trinary-sync/scripts/sync-all.js
-│         .codex/skills/maintaining-trinary-sync/scripts/sync-skill.js
-│         .codex/skills/maintaining-trinary-sync/scripts/sync-agent.js
-│         .codex/skills/maintaining-trinary-sync/scripts/check-sync.js
+│         .claude/skills/maintaining-trinary-sync/scripts/sync-all.js
+│         .claude/skills/maintaining-trinary-sync/scripts/sync-skill.js
+│         .claude/skills/maintaining-trinary-sync/scripts/sync-agent.js
+│         .claude/skills/maintaining-trinary-sync/scripts/check-sync.js
 │
 ├── extensibility/                     ← Agent, Skill & Hook Creation
 │   ├── README.md
@@ -95,62 +95,70 @@ system_docs/
 │   ├── skill-creation.md
 │   └── hooks-system.md
 │       Skills:
-│         .codex/skills/creating-claude-agents/
-│         .codex/skills/creating-claude-skills/
-│         .codex/skills/using-claude-hooks/
+│         .claude/skills/creating-claude-agents/
+│         .claude/skills/creating-claude-skills/
+│         .claude/skills/using-claude-hooks/
 │
 ├── chat_reports/                      ← Session Report Generation
 │   └── README.md
 │       Agents:
-│         .codex/agents/chat-report-agent/
+│         .claude/agents/chat-report-agent/
 │       Skills:
-│         .codex/skills/generating-chat-reports/
+│         .claude/skills/generating-chat-reports/
 │       Output:
 │         (printed to chat; optionally .chat-history/reports/)
 │
 ├── claude_codex_sync/                 ← .claude ↔ .codex Synchronization
 │   └── README.md
 │       Agents:
-│         .codex/agents/claude-codex-sync-agent/
+│         .claude/agents/claude-codex-sync-agent/
 │       Skills:
-│         .codex/skills/syncing-claude-codex/
+│         .claude/skills/syncing-claude-codex/
 │
 ├── repo_setup/                        ← Project Bootstrapping
 │   └── README.md
 │       Agents:
-│         .codex/agents/repo-setup-agent/
+│         .claude/agents/repo-setup-agent/
 │       Skills:
-│         .codex/skills/repo-setup-session/
+│         .claude/skills/repo-setup-session/
 │       Output:
 │         .ai-ingest-docs/project-goals-understanding.md
 │         .docs/planning/
 │
-├── game_development/                  ← Game Development (12 Domains)
-│   └── README.md
+├── idea_logging/                      ← Idea Capture and Planning Folders
+│   ├── README.md
+│   ├── USAGE_GUIDE.md
+│   └── ARCHITECTURE.md
 │       Agents:
-│         .codex/agents/game-development-agent/
+│         .claude/agents/idea-logger/
 │       Skills:
-│         .codex/skills/game-development-agent/
-│       Resources:
-│         .codex/skills/game-development-agent/resources/ (12 domain files + citations)
-│
-├── godot_development/                 ← Godot 4.x Engine Development
-│   └── README.md
-│       Agents:
-│         .codex/agents/godot-development-agent/
-│       Skills:
-│         .codex/skills/godot-development-agent/
-│       Resources:
-│         .codex/skills/godot-development-agent/resources/ (5 resource files + citations)
-│
-├── system_docs_management/            ← System Docs Creation & Maintenance
-│   └── README.md
-│       Agents:
-│         .codex/agents/system-docs-agent/
-│       Skills:
-│         .codex/skills/system-docs-agent/
+│         .claude/skills/logging-ideas/
 │       Output:
-│         .codex/system_docs/ (this directory)
+│         .ideas/
+│
+├── dev_server_lifecycle/             ← Dev Server Lifecycle (leave-running policy)
+│   ├── README.md
+│   └── USAGE_GUIDE.md
+│       Agent:
+│         .codex/agents/dev-server-manager/
+│       Skill:
+│         .codex/skills/dev-server-lifecycle/
+│       Command:
+│         .codex/commands/dev-server.md
+│       Hook:
+│         .codex/hooks/scripts/dev-server-detect.sh
+│
+├── feature_planning_spec/             ← Feature-folder planning spec (scaffold/audit to full spec)
+│   ├── README.md
+│   └── USAGE_GUIDE.md
+│       Agents:
+│         .claude/agents/feature-planning-spec-agent/
+│       Skills:
+│         .claude/skills/feature-planning-spec/  (+ references/minimum-spec-checklist.md)
+│       Command:
+│         .claude/commands/feature-planning-spec.md
+│       Output:
+│         .docs/planning/<f#-feature>@<ver>/   (project-local — component syncs, folders do not)
 │
 └── deprecated/                        ← Superseded Systems
     ├── DEPRECATED.md
@@ -193,7 +201,7 @@ These skills are standalone utilities that don't warrant their own system docs f
 | Chat Reports | Session report generation | 1 | 1 |
 | Claude-Codex Sync | .claude ↔ .codex mirroring | 1 | 1 |
 | Repo Setup | Interactive project bootstrapper | 1 | 1 |
-| Game Development | Engine-agnostic game dev (12 domains) | 1 | 1 |
-| Godot Development | Godot 4.x engine specialist | 1 | 1 |
-| System Docs Management | Auto-documentation for agents/skills | 1 | 1 |
+| Idea Logging | Repo-local idea capture and planning sync | 1 | 1 |
+| Dev Server Lifecycle | Local dev-server leave-running policy (+ command + hook) | 1 | 1 |
+| Feature Planning Spec | Scaffold/audit a feature folder to the full planning spec | 1 | 1 |
 | **Total** | | **12** | **21** |
