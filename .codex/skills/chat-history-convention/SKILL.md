@@ -189,5 +189,31 @@ AGENT REPORT:
 - Keep USER INTENT bullets concise but complete — each should be independently understandable
 - If the user sends a very short message (e.g., "yes", "looks good"), still include all sections but keep them proportionally brief
 
+## Autonomous Run Report Log (required during long autonomous runs)
+
+During a **long / autonomous agent run** — multi-hour, self-directed work where the operator sets a
+mandate up front and interjects intermittently — the agent MUST maintain a live, timestamped
+**autonomous run report log** at `.chat-history/autonomous-report-log.md`, alongside `user-messages.md`.
+It is the operational narrative of the run (what happened, when, findings, decisions) and complements the
+structured per-message transcript.
+
+**When it's required:** any run the operator frames as "proceed autonomously", "document as you go", a
+multi-phase build to a deadline, or similar standing mandate. Skip it for ordinary interactive turns.
+
+**File rules (append-only — operator requirement):**
+1. **Document as you go, timestamped.** Every entry opens with `### YYYY-MM-DD HH:MM · <short title>`.
+   Log meaningful steps/findings AS THEY HAPPEN, not in bulk afterward.
+2. **Note agent + branch on every entry:** `Agent: <claude|codex> · Branch: <working-lane>` (the device
+   working lane resolved from `device.local.md`).
+3. **Interject user prompts verbatim.** When the operator sends a prompt mid-run, append it under a
+   `### YYYY-MM-DD HH:MM · 👤 USER PROMPT` heading (quoted exactly), then the agent's actions/response below it.
+4. **Append-only.** Never rewrite past entries; correct via a new dated entry.
+
+**Relationship to `user-messages.md`:** a mid-run operator prompt is recorded in BOTH — verbatim under a
+`👤 USER PROMPT` heading in the report log (for the run narrative), and as a full structured entry in
+`user-messages.md` (for the durable transcript). The report log is per-run and operational;
+`user-messages.md` is the cross-session record. The report log is **project data, not a reusable
+component** — it is NOT cross-repo synced (only this convention's rules are).
+
 ## Optional Script
 Use `scripts/append-user-message.ps1` when shell automation is preferred.
