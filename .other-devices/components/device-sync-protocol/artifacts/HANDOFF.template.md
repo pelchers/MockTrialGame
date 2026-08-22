@@ -7,7 +7,8 @@
 >
 > **Entry template** (newest on top):
 > ```
-> ## <YYYY-MM-DD HH:MM TZ> · <device> (<hostname>) · <agent> · branch <X>-Work @ <short-sha>
+> ## <YYYY-MM-DD HH:MM TZ> · <device> (<hostname>) · <agent> · branch <feature-or-lane> @ <short-sha>
+> **Feature lane:** <fN-slug@luke · base <cut-from> · last-advanced-by <device@sha>>
 > **Synced from:** <what /pickup adopted this session, or "fresh clone">
 > **What changed:** <the work done>
 > **Where I stopped / state:** <current app + DB + branch state>

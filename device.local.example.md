@@ -30,3 +30,10 @@
 
 ## 4. Hostname pin (safety net — leave blank; auto-filled on first run)
 HOSTNAME=
+
+## 5. Active feature lane on THIS device   (the feature axis — contract §1.5)
+# The `f<N>-<slug>@luke` branch this machine is currently advancing. Routine commits go HERE; at
+# /winddown the device lane (§1-2) fast-forwards to this tip and it's pushed. Device identity is
+# METADATA (commit author + HANDOFF + the registry's "last advanced by") — NOT a fixed owner; any
+# device may pick up any feature next. Blank = working directly on the device lane.
+ACTIVE_FEATURE_BRANCH=

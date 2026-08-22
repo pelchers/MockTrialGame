@@ -23,13 +23,63 @@ under `.other-devices/components/` and **synced** to the other repos.
 
 | Branch | Role |
 |---|---|
-| `Home-Work` | 🖥 home-desktop **working lane** — default commit target on the home desktop |
-| `Asus-Work` | 💻 asus-laptop **working lane** — default commit target on the laptop |
+| `f<N>-<slug>@luke` | **Feature work tip** — the durable, carry-forward source of truth for feature *N*. The primary working surface. One per active feature; merged forward, **never rebased or deleted**. (See §1.5.) |
+| `Home-Work` | 🖥 home-desktop **working lane** — this machine's daily commit target + handoff pointer; at wind-down it fast-forwards to the feature tip it advanced |
+| `Asus-Work` | 💻 asus-laptop **working lane** — same, for the laptop |
 | `main` | **handoff + savepoint + stable + deployment/prod** — synced to a device lane only at wind-down; savepoints cut from it; prod deploys from it |
 | `savepoint-*` | milestone snapshots cut from `main` via `/savepoint` |
 
 The latest completed handoff always lives on `main` (and the device branch that did it). The next
 machine gets it by pulling `main`.
+
+## 1.5 The feature-lane axis — how work is partitioned across features AND devices (added 2026-08-13)
+
+The branch table has **two orthogonal axes**; keep their jobs distinct:
+
+- **Feature axis — `f<N>-<slug>@luke` = the WHAT.** Each feature gets exactly one long-lived branch
+  that is the *carry-forward work tip* for that feature — the single source of truth for its state,
+  across sessions and machines. It is cut from the current integration tip, advanced until the feature
+  is done, **merged forward (never rebased/deleted)**, and kept as a savepoint afterward.
+- **Device axis — `<Device>-Work` = the WHO/WHERE.** A device lane is this machine's daily commit
+  target *and* handoff pointer. At wind-down it **fast-forwards to the feature tip this device
+  advanced**, then syncs `main`. It records *which device took feature N to which commit* and carries
+  the `HANDOFF.md` + logs — it is **not** the feature's source of truth (the `f<N>` branch is).
+
+**Partition rule (from here on):**
+1. **One feature ⇒ one `f<N>-<slug>@luke` branch.** Never run two features on one branch, and never run
+   two devices on the *same* feature branch at once (that is what causes silent divergence — e.g. f3
+   piled onto f5).
+2. **Each device drives its own feature at a time**, declared in `device.local.md` (§5). Parallel work =
+   different features on different branches on different devices (e.g. f4 on old-pc-home while f3
+   continues on the other device).
+3. **Feature branches cut from the current integration tip** (the furthest-forward `f<N>` branch, or
+   `main`) and **merge forward** per `lane-forward-integration.md`; the newest lane stays the superset.
+4. **No fixed "owning device."** Features converge by **forward-merge at the integration tip** (per
+   `lane-forward-integration.md`); whichever device performs a given merge/promotion **records it** in the
+   registry's "Last advanced by" column — a *fact*, not a standing role. Any device may pick up any feature
+   next. `/pickup`'s `pull --rebase` before you push keeps single-branch pushes **fast-forward-only**, so
+   two devices can share one feature branch across sessions without clobbering.
+5. **Routine commits go on the `f<N>` branch.** The device lane is fast-forwarded to that tip, and
+   `main` ff'd, only at wind-down (unchanged) — by whichever device is at the convergence/promotion point.
+6. **Repo-infra / convention changes** (this contract, skills, agents, runbooks, the registry — *not*
+   feature-scoped) are committed on the **integration tip** and forward-integrated into every active
+   feature lane, so each device picks them up on its next merge rather than on only one feature branch.
+
+**Feature-Lane Registry (feature lanes + who last advanced them).** One canonical table, one row per
+active feature lane, lives in the status board `.adr/current/development-progress.md` (read at `/pickup`,
+updated at `/winddown`). Columns: **Feature · Branch · Base (cut-from) · Status · Last advanced by
+(device@sha · date)**. **Device identity is metadata, not ownership** — the last column is a factual log
+of which machine took the lane to which commit, never an assignment. `device.local.md` §5 records this
+machine's *current* lane.
+
+**Concurrent co-dev escape hatch (rare, opt-in).** The default is **one shared feature branch** synced via
+`/pickup` pull-rebase. Only if two devices must commit to the *same* feature at the *same time* may each
+work a device-suffixed branch `f<N>-<slug>@luke__<device>` (only that device ff-pushes it) and merge both
+into the canonical `f<N>-<slug>@luke`. This is an exception for genuine simultaneity — not the norm.
+
+> **Nothing else changes.** `/pickup`, `/winddown`, `/savepoint`, `/device`, `device.local.md` routing,
+> `main` = prod, the SessionStart banner, multi-agent add-all/read-fresh/rebase, and cross-repo sync all
+> work exactly as before — the feature axis + registry are layered on top.
 
 ## 2. The conventions (each is its own component)
 

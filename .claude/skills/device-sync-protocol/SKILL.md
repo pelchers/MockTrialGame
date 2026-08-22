@@ -16,6 +16,17 @@ agent runs to (1) get onto the most-forward version before working, and (2) hand
 - `Home-Work` = home-desktop default lane · `Asus-Work` = asus-laptop default lane (from `device.local.md`).
 - `main` = handoff + savepoint + stable + deployment/prod. Updated ONLY at a handoff (wind-down pushes
   device branch **and** `main` in sync) and at savepoints. **The latest handoff always lives on `main`.**
+- **Feature axis (contract §1.5):** routine work happens on the **`f<N>-<slug>@luke` feature branch**
+  named in `device.local.md` §5 (`ACTIVE_FEATURE_BRANCH`) — the durable carry-forward tip for that
+  feature. The device lane is fast-forwarded to that feature tip at wind-down; it is the savepoint /
+  handoff pointer, not the feature's source of truth. The canonical **Feature-Lane Registry** (feature ·
+  branch · base · status · **last advanced by `device@sha`**) lives in
+  `.adr/current/development-progress.md`. Device identity is **metadata, not a fixed owner**.
+- **Convergence (no fixed owner):** features forward-merge at the integration tip per
+  `lane-forward-integration.md`; whichever device performs a given merge/promotion **records it** in the
+  registry. `pull --rebase` before pushing keeps single-branch pushes fast-forward-only, so a shared
+  feature branch never clobbers across sessions. (Opt-in escape hatch for true concurrent co-dev:
+  device-suffixed `f<N>-<slug>@luke__<device>` branches that merge into the canonical.)
 
 ---
 
@@ -53,25 +64,35 @@ agent runs to (1) get onto the most-forward version before working, and (2) hand
    ```
    Pulls the other device's chat-history + HANDOFF entries into their segment and regenerates the merged
    views — unioned, deduped, chronological (0 loss). See `branched-logs` + `.codex/system_docs/branched_logs/`.
-7. **Read the newest `HANDOFF.md` entry** (now unioned across both devices) + skim the status board →
-   rebuild understanding of where EACH device left off + what's next.
+7. **Read the newest `HANDOFF.md` entry** (now unioned across both devices) + skim the status board,
+   **including the Feature-Lane Registry** → rebuild understanding of where EACH device left off. Confirm
+   which `f<N>` branch this device drives (`device.local.md` §5). If it isn't checked out, `git checkout`
+   it; then `git pull --rebase` so your next push is fast-forward-only.
 8. **Proceed** — continue where the other agent left off.
 
 ## WIND-DOWN — run at the end of work (`/winddown`)
 
-1. **Commit everything** to your device branch: `git add -A && git commit -m "..."`.
+1. **Commit everything** to your **active feature branch** (`device.local.md` §5 `ACTIVE_FEATURE_BRANCH`;
+   falls back to the device lane if none): `git add -A && git commit -m "..."`.
 2. **Prepend a `HANDOFF.md` entry** (template in `HANDOFF.md`; newest on top): synced-from · what
-   changed · where I stopped/state · next actions · blocked-on · gotchas · branch@sha. Commit it.
-3. **Push the device branch AND sync `main`:**
+   changed · where I stopped/state · next actions · blocked-on · gotchas · **feature-id · feature-branch ·
+   base · last-advanced-by `device@sha`** · branch@sha. Commit it.
+3. **Pull-rebase the feature branch; push it; fast-forward the device lane to it; sync `main`:**
    ```bash
+   git pull --rebase origin <ACTIVE_FEATURE_BRANCH>     # take the other device's latest FIRST (keeps push ff)
+   git push origin <ACTIVE_FEATURE_BRANCH>              # the feature work tip (ALWAYS)
+   git branch -f <Device>-Work <ACTIVE_FEATURE_BRANCH>  # device lane = savepoint pointer to the tip
    git push origin <Device>-Work
-   git push origin <Device>-Work:main     # fast-forward main to this handoff (stable/prod)
+   git push origin <Device>-Work:main                   # ff main to this handoff (stable/prod)
    ```
-   If `<Device>-Work:main` is NOT a fast-forward (main moved via another device without a pull),
-   `/pickup` first (integrate), then push. **Never force-push `main`.**
+   `main` is ff'd only when this feature tip is a superset of `main` (the usual case at a convergence /
+   promotion point). If `<Device>-Work:main` is NOT a fast-forward (main moved via another device),
+   `/pickup` first (forward-merge at the integration tip), then push. **Never force-push.** No fixed
+   owner — whoever is at the convergence point does the merge + records it in the registry.
 4. **(Optional) savepoint** at a milestone: `/savepoint <name>` (from `main`).
 5. **Verify:** `git status` clean; `git rev-list --left-right --count origin/main...HEAD` = `0 0`.
-6. Update `.chat-history/user-messages.md` + the status board as usual.
+6. Update `.chat-history/user-messages.md` + the status board — **including this feature's row in the
+   Feature-Lane Registry** (last advanced by `device@sha` · date, status).
 
 ---
 

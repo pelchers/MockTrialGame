@@ -1,6 +1,6 @@
 ---
 name: chat-history-convention
-description: Append every user message to .chat-history/user-messages.md with timestamp, role, raw message body, and structured USER INTENT analysis for project-local chat continuity.
+description: Append every user message to .chat-history/user-messages.md with timestamp, role, raw message body, a MANDATORY VERBATIM USER PROMPT(S) block storing each user message exactly as typed, a MANDATORY VERBATIM AGENT REPLY(S) block storing the agent's substantive chat reply so it survives cross-device handoff, and structured USER INTENT analysis for project-local chat continuity (all recoverable from the session transcript JSONL).
 ---
 
 # Chat History Convention
@@ -46,6 +46,18 @@ Most recent commit: <short-hash> (<commit subject>)
 
 <raw user message — preserved verbatim, typos and all>
 
+VERBATIM USER PROMPT(S):            # MANDATORY — see Section Rules (recover from transcript JSONL if missed)
+(a fenced code block — opened/closed with triple backticks — holding EACH raw user message this
+ entry covers, EXACTLY as typed: unedited, typos/casing/punctuation/whitespace/pasted-noise preserved)
+[1] (<ISO-timestamp>) <verbatim user message 1 — raw, unedited>
+[2] (<ISO-timestamp>) <verbatim user message 2 — raw, unedited, if the entry batches several>
+
+VERBATIM AGENT REPLY(S):            # MANDATORY (added 2026-08-18) — the agent's substantive chat reply(ies)
+(a fenced code block holding the agent's DELIVERED chat prose for this entry — the actual text the user
+ saw, near-verbatim; recover from the transcript JSONL assistant turns if not captured live. This is the
+ content that must survive a device handoff, e.g. a model-effectiveness comparison the next agent needs.)
+[reply to 1] <the agent's substantive reply — numbers, tables, links, determinations preserved intact>
+
 SESSION CONTEXT:
 - Current task/topic being worked on
 - Which agents/skills are active (if any)
@@ -88,6 +100,60 @@ AGENT REPORT:
 ### Raw Message
 - Always preserve the user's message exactly as typed, including typos and formatting
 - Do not edit, clean up, or paraphrase the raw message
+
+### VERBATIM USER PROMPT(S) — MANDATORY (required on EVERY entry)
+- Every entry MUST include a **VERBATIM USER PROMPT(S)** block that stores the EXACT raw text of each
+  user message the entry covers — unedited, with typos, casing, punctuation, line breaks, and any pasted
+  noise preserved. This is REQUIRED in **addition** to the `USER MESSAGES` / `USER INTENT` /
+  `KEY DECISIONS` / `AGENT REPORT` sections. Those sections may summarize, number, or paraphrase; the
+  VERBATIM block NEVER does — it is the exact source-of-truth transcript of what the user typed.
+- Put the raw messages inside a fenced code block so whitespace/formatting survives intact. One numbered
+  item per user message, in chronological order, each prefixed with its ISO-8601 timestamp:
+
+  ```text
+  [1] (2026-08-13T16:10:06Z) come back to that info above - we will readress it ... (verbatim, typos and all)
+  [2] (2026-08-13T16:16:09Z) make sure that table is somewhere in the features user documentation ...
+  ```
+
+- ⛔ **EXCLUSIONS — the ONLY permitted deviations from verbatim** (added 2026-08-17). Omit the content and
+  leave a one-line marker in its place; never reproduce it:
+  - **Accidental / mis-pasted content** the user flags as a paste bug or asks to exclude
+    → `[1] (ts) [excluded — accidental paste, per user]`
+  - **Third-party PII** — a real person's name + personal details who is NOT the user (job candidates,
+    customers, employees: contact info, pay, interview notes, health, addresses)
+    → `[2] (ts) [excluded — third-party PII]`
+  - **Secrets** — API keys, tokens, passwords, connection strings → `[3] (ts) [redacted — secret]`
+  These files are **committed and synced across repos**, so anything captured here is permanent and shared.
+  When in doubt, exclude and note it. Everything else stays byte-exact.
+- **Source of truth = the raw prompt as the user typed it.** When logging live, pass the message through
+  UNCHANGED (the `append-user-message.ps1` `$Message` arg is already stored verbatim — do NOT
+  pre-summarize it before handing it over).
+- **If the live hook did NOT capture it** (e.g. an entry was written with only paraphrased snippets, or a
+  batched winddown entry), RECOVER the verbatim text from the session transcript JSONL at
+  `~/.claude/projects/<project-slug>/<session-id>.jsonl`. Each genuine user turn is a line with
+  `"type":"user"` + `message.role == "user"` whose `content` is a plain string (or a `text` block).
+  EXCLUDE: `tool_result` blocks; `<system-reminder>` / `<command-*>` / `<local-command-*>` /
+  `<task-notification>` wrappers; the compaction "This session is being continued…" summary; and the
+  auto-generated `[Request interrupted by user]` / `Continue from where you left off.` control markers
+  (these are not user words). `promptSource` `typed`/`queued` marks user-originated turns.
+- Redact only secret VALUES (keys/tokens) — replace with a `‹redacted: shape/location›` note and keep
+  everything else verbatim.
+
+### VERBATIM AGENT REPLY(S) — MANDATORY (added 2026-08-18; required on EVERY entry that got a substantive reply)
+- Every entry MUST also capture the agent's **substantive chat reply(ies)** — the actual prose delivered to
+  the user — NOT only the paraphrased `AGENT REPORT`. **Why this exists:** a summarized report LOSES the
+  content a cross-device pickup needs. When the user switched devices, the prior agent's model-effectiveness
+  comparison had only been said in chat (never written here), so the next agent could not see it and the user
+  could not reassess it. The reply text itself must travel with the log.
+- Put the reply in a fenced code block, **near-verbatim** — light trimming of pure tool-call chatter is fine,
+  but the SUBSTANCE (numbers, tables, links, determinations, recommendations, comparisons) is preserved
+  intact. One block per user message the entry answers.
+- **If not captured live, RECOVER from the transcript JSONL:** assistant turns are lines with
+  `"type":"assistant"` whose `message.content` holds `text` blocks — concatenate the text blocks of the
+  final substantive reply for that turn; exclude `tool_use`/`tool_result` plumbing.
+- This is REQUIRED in addition to `AGENT REPORT` (which stays a concise plan/completion summary). The
+  autonomous-report-log complements it, but the KEY user-facing replies (comparisons, determinations,
+  answers to direct questions) MUST land here too.
 
 ### Authorship + Commit Metadata
 - Every entry MUST include `Authored by: codex` or `Authored by: claude` immediately under the
@@ -186,6 +252,9 @@ AGENT REPORT:
 - Timestamps should be ISO 8601 format: `[YYYY-MM-DDTHH:MM:SSZ]`
 - The first two metadata lines after the timestamp are mandatory:
   `Authored by: <codex|claude>` and `Most recent commit: <short-hash> (<subject>)`
+- Every entry MUST carry a **VERBATIM USER PROMPT(S)** fenced block holding the exact raw text of each
+  user message it covers (see Section Rules). If the live hook did not capture it, recover the verbatim
+  text from the session transcript JSONL — never leave an entry with only paraphrased snippets.
 - Keep USER INTENT bullets concise but complete — each should be independently understandable
 - If the user sends a very short message (e.g., "yes", "looks good"), still include all sections but keep them proportionally brief
 

@@ -67,6 +67,13 @@ PATHS=(
   ".other-devices/components/multi-agent-collaboration"
   ".other-devices/components/chat-history-convention"
   ".other-devices/components/branched-logs"
+  ".claude/skills/pr-shepherd" ".codex/skills/pr-shepherd"
+  ".claude/agents/pr-shepherd-agent" ".codex/agents/pr-shepherd-agent"
+  ".claude/commands/pr-watch.md" ".codex/commands/pr-watch.md"
+  ".claude/system_docs/pr_shepherd" ".codex/system_docs/pr_shepherd"
+  ".docs/runbooks/development/pr-shepherd.md"
+  ".docs/runbooks/development/pre-pr-learned-checks.md"
+  ".other-devices/components/pr-shepherd"
   "HANDOFF.md" ".gitattributes"
   ".claude/CLAUDE.md" ".codex/CODEX.md" ".codex/AGENTS.md" "CLAUDE.md"
 )

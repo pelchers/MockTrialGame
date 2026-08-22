@@ -1,4 +1,8 @@
 param(
+  # $Message MUST be the user's prompt EXACTLY as typed — verbatim, unedited, typos and all.
+  # Do NOT pre-summarize or paraphrase it: it is persisted verbatim (see the entry build below), which
+  # satisfies the MANDATORY "VERBATIM USER PROMPT(S)" requirement in SKILL.md. If a live capture is
+  # missed, recover the raw text from the session transcript JSONL and backfill it verbatim.
   [Parameter(Mandatory=$true)]
   [string]$Message,
   [ValidateSet('codex','claude')]
@@ -37,6 +41,7 @@ try {
 }
 
 # Legacy-format entry block (the branched-log engine ingests this + wraps it with a hidden marker).
+# $Message is embedded VERBATIM (raw, unedited) — this line is the verbatim source-of-truth capture.
 $entry = "[$timestamp] role=user`nAuthored by: $Author (device: $device)`n$commitLine`n`n$Message`n"
 
 $eng = '.claude/hooks/scripts/branched-log-merge.py'

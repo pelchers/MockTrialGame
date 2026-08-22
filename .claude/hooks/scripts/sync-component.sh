@@ -43,6 +43,13 @@ FILES=(
   ".docs/runbooks/development/multi-device-and-agent-contract.md"
   "multi-device-and-agent-contract.md" "device.local.example.md"
   "SYNC-REPOS.md" "sync-repos-asus-laptop.md"
+  ".claude/skills/pr-shepherd/SKILL.md" ".codex/skills/pr-shepherd/SKILL.md"
+  ".claude/agents/pr-shepherd-agent/AGENT.md" ".codex/agents/pr-shepherd-agent/AGENT.md"
+  ".claude/commands/pr-watch.md" ".codex/commands/pr-watch.md"
+  ".claude/system_docs/pr_shepherd/README.md" ".codex/system_docs/pr_shepherd/README.md"
+  ".claude/system_docs/pr_shepherd/USAGE_GUIDE.md" ".codex/system_docs/pr_shepherd/USAGE_GUIDE.md"
+  ".docs/runbooks/development/pr-shepherd.md"
+  ".docs/runbooks/development/pre-pr-learned-checks.md"
 )
 copied=0
 for f in "${FILES[@]}"; do
