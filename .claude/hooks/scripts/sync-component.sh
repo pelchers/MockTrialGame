@@ -50,6 +50,16 @@ FILES=(
   ".claude/system_docs/pr_shepherd/USAGE_GUIDE.md" ".codex/system_docs/pr_shepherd/USAGE_GUIDE.md"
   ".docs/runbooks/development/pr-shepherd.md"
   ".docs/runbooks/development/pre-pr-learned-checks.md"
+  ".claude/skills/feature-review/SKILL.md"
+  ".claude/agents/feature-review-agent/AGENT.md"
+  ".claude/commands/feature-review.md"
+  ".claude/hooks/scripts/feature-review-refresh.sh"
+  ".codex/skills/feature-review/SKILL.md"
+  ".codex/agents/feature-review-agent/AGENT.md"
+  ".codex/commands/feature-review.md"
+  ".codex/hooks/scripts/feature-review-refresh.sh"
+  ".codex/system_docs/feature_review/README.md"
+  ".codex/system_docs/feature_review/USAGE_GUIDE.md"
 )
 copied=0
 for f in "${FILES[@]}"; do
@@ -98,6 +108,7 @@ WANT=[
     ("SessionStart", None, "device-sync-check.sh", "Device + branch + cross-device sync status (device-sync-protocol)"),
     ("PostToolUse", "Edit|Write", "component-change-detector.sh", "Flag edited reusable-component files for cross-repo propagation"),
     ("SessionEnd", None, "session-winddown.sh", "Auto safety-net: snapshot this repo's lane + report stranded component changes"),
+    ("SessionStart", None, "feature-review-refresh.sh", "Flag FEATURE-REVIEW.md staleness (feature-review)"),
 ]
 added=[]
 for evt,matcher,script,desc in WANT:
@@ -128,6 +139,7 @@ ensure_block() {
 }
 for f in "$TARGET/.claude/CLAUDE.md" "$TARGET/.codex/CODEX.md" "$TARGET/.codex/AGENTS.md" "$TARGET/CLAUDE.md"; do
   ensure_block "$f" "device-sync-and-handoff convention" "$SRC/.claude/CLAUDE.md"
+  ensure_block "$f" "feature-review convention" "$SRC/.claude/CLAUDE.md"
 done
 
 log "DONE (copy-only — run sync-flush.sh to commit+push component paths). device.local.md untouched."

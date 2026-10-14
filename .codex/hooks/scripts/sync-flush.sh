@@ -74,6 +74,13 @@ PATHS=(
   ".docs/runbooks/development/pr-shepherd.md"
   ".docs/runbooks/development/pre-pr-learned-checks.md"
   ".other-devices/components/pr-shepherd"
+  ".claude/skills/cycle-back" ".codex/skills/cycle-back"
+  ".claude/agents/cycle-back-agent" ".codex/agents/cycle-back-agent"
+  ".claude/commands/cycle-back.md" ".codex/commands/cycle-back.md"
+  ".claude/hooks/scripts/cycle-back-surface.sh" ".codex/hooks/scripts/cycle-back-surface.sh"
+  ".claude/system_docs/cycle_back" ".codex/system_docs/cycle_back"
+  ".docs/runbooks/development/cycle-back.md"
+  ".other-devices/components/cycle-back"
   "HANDOFF.md" ".gitattributes"
   ".claude/CLAUDE.md" ".codex/CODEX.md" ".codex/AGENTS.md" "CLAUDE.md"
 )

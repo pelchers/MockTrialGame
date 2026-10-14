@@ -70,6 +70,15 @@ agent runs to (1) get onto the most-forward version before working, and (2) hand
    it; then `git pull --rebase` so your next push is fast-forward-only.
 8. **Proceed** — continue where the other agent left off.
 
+> **Feature-base currency (follow by default):** the SessionStart banner also runs
+> `feature-base-currency-check.sh`, which determines whether our diverged `CC/` fork is CURRENT for the
+> AREA the active feature touches vs `upstream/<base>` and prints
+> `FEATURE_BASE_RECOMMENDATION=proceed-on-fork|targeted-sync-needed`. **Pickup surfaces this and the agent
+> follows it by default WITHOUT asking:** `proceed-on-fork` → build on our fork as-is; `targeted-sync-needed`
+> → do the deliberate, listed targeted sync of those specific files from upstream (strip `CC/` on the
+> upstream side) BEFORE building. Re-run standalone when starting a NEW feature:
+> `bash .claude/hooks/scripts/feature-base-currency-check.sh` (read-only; never pushes upstream).
+
 ## WIND-DOWN — run at the end of work (`/winddown`)
 
 1. **Commit everything** to your **active feature branch** (`device.local.md` §5 `ACTIVE_FEATURE_BRANCH`;
@@ -124,5 +133,6 @@ entry, and resumes. Nothing is lost even without a manual wind-down.
 
 ## Related
 - SessionStart banner: `.claude/hooks/scripts/device-sync-check.sh` (reports if a device/`main` is ahead + HANDOFF freshness).
+- SessionStart banner: `.claude/hooks/scripts/feature-base-currency-check.sh` (is our `CC/` fork current for the active feature's area vs upstream; emits `FEATURE_BASE_RECOMMENDATION` — followed by default at pickup / new-feature start).
 - Commands: `/pickup`, `/winddown`. Agent: `device-sync-agent`. Toggle: `/device` + `device-branch-routing`.
 - Portable package: `.other-devices/components/device-sync-protocol/`.

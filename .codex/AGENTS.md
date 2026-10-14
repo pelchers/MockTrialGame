@@ -33,3 +33,31 @@ Use the Claude workspace at `<PROJECT_ROOT>/.claude` as a reference for creating
   `git push origin <Device>-Work:main` (fast-forward only) → optional `/savepoint` at a milestone.
 - Full protocol: `.docs/runbooks/development/device-sync-and-handoff-protocol.md`. Log: `HANDOFF.md`.
 <!-- END device-sync-and-handoff convention -->
+
+
+<!-- BEGIN feature-review convention (managed; append idempotently — do not duplicate) -->
+## Feature Review — one page saying what exists and where to review it (Required)
+- Keep the repo-root **`FEATURE-REVIEW.md`** current: per feature, its **state**, the **URL / admin
+  path to review it at**, the **paths** that carry it, and its **PR** with that PR's live CI/review
+  state. Maintained by **`/feature-review`** (skill `feature-review`, agent `feature-review-agent`).
+  Refresh whenever a feature's state MOVES — **pre-PR** (built locally ⇒ `BUILT — NOT SUBMITTED`)
+  and **post-PR** (opened / remediated / CI / merged / closed) — not only when asked.
+- **Ship state comes from MERGED upstream PRs, never from ADR checkboxes.** Measured 2026-10-13:
+  `f2`, `f3`, `f4`, `f6` and `f10` all ship in production while their `primary_task_list.md` files
+  show **zero** ticked phases. Report ADR-vs-code drift as a ⚠️ line; **never tick a checkbox** to
+  make them agree (that fabricates a completion claim — reconciling an ADR is a separate audit).
+- **`BUILT — NOT SUBMITTED` means local-only review.** Such a feature is on neither deployment, so
+  the entry must say so; pointing a reviewer at a deployment that lacks it is the worst error this
+  index can make. **`UNKNOWN — needs a check`** is a valid status — never guess, never round
+  "probably done" up to LIVE.
+- **Append-or-update, never rewrite** (the ⚠️ gap notes and the Progress log are hand-written), and
+  **verify every link and path before writing it** — a dead link in a trusted index is worse than
+  no link. The file stays at the **repo root**, never under `CC/` (only `CC/` reaches the product
+  repo). No secrets or customer data: URLs and paths only.
+- **Keep it readable as PLAIN TEXT.** Never inline a link in a table cell — define it at the
+  bottom and cite the short form (`[#319]`); keep lines under 100 chars, cells ~40, paths in fenced
+  code blocks, gaps in blockquotes, status as emoji + word. The first draft folded into
+  unreadability (rows of 315/339/446 chars) because cells carried inline PR links.
+- A SessionStart hook (`feature-review-refresh.sh`) flags staleness and never edits the file.
+  `/winddown` should leave the index current — the other device reads it cold at `/pickup`.
+<!-- END feature-review convention -->
