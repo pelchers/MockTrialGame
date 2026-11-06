@@ -440,3 +440,42 @@ it is running.
 - **Root cause:** `.github/workflows/ci.yml` lists `edited` in its `pull_request` `types` (so that retargeting a stacked PR's base fires CI), and the job is guarded on `github.event.changes.base != null`. A body-only edit therefore satisfies the trigger but fails the guard: the job skips, and because it belongs to the same concurrency group it supersedes and cancels the run that was actually testing the code.
 - **Pre-submit check:** finish the CI observation BEFORE touching the PR body or title. If the description must be corrected after a push, either do it before pushing the commit, or accept that you must re-run CI afterwards. Never read `mergeStateStatus: CLEAN` as "CI passed" — a skipped check does not block a merge; look at the run's own `conclusion`.
 - **Fix pattern:** re-run the cancelled run rather than pushing an empty commit, after confirming its `headSha` equals the branch tip (`gh run view <id> --json headSha` vs `git ls-remote <remote> <branch>`): `gh run rerun <id>`. Then watch that run id directly — the PR check rollup still carries the skipped entry and is misleading.
+
+### A PR series can pass review and still not deliver the feature (learned 2026-11-05, PRs #401 -> #420)
+
+**What happened.** f22 (Content Studio cleanup) was complete and tested on our lane at `b2ea9ec`.
+It went upstream as #401 and took three review rounds. In each round the maintainer said "do not
+revert development", and we answered by restoring development's copy of whole files
+(`template-form.tsx`, `unified-automation-form.tsx`, `Automations.tsx`, parts of `outreach-api.ts`).
+That cleared the review, but those files were where f22's editor lived. #401 merged a reduced f22.
+The hosted site no longer matched what the user had tested, and the user found out by opening it.
+#420 then had to rebuild the missing editor work on top. Several PRs went in, and none of them on
+its own brought `development` to the feature's state.
+
+**Root causes.**
+- No fixed target. Nobody had written down which commit was "the feature", so each round was judged
+  against the review rather than against the build the user tested.
+- Two wrong ways to port. Copying lane files reverts development's later fixes, which causes review
+  bounce. Restoring development's files drops the feature, which causes silent loss. Both happened.
+- "Keep development's version" on a file the feature rewrote is a product decision, not a merge
+  detail. It was handled as a merge detail and pushed.
+- Merged was treated as done. Nothing compared `development` with the tested build after the merge.
+- Two screens looked alike (the article/email content editor and the template editor). The one the
+  user had tested was not the one that was checked.
+
+**Pre-submit checks.**
+1. Before the first PR, record the target: the lane commit the user tested, and the list of
+   requirements in the user's words (example: `.chat-history/f22-part2-requirements.md`). The
+   main session owns that list. Do not hand it to one subagent.
+2. Build the PR by 3-way applying ONLY the feature's own diff (`git diff <base> <tested> -- CC/`,
+   `git apply --3way`) onto current development. Resolve each conflict as development's side PLUS
+   the feature. Never copy whole files, and never restore whole files.
+3. If a review asks to keep development's version of a file the feature changed, stop and ask the
+   user before pushing. Say plainly which feature behaviour would be lost.
+4. Before every push, and again after the merge, run
+   `bash scripts/e2e/upstream-parity-check.sh <tested-sha> <clone>` and the browser walk
+   `node scripts/e2e/content-studio-walk.mjs --admin <url>` against a build of the branch or of
+   development. A merged PR counts as done only when both pass.
+5. After pulling development into a local DB, run development's `db:ensure-*` scripts. A missing
+   `app_settings` column made every AI call 500 locally (2026-11-05). It looked like a PR bug and
+   it was not one.
