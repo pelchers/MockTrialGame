@@ -12,6 +12,43 @@ costs a round-trip again, and the file is **synced across all repos** (`SYNC-REP
 
 ---
 
+### A hand-rolled check can be a NO-OP; run the PACKAGE SCRIPT (learned 2026-10-14, PR #319 round 2)
+
+**What happened.** A change passed `tsc --noEmit` in `apps/admin-panel` and would have failed CI.
+The check had not found the bug because it was not looking: that package's `tsconfig.json` declares
+`"files": []` with project references, so bare `tsc --noEmit` compiles **nothing** and exits 0. Its
+real script is `tsc -b --noEmit`, which is what CI runs.
+
+Proven side by side, with a deliberate type error in `src/`:
+
+```
+bare 'tsc --noEmit'   -> exit 0    <- checks nothing
+npm run typecheck     -> exit 2    <- the real check
+```
+
+**The class.** A verification step that passes without verifying anything is worse than no step,
+because it manufactures confidence and leaves no trace in the output. Any approximation of a CI
+command — retyped, remembered, or "basically the same" — can be one of these.
+
+**The rule.** Never substitute a hand-rolled command for a package script when the question is
+"would CI pass". Run `npm run <script>` / `turbo run <task>`: the same entry point CI uses. If a
+command must be run directly (a Windows shell limitation, say), say so explicitly and verify the
+script separately — do not report the substitute's result as the script's.
+
+**The check.** `scripts/pre-pr-verify.sh` runs the real commands, read out of the product repo's own
+`.github/workflows/ci.yml` so they cannot drift, and **canary-tests** every `typecheck` script:
+writes a file that cannot compile, asserts the check goes red, removes it. A check that stays green
+with a deliberate type error is reported as a NO-OP and fails the run.
+
+    bash scripts/pre-pr-verify.sh               # full
+    bash scripts/pre-pr-verify.sh --canary-only # just prove the checks can fail
+    bash scripts/pre-pr-verify.sh --repo C:/cc10
+
+**Related Windows wrinkle, so it is not mistaken for a defect.** The backend's `typecheck`/`build`
+scripts are prefixed `NODE_OPTIONS=... tsc`, which cmd.exe cannot parse — that failure is
+environmental (CI is Linux). Confirm with `cd apps/backend && ./node_modules/.bin/tsc --noEmit`, and
+report it as environmental rather than as a pass or a defect.
+
 ### Cross-repo divergence gap: a symbol our code calls is missing on the dev branch (learned 2026-08-22, PR #93)
 - **Symptom:** CI `admin-panel:build` failed —
   `src/hooks/queries/use-visitors-queries.ts(68,15): error TS2339: Property 'createUser' does not exist on type 'AuthApi'`.
