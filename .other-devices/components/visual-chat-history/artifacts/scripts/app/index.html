@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--CSP-->
+<title>Chat History Viewer</title>
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231f6f5c'/%3E%3Cpath d='M8 10h16M8 16h11M8 22h14' stroke='%23fff' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+<a class="skip" href="#list">Skip to entries</a>
+<header class="masthead">
+  <div class="bar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <div class="brand-text">
+        <h1>Chat history</h1>
+        <p id="repo-name" class="repo"></p>
+      </div>
+    </div>
+    <div class="search">
+      <label class="sr-only" for="q">Search the chat history</label>
+      <svg class="search-icon" viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M13 13l4.5 4.5"/></svg>
+      <input id="q" type="search" autocomplete="off" spellcheck="false" placeholder="Search prompts, replies, intent, decisions, reports">
+      <kbd class="search-key" title="Press / or Ctrl+K to search">/</kbd>
+    </div>
+    <div class="bar-right">
+      <span id="live" class="live" role="status" aria-live="polite"><span class="dot"></span><span class="live-text">Connecting</span></span>
+      <button id="help-btn" class="icon-btn" type="button" aria-label="Keyboard shortcuts" aria-expanded="false" title="Keyboard shortcuts (?)">?</button>
+      <button id="theme-btn" class="icon-btn theme-btn" type="button" aria-label="Theme" title="Theme"></button>
+    </div>
+  </div>
+  <nav id="tabs" class="tabs" role="tablist" aria-label="Sessions"></nav>
+  <div class="filters" role="group" aria-label="Sort and filter">
+    <label class="field">
+      <span>Sort</span>
+      <select id="sort">
+        <option value="newest">Newest first</option>
+        <option value="oldest">Oldest first</option>
+        <option value="match">Best match</option>
+      </select>
+    </label>
+    <label class="field"><span>From</span><input id="from" type="date"></label>
+    <label class="field"><span>To</span><input id="to" type="date"></label>
+    <label class="field" id="machine-field"><span>Machine</span><select id="machine"></select></label>
+    <label class="field" id="author-field"><span>Author</span><select id="author"></select></label>
+    <div class="chips" id="has-chips" role="group" aria-label="Only entries that have these sections"></div>
+    <button id="clear" class="text-btn" type="button">Clear filters</button>
+    <span id="count" class="count" aria-live="polite"></span>
+  </div>
+</header>
+<main class="layout">
+  <section id="list" class="list" aria-label="Entries" tabindex="-1"></section>
+  <section id="detail" class="detail" aria-label="Entry" tabindex="-1"></section>
+</main>
+<div id="help" class="help" hidden>
+  <h2>Keyboard</h2>
+  <dl>
+    <dt><kbd>/</kbd> or <kbd>Ctrl</kbd> <kbd>K</kbd></dt><dd>Search</dd>
+    <dt><kbd>Esc</kbd></dt><dd>Clear the search, or go back to the list</dd>
+    <dt><kbd>j</kbd> <kbd>k</kbd></dt><dd>Next or previous entry</dd>
+    <dt><kbd>[</kbd> <kbd>]</kbd></dt><dd>Previous or next session tab</dd>
+    <dt><kbd>a</kbd></dt><dd>All sessions</dd>
+    <dt><kbd>?</kbd></dt><dd>Show or hide this</dd>
+  </dl>
+  <p>Search is fuzzy: small typos still match. Put words in quotes for an exact phrase.</p>
+</div>
+<div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+<script src="app.js" defer></script>
+</body>
+</html>

@@ -90,6 +90,14 @@ PATHS=(
   ".claude/system_docs/cycle_back" ".codex/system_docs/cycle_back"
   ".docs/runbooks/development/cycle-back.md"
   ".other-devices/components/cycle-back"
+  # visual-chat-history (the component only; .chat-history/sessions/, .chat-history/exports/ and
+  # the runbook's screenshot folder hold one repo's chat contents and are never listed)
+  ".claude/skills/visual-chat-history" ".codex/skills/visual-chat-history"
+  ".claude/agents/visual-chat-history-agent" ".codex/agents/visual-chat-history-agent"
+  ".claude/commands/visual-chat-history.md" ".codex/commands/visual-chat-history.md"
+  ".claude/system_docs/visual_chat_history" ".codex/system_docs/visual_chat_history"
+  ".docs/runbooks/development/visual-chat-history.md"
+  ".other-devices/components/visual-chat-history"
   "HANDOFF.md" ".gitattributes"
   ".claude/CLAUDE.md" ".codex/CODEX.md" ".codex/AGENTS.md" "CLAUDE.md"
   # sync-component.sh wires hooks into settings.json; without this entry that wiring was never

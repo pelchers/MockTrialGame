@@ -101,6 +101,20 @@ When adding new agents, skills, or system docs to `.claude/` and `.codex/`, also
   runbook, and the `.codex/` mirror of each (the surfacing hook is registered in each target's
   `.claude/settings.json` SessionStart). The parked-topics log `.chat-history/cycle-back.md` stays
   project-local (NOT synced) — only the component travels.
+- **`visual-chat-history` component** (a local web page over `.chat-history/`: a tab per session,
+  sort, filters, fuzzy search, deep links, live updates while you work, one-file HTML export; it
+  only reads the history, uses Node built-ins and needs no install). Sync the whole set:
+  `.claude/skills/visual-chat-history/SKILL.md` + `scripts/viewer.mjs` +
+  `scripts/app/{index.html,app.css,app.js}`, `.claude/agents/visual-chat-history-agent/AGENT.md`,
+  `.claude/commands/visual-chat-history.md`,
+  `.claude/system_docs/visual_chat_history/{README,USAGE_GUIDE,ARCHITECTURE}.md`, the
+  `.docs/runbooks/development/visual-chat-history.md` runbook, the
+  `.other-devices/components/visual-chat-history/` package, and the `.codex/` mirror of each. It
+  needs `chat-history-convention`'s `scripts/split-sessions.mjs` (shared parser and session rule),
+  which travels with that component along with the "Sessions folder" section appended to its
+  SKILL.md. No hook and no settings change. Chat contents, the `.chat-history/sessions/` folder,
+  exported HTML (`.chat-history/exports/`) and the runbook's screenshot folder stay project-local
+  (NOT synced); only the component travels.
 - **`self-improvement-logging` component** (record how the agents actually performed — benefit + bug/gap +
   verified + commit — so future agents compound) — sync the whole set:
   `.claude/skills/self-improvement-logging/SKILL.md`, `.claude/agents/self-improvement-logger-agent/AGENT.md`,

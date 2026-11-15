@@ -60,6 +60,21 @@ FILES=(
   ".codex/hooks/scripts/feature-review-refresh.sh"
   ".codex/system_docs/feature_review/README.md"
   ".codex/system_docs/feature_review/USAGE_GUIDE.md"
+  # visual-chat-history: the viewer reads .chat-history/ and never writes it. Chat contents, the
+  # .chat-history/sessions/ folder and exported HTML are project-local and never listed here.
+  # split-sessions.mjs belongs to chat-history-convention; the viewer imports it.
+  ".claude/skills/chat-history-convention/scripts/split-sessions.mjs" ".codex/skills/chat-history-convention/scripts/split-sessions.mjs"
+  ".claude/skills/visual-chat-history/SKILL.md" ".codex/skills/visual-chat-history/SKILL.md"
+  ".claude/skills/visual-chat-history/scripts/viewer.mjs" ".codex/skills/visual-chat-history/scripts/viewer.mjs"
+  ".claude/skills/visual-chat-history/scripts/app/index.html" ".codex/skills/visual-chat-history/scripts/app/index.html"
+  ".claude/skills/visual-chat-history/scripts/app/app.css" ".codex/skills/visual-chat-history/scripts/app/app.css"
+  ".claude/skills/visual-chat-history/scripts/app/app.js" ".codex/skills/visual-chat-history/scripts/app/app.js"
+  ".claude/agents/visual-chat-history-agent/AGENT.md" ".codex/agents/visual-chat-history-agent/AGENT.md"
+  ".claude/commands/visual-chat-history.md" ".codex/commands/visual-chat-history.md"
+  ".claude/system_docs/visual_chat_history/README.md" ".codex/system_docs/visual_chat_history/README.md"
+  ".claude/system_docs/visual_chat_history/USAGE_GUIDE.md" ".codex/system_docs/visual_chat_history/USAGE_GUIDE.md"
+  ".claude/system_docs/visual_chat_history/ARCHITECTURE.md" ".codex/system_docs/visual_chat_history/ARCHITECTURE.md"
+  ".docs/runbooks/development/visual-chat-history.md"
   # env-vault — the MECHANISM only. Nothing under `.envs/` is ever listed here: that directory
   # holds each repo's own secrets and must never cross repos.
   "scripts/env-sync.ps1"
