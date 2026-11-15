@@ -125,6 +125,7 @@ PATHS=(
   ".docs/runbooks/development/lane-forward-integration.md"
   ".claude/skills/qna-logger" ".codex/skills/qna-logger"
   ".claude/hooks/scripts/chat-history-reminder.sh" ".codex/hooks/scripts/chat-history-reminder.sh"
+  ".claude/hooks/scripts/chat-history-sessions-sync.sh" ".codex/hooks/scripts/chat-history-sessions-sync.sh"
   ".githooks" ".other-devices/components/general-frontend-design"
 )
 

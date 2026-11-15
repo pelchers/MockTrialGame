@@ -43,3 +43,14 @@ scrolling the whole history.
   repos. Only the script and this section travel with the component.
 - To browse the history visually (a tab per session, fuzzy search, filters, live updates while you
   work), use the separate `visual-chat-history` component (`/visual-chat-history start`).
+  work), use the separate `visual-chat-history` component (`/visual-chat-history start`).
+
+### Automatic refresh (hook)
+
+Added 2026-11-15. The step "after each append, refresh the folder" now runs on its own:
+`.claude/hooks/scripts/chat-history-sessions-sync.sh` is registered in `.claude/settings.json`
+on PostToolUse (Edit|Write), Stop and SessionStart. It compares the size and modified time of the
+history files with a stamp under `.git/` and runs `split-sessions.mjs` only when they changed, so
+an agent never needs to load this skill or remember the command just to keep `sessions/`
+current. Running the script by hand still works and gives the same result. Commit `sessions/`
+together with the history change. Turn the hook off with `CHAT_HISTORY_SESSIONS_SYNC=off`.

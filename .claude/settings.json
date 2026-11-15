@@ -86,6 +86,15 @@
             "description": "contributor-conventions: announce safe default push target + PR-only upstream on a repo declared 'contributor' in repo.local.md"
           }
         ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/scripts/chat-history-sessions-sync.sh\"",
+            "description": "chat-history: keep .chat-history/sessions/ in step with user-messages.md (runs split-sessions.mjs only when the history changed)"
+          }
+        ]
       }
     ],
     "PostToolUse": [
@@ -118,6 +127,16 @@
             "description": "feature-user-docs: on an ADR phase being marked COMPLETE, regenerate that feature's path-inventory.md and instruct a refresh of its user-docs/OVERVIEW.md"
           }
         ]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/scripts/chat-history-sessions-sync.sh\"",
+            "description": "chat-history: keep .chat-history/sessions/ in step with user-messages.md (runs split-sessions.mjs only when the history changed)"
+          }
+        ]
       }
     ],
     "SessionEnd": [
@@ -127,6 +146,17 @@
             "type": "command",
             "command": "bash .claude/hooks/scripts/session-winddown.sh",
             "description": "Auto safety-net: snapshot this repo's lane + report stranded component changes"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/scripts/chat-history-sessions-sync.sh\"",
+            "description": "chat-history: keep .chat-history/sessions/ in step with user-messages.md (runs split-sessions.mjs only when the history changed)"
           }
         ]
       }

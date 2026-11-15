@@ -64,6 +64,7 @@ FILES=(
   # .chat-history/sessions/ folder and exported HTML are project-local and never listed here.
   # split-sessions.mjs belongs to chat-history-convention; the viewer imports it.
   ".claude/skills/chat-history-convention/scripts/split-sessions.mjs" ".codex/skills/chat-history-convention/scripts/split-sessions.mjs"
+  ".claude/hooks/scripts/chat-history-sessions-sync.sh" ".codex/hooks/scripts/chat-history-sessions-sync.sh"
   ".claude/skills/visual-chat-history/SKILL.md" ".codex/skills/visual-chat-history/SKILL.md"
   ".claude/skills/visual-chat-history/scripts/viewer.mjs" ".codex/skills/visual-chat-history/scripts/viewer.mjs"
   ".claude/skills/visual-chat-history/scripts/app/index.html" ".codex/skills/visual-chat-history/scripts/app/index.html"
@@ -129,6 +130,9 @@ WANT=[
     ("PostToolUse", "Edit|Write", "component-change-detector.sh", "Flag edited reusable-component files for cross-repo propagation"),
     ("SessionEnd", None, "session-winddown.sh", "Auto safety-net: snapshot this repo's lane + report stranded component changes"),
     ("SessionStart", None, "feature-review-refresh.sh", "Flag FEATURE-REVIEW.md staleness (feature-review)"),
+    ("PostToolUse", "Edit|Write", "chat-history-sessions-sync.sh", "chat-history: keep .chat-history/sessions/ in step with user-messages.md"),
+    ("Stop", None, "chat-history-sessions-sync.sh", "chat-history: keep .chat-history/sessions/ in step with user-messages.md"),
+    ("SessionStart", None, "chat-history-sessions-sync.sh", "chat-history: keep .chat-history/sessions/ in step with user-messages.md"),
 ]
 added=[]
 for evt,matcher,script,desc in WANT:

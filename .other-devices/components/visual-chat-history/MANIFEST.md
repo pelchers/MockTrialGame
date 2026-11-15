@@ -51,7 +51,10 @@ parser and session rule), which is shipped here too.
    and generated HTML stay project-local.
 3. **Master system_docs index** (optional): a `visual_chat_history/` block in
    `.claude/system_docs/README.md` and `.codex/system_docs/README.md`.
-4. No `settings.json` change and no hook.
+4. The viewer adds no hook. The sessions folder it shows is kept current by
+   `chat-history-convention`'s hook `.claude/hooks/scripts/chat-history-sessions-sync.sh` (copy in
+   `artifacts/hooks/`), registered in `.claude/settings.json` on PostToolUse (Edit|Write), Stop and
+   SessionStart (added 2026-11-15).
 
 ## Per-target adaptation
 

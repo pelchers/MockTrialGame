@@ -112,7 +112,11 @@ When adding new agents, skills, or system docs to `.claude/` and `.codex/`, also
   `.other-devices/components/visual-chat-history/` package, and the `.codex/` mirror of each. It
   needs `chat-history-convention`'s `scripts/split-sessions.mjs` (shared parser and session rule),
   which travels with that component along with the "Sessions folder" section appended to its
-  SKILL.md. No hook and no settings change. Chat contents, the `.chat-history/sessions/` folder,
+  SKILL.md. The viewer itself has no hook. The sessions folder is kept current by
+  `chat-history-convention`'s own hook `.claude/hooks/scripts/chat-history-sessions-sync.sh`
+  (+ `.codex/` mirror), registered in each target's `.claude/settings.json` on PostToolUse
+  (Edit|Write), Stop and SessionStart; it runs `split-sessions.mjs` only when the history changed.
+  Chat contents, the `.chat-history/sessions/` folder,
   exported HTML (`.chat-history/exports/`) and the runbook's screenshot folder stay project-local
   (NOT synced); only the component travels.
 - **`self-improvement-logging` component** (record how the agents actually performed — benefit + bug/gap +
