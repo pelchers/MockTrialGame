@@ -38,6 +38,10 @@ This repo uses a multi-style frontend concept ideation system.
 - **Views/surfaces are dynamically discovered** from `.docs/`, `.adr/`, `.ideas/`, `.appdocs/` planning files — never hardcoded. The orchestrator reads the project's PRD + planning docs and builds the surface list per run.
 - Surfaces supported: `website`, `vscode-extension`, `mobile-app`, `browser-extension` (one or more per run; cross-surface passes share visual identity per correlation group)
 - Claude Code agents generate concepts directly (no template scripts)
+- Every pass includes a review Mode switcher (bottom-right by default) with a role picker for
+  each signed-in mode, plus mock sign-in and sign-out; passes open signed out and
+  `?mode=<id>&role=<id>` starts any view in any state
+  (`.claude/skills/general-frontend-design-subagent/references/mode-switcher.md`)
 
 ## Visual/Creative Concept Generation
 This repo also includes a visual/creative concept system for data visualization, animation, and graphic design.

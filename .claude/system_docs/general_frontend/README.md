@@ -59,6 +59,18 @@ The orchestrator assigns unique core flags to each pass before dispatching.
 
 The orchestrator provides thematic search hints (not URLs). The subagent uses WebSearch to find actual reference sites and documents what patterns it adapted from each.
 
+### Review Mode Switcher, Role Picker and Mock Sign-in (default)
+
+Every pass can be seen as each kind of user without a backend. The orchestrator works out the modes
+(every kind of user, signed out and signed in) and the roles inside each signed-in mode from the
+planning files, and writes one table into every README spec. Example from a dealership app: "Dealer
+signed in" with the roles Owner, Manager, Salesperson, Detailer and Photographer. The subagent
+builds a small "Mode" control (default bottom-right, never covering content), a role select for each
+signed-in mode, and mock sign-in, sign-up and sign-out that work the normal way. Passes open signed
+out, and `?mode=<id>&role=<id>` starts any view in any state. The validation script checks it all and
+writes `modeChecks` into `validation/report.playwright.json` plus one screenshot per mode and role in
+`validation/modes/`. Contract: `.claude/skills/general-frontend-design-subagent/references/mode-switcher.md`.
+
 ## Workflow
 
 1. User provides style(s) and number of passes
