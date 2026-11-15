@@ -19,6 +19,7 @@ When adding new agents, skills, or system docs to `.claude/` and `.codex/`, also
 | DualLeads | `C:\Tool\Clients\CC\DualLeads` | Collectible Classics dual-lead (buyer+seller) car-scraping dashboard |
 | HealthApps (umbrella) | `C:\App\HealthApps` | Health-app umbrella directory — sync deferred until user authorizes |
 | LivBeyond | `C:\App\HealthApps\LivBeyond` | Health metrics demo (LivBeyond client work) — sync deferred until user authorizes |
+| CDP | `C:\App\CDP` | Car dealership platform (private, single owner) |
 
 ## What to sync
 
@@ -29,6 +30,15 @@ When adding new agents, skills, or system docs to `.claude/` and `.codex/`, also
 - `.claude/skills/<name>/SKILL.md`
 - `.claude/commands/<name>.md` when a component includes a slash command
 - `.claude/hooks/scripts/<name>.sh` or `.ps1` when a component includes a hook
+- **env-vault component** (cross-device env values) — **REGISTERED 2026-10-14**. Syncs the
+  MECHANISM only: `scripts/env-sync.ps1`, `scripts/env-location-guard.sh`,
+  `scripts/install-git-hooks.sh`, plus the managed `<!-- BEGIN env-vault convention -->` block
+  carried by `ensure_block`. **The vault directory is NEVER synced** — it holds each repo's own
+  secrets and is deliberately absent from both the `sync-component.sh` FILES list and the
+  `sync-flush.sh` PATHS list. **CONDITIONAL on the target remote being PRIVATE and single-owner**:
+  the convention block leads with that gate, and a target that is public, has collaborators, or is
+  a fork must keep env files gitignored instead. Adopting repo runs
+  `bash scripts/install-git-hooks.sh` once, then `.\scripts\env-sync.ps1`.
 - **feature-review component** (root `FEATURE-REVIEW.md` state + review index) — **REGISTERED +
   PROPAGATED 2026-10-14** (from `asus-laptop`/VENGEANCE, the first device with the targets present;
   it was authored 2026-10-13 on `DESKTOP-16O74RE` where no target existed). Now a first-class synced
@@ -74,6 +84,16 @@ When adding new agents, skills, or system docs to `.claude/` and `.codex/`, also
   ONE runbook whose **CONTENT is intentionally synced** across repos (every novel gating-failure lesson
   propagates to all `SYNC-REPOS.md` targets via `/sync-component pr-shepherd` → `/sync-flush`), unlike other
   `.docs/runbooks/**` whose contents stay project-local.
+- **`plain-speech` component** (no AI-speak in any human-facing reply, report, ADR or commit message) —
+  sync the whole set: `.claude/skills/plain-speech-convention/SKILL.md` +
+  `references/chat-tells.md`, `.claude/agents/plain-speech-agent/AGENT.md`,
+  `.claude/commands/plain-speech.md`, `.codex/system_docs/plain_speech/{README,USAGE_GUIDE}.md`,
+  the `.codex/` mirrors, and the root `CLAUDE.md` rule "Explain Like A Person, Not Like A Report".
+  The source catalogue it points at
+  (`.adr/orchestration/f3-ai-articles-seo@luke/08_tone-and-anti-ai-speak/`) is f3 feature work and
+  is **project-local — it does NOT sync**; a repo without it keeps the skill's own eight chat tells
+  and loses only the word/phrase lists. No secrets, no customer data: the component is prose rules.
+
 - **`cycle-back` component** (park a conversation topic; resume it after context compaction) — sync the whole
   set: `.claude/skills/cycle-back/SKILL.md`, `.claude/agents/cycle-back-agent/AGENT.md`,
   `.claude/commands/cycle-back.md`, `.claude/hooks/scripts/cycle-back-surface.sh`,

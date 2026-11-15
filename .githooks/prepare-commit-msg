@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# prepare-commit-msg — clean commit attribution (idempotent, fail-safe). Two steps:
+#   1) STRIP AI co-author / marketing trailers ("Co-Authored-By: Claude…", "Generated with Claude Code").
+#   2) APPEND our "Made-By: pelchers" trailer.
+#
+# Our-side mirror of the upstream FahimCode attribution convention (their .githooks strips Cursor/AI
+# lines + appends "Made-by: FahimCode"). Per user (2026-08-17): commits must NOT carry the Claude
+# co-author line — this hook enforces that even if a tool adds it.
+#
+# TRACKED SOURCE: .githooks/prepare-commit-msg — synced to all SYNC-REPOS (see SYNC-REPOS.md).
+# INSTALL per clone (preserves any existing .git/hooks/* such as the branched-logs post-merge):
+#   cp .githooks/prepare-commit-msg .git/hooks/prepare-commit-msg && chmod +x .git/hooks/prepare-commit-msg
+# Do NOT `git config core.hooksPath .githooks` — that would bypass .git/hooks/post-merge. Install by copy.
+#
+# NOTE: for UPSTREAM promotion we also strip AI co-author lines (pre-pr-checklist §7); "Made-By: pelchers"
+# is our LOCAL attribution — Fahim's repo owns its own "Made-by: FahimCode".
+
+MSG_FILE="$1"
+SRC="${2:-}"
+
+# Only stamp normal + template commits; skip merge/squash auto-messages.
+case "$SRC" in
+  merge|squash) exit 0 ;;
+esac
+
+# 1) STRIP AI co-author + marketing lines (fail-safe: on error, leave the message untouched).
+if [ -f "$MSG_FILE" ]; then
+  tmp="$MSG_FILE.attr.$$"
+  if grep -viE '^Co-Authored-By:[[:space:]]*Claude|^Co-authored-by:[[:space:]]*Claude|Generated with .*Claude Code|🤖[[:space:]]*Generated with' "$MSG_FILE" > "$tmp" 2>/dev/null; then
+    mv "$tmp" "$MSG_FILE"
+  else
+    rm -f "$tmp"
+  fi
+fi
+
+# 2) APPEND our attribution if absent (idempotent).
+if ! grep -qiE '^Made-By:' "$MSG_FILE" 2>/dev/null; then
+  git interpret-trailers --trailer "Made-By: pelchers" --in-place "$MSG_FILE" 2>/dev/null || true
+fi
+exit 0

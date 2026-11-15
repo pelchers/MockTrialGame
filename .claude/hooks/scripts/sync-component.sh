@@ -60,6 +60,11 @@ FILES=(
   ".codex/hooks/scripts/feature-review-refresh.sh"
   ".codex/system_docs/feature_review/README.md"
   ".codex/system_docs/feature_review/USAGE_GUIDE.md"
+  # env-vault — the MECHANISM only. Nothing under `.envs/` is ever listed here: that directory
+  # holds each repo's own secrets and must never cross repos.
+  "scripts/env-sync.ps1"
+  "scripts/env-location-guard.sh"
+  "scripts/install-git-hooks.sh"
 )
 copied=0
 for f in "${FILES[@]}"; do
@@ -140,6 +145,7 @@ ensure_block() {
 for f in "$TARGET/.claude/CLAUDE.md" "$TARGET/.codex/CODEX.md" "$TARGET/.codex/AGENTS.md" "$TARGET/CLAUDE.md"; do
   ensure_block "$f" "device-sync-and-handoff convention" "$SRC/.claude/CLAUDE.md"
   ensure_block "$f" "feature-review convention" "$SRC/.claude/CLAUDE.md"
+  ensure_block "$f" "env-vault convention" "$SRC/.claude/CLAUDE.md"
 done
 
 log "DONE (copy-only — run sync-flush.sh to commit+push component paths). device.local.md untouched."

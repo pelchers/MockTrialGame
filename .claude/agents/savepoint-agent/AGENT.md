@@ -32,3 +32,9 @@ Specialist for milestone savepoint branch workflow.
 2. Ensure target commit exists on current branch.
 3. Create and push savepoint branch with naming convention.
 4. Switch back to original branch and confirm status.
+
+## Remote Push Safety — Collectible Classics (Required)
+
+- Savepoint branches are pushed ONLY to our working repo **`https://github.com/pelchers/CC-Local.git`**.
+  **NEVER push to the upstream `fmchisti/collectibleclassics` remote** unless the user explicitly directs
+  it in that same message. See the `remote-push-safety` block in `CLAUDE.md`.

@@ -17,6 +17,10 @@
 #
 # Quiet by design: prints NOTHING when the index looks current, when the file is absent, or on any
 # error. Never fails a session.
+#
+# ONE EXCEPTION, deliberately: if the header date cannot be parsed, it SAYS SO. A check that silently
+# stops checking is worse than no check. This hook spent two days unable to find the date (it matched
+# "Last refreshed:" while the file said "**Updated**") and reported clean the whole time.
 #   Disable with FEATURE_REVIEW_REFRESH=off.
 set -uo pipefail
 [ "${FEATURE_REVIEW_REFRESH:-on}" = "off" ] && exit 0
@@ -48,9 +52,21 @@ if [ "${FEATURE_REVIEW_HOOK_NET:-off}" = "on" ] && command -v gh >/dev/null 2>&1
 fi
 
 # ── 2. Feature work landed since the index was last refreshed ───────────────────────────────────
-# "Last refreshed:** YYYY-MM-DD" in the header.
-refreshed="$(grep -m1 -oE 'Last refreshed:\*\* [0-9]{4}-[0-9]{2}-[0-9]{2}' "$FILE" 2>/dev/null \
-             | grep -oE '[0-9]{4}-[0-9]{2}-[0-9]{2}' || true)"
+# The header date. Matched LOOSELY on purpose: this hook previously grepped only for
+# "Last refreshed:** YYYY-MM-DD" while the file's header actually reads "**Updated** YYYY-MM-DD",
+# so the date was never found, this whole check was skipped on every run, and the hook reported
+# nothing no matter how stale the index got. Accept any of the header spellings, then take the
+# first ISO date on that line.
+refreshed="$(grep -m1 -iE '^\*\*(Updated|Last refreshed)|Last refreshed:' "$FILE" 2>/dev/null \
+             | grep -m1 -oE '[0-9]{4}-[0-9]{2}-[0-9]{2}' || true)"
+
+# A check that cannot fail is worse than no check — it manufactures confidence. If the header date
+# cannot be parsed at all, the hook must say so rather than go quiet: that silence is exactly what
+# hid the bug above. Reported as a reason, so it surfaces in the same banner.
+if [ -z "$refreshed" ]; then
+  reasons+=("cannot read a date from the FEATURE-REVIEW.md header — staleness check DISABLED (expected '**Updated** YYYY-MM-DD')")
+fi
+
 if [ -n "$refreshed" ]; then
   # Newest commit date touching the product subtree.
   last_cc="$(git -C "$ROOT" log -1 --format=%ad --date=short -- CC/ 2>/dev/null || true)"

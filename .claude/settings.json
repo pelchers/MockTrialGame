@@ -20,6 +20,115 @@
             "description": "Block edits to sensitive files"
           }
         ]
+      },
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/scripts/contributor-push-guard.sh\"",
+            "description": "contributor-conventions: fail-open guard — block accidental git push to a contributor repo's declared upstream (repo.local.md); CONTRIBUTOR_PUSH_OK=1 to authorize"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/scripts/device-sync-check.sh",
+            "description": "Device + branch + cross-device sync status (device-branch-routing / device-sync-protocol)"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/scripts/feature-review-refresh.sh",
+            "description": "Flag FEATURE-REVIEW.md staleness (feature-review)"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/scripts/cycle-back-surface.sh\"",
+            "description": "cycle-back: surface OPEN/BLOCKED parked topics from .chat-history/cycle-back.md so deferred threads survive context compaction"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/scripts/self-improvement-surface.sh\"",
+            "description": "self-improvement: surface that .self-improving-ai/ logging is active + remind to record subagent outcomes (benefit/bug/verified/commit)"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/scripts/feature-user-docs-detect.sh\" --session-scan",
+            "description": "feature-user-docs: report features with completed ADR phases but a missing or stale user-docs/ reading map"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/scripts/contributor-repo-check.sh\"",
+            "description": "contributor-conventions: announce safe default push target + PR-only upstream on a repo declared 'contributor' in repo.local.md"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/scripts/component-change-detector.sh",
+            "description": "Flag edited reusable-component files for cross-repo propagation"
+          }
+        ]
+      },
+      {
+        "matcher": "Task|Agent",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/scripts/self-improvement-log-reminder.sh\"",
+            "description": "self-improvement: after a subagent (Task) finishes, nudge logging its outcome to .self-improving-ai/"
+          }
+        ]
+      },
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$CLAUDE_PROJECT_DIR/.claude/hooks/scripts/feature-user-docs-detect.sh\"",
+            "description": "feature-user-docs: on an ADR phase being marked COMPLETE, regenerate that feature's path-inventory.md and instruct a refresh of its user-docs/OVERVIEW.md"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash .claude/hooks/scripts/session-winddown.sh",
+            "description": "Auto safety-net: snapshot this repo's lane + report stranded component changes"
+          }
+        ]
       }
     ]
   },

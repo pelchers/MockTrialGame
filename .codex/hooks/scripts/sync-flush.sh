@@ -33,10 +33,14 @@ TARGETS=(
   "C:/Tool/Clients/CC/DualLeads"
   "C:/App/HealthApps"
   "C:/App/HealthApps/LivBeyond"
+  "C:/App/CDP"
 )
 
 # --- ONLY these paths are ever committed (the reusable-component surface) --------
 PATHS=(
+  # env-vault: the MECHANISM only. The vault directory itself is deliberately ABSENT from
+  # this list -- it holds each repo's own secrets and must never be pushed across repos.
+  "scripts/env-sync.ps1" "scripts/env-location-guard.sh" "scripts/install-git-hooks.sh"
   ".claude/skills/device-sync-protocol" ".codex/skills/device-sync-protocol"
   ".claude/skills/device-branch-routing" ".codex/skills/device-branch-routing"
   ".claude/agents/device-sync-agent" ".codex/agents/device-sync-agent"
@@ -74,6 +78,11 @@ PATHS=(
   ".docs/runbooks/development/pr-shepherd.md"
   ".docs/runbooks/development/pre-pr-learned-checks.md"
   ".other-devices/components/pr-shepherd"
+  ".claude/skills/feature-review" ".codex/skills/feature-review"
+  ".claude/agents/feature-review-agent" ".codex/agents/feature-review-agent"
+  ".claude/commands/feature-review.md" ".codex/commands/feature-review.md"
+  ".claude/hooks/scripts/feature-review-refresh.sh" ".codex/hooks/scripts/feature-review-refresh.sh"
+  ".codex/system_docs/feature_review"
   ".claude/skills/cycle-back" ".codex/skills/cycle-back"
   ".claude/agents/cycle-back-agent" ".codex/agents/cycle-back-agent"
   ".claude/commands/cycle-back.md" ".codex/commands/cycle-back.md"
@@ -83,6 +92,32 @@ PATHS=(
   ".other-devices/components/cycle-back"
   "HANDOFF.md" ".gitattributes"
   ".claude/CLAUDE.md" ".codex/CODEX.md" ".codex/AGENTS.md" "CLAUDE.md"
+  # sync-component.sh wires hooks into settings.json; without this entry that wiring was never
+  # committed and sat uncommitted in every target (found 2026-11-15).
+  ".claude/settings.json"
+  ".claude/skills/plain-speech-convention" ".codex/skills/plain-speech-convention"
+  ".claude/agents/plain-speech-agent" ".codex/agents/plain-speech-agent"
+  ".claude/commands/plain-speech.md" ".codex/commands/plain-speech.md"
+  ".claude/system_docs/plain_speech" ".codex/system_docs/plain_speech"
+  ".claude/skills/self-improvement-logging" ".codex/skills/self-improvement-logging"
+  ".claude/agents/self-improvement-logger-agent" ".codex/agents/self-improvement-logger-agent"
+  ".claude/commands/log-improvement.md" ".codex/commands/log-improvement.md"
+  ".claude/hooks/scripts/self-improvement-surface.sh" ".codex/hooks/scripts/self-improvement-surface.sh"
+  ".claude/hooks/scripts/self-improvement-log-reminder.sh" ".codex/hooks/scripts/self-improvement-log-reminder.sh"
+  ".claude/system_docs/self_improvement" ".codex/system_docs/self_improvement"
+  ".claude/skills/feature-user-docs" ".codex/skills/feature-user-docs"
+  ".claude/agents/feature-user-docs-agent" ".codex/agents/feature-user-docs-agent" ".codex/agents/feature-user-docs-agent.md"
+  ".claude/commands/feature-user-docs.md" ".codex/commands/feature-user-docs.md"
+  ".claude/hooks/scripts/feature-user-docs-detect.sh" ".codex/hooks/scripts/feature-user-docs-detect.sh"
+  ".claude/system_docs/feature_user_docs" ".codex/system_docs/feature_user_docs"
+  ".other-devices/components/contributor-conventions" "repo.local.md.template"
+  ".claude/hooks/scripts/contributor-push-guard.sh" ".codex/hooks/scripts/contributor-push-guard.sh"
+  ".claude/hooks/scripts/contributor-repo-check.sh" ".codex/hooks/scripts/contributor-repo-check.sh"
+  ".docs/runbooks/development/contributor-conventions.md" ".docs/runbooks/development/pre-pr-checklist.md"
+  ".docs/runbooks/development/lane-forward-integration.md"
+  ".claude/skills/qna-logger" ".codex/skills/qna-logger"
+  ".claude/hooks/scripts/chat-history-reminder.sh" ".codex/hooks/scripts/chat-history-reminder.sh"
+  ".githooks" ".other-devices/components/general-frontend-design"
 )
 
 declare -A seen_root

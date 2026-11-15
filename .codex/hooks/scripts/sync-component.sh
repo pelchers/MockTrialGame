@@ -43,6 +43,28 @@ FILES=(
   ".docs/runbooks/development/multi-device-and-agent-contract.md"
   "multi-device-and-agent-contract.md" "device.local.example.md"
   "SYNC-REPOS.md" "sync-repos-asus-laptop.md"
+  ".claude/skills/pr-shepherd/SKILL.md" ".codex/skills/pr-shepherd/SKILL.md"
+  ".claude/agents/pr-shepherd-agent/AGENT.md" ".codex/agents/pr-shepherd-agent/AGENT.md"
+  ".claude/commands/pr-watch.md" ".codex/commands/pr-watch.md"
+  ".claude/system_docs/pr_shepherd/README.md" ".codex/system_docs/pr_shepherd/README.md"
+  ".claude/system_docs/pr_shepherd/USAGE_GUIDE.md" ".codex/system_docs/pr_shepherd/USAGE_GUIDE.md"
+  ".docs/runbooks/development/pr-shepherd.md"
+  ".docs/runbooks/development/pre-pr-learned-checks.md"
+  ".claude/skills/feature-review/SKILL.md"
+  ".claude/agents/feature-review-agent/AGENT.md"
+  ".claude/commands/feature-review.md"
+  ".claude/hooks/scripts/feature-review-refresh.sh"
+  ".codex/skills/feature-review/SKILL.md"
+  ".codex/agents/feature-review-agent/AGENT.md"
+  ".codex/commands/feature-review.md"
+  ".codex/hooks/scripts/feature-review-refresh.sh"
+  ".codex/system_docs/feature_review/README.md"
+  ".codex/system_docs/feature_review/USAGE_GUIDE.md"
+  # env-vault — the MECHANISM only. Nothing under `.envs/` is ever listed here: that directory
+  # holds each repo's own secrets and must never cross repos.
+  "scripts/env-sync.ps1"
+  "scripts/env-location-guard.sh"
+  "scripts/install-git-hooks.sh"
 )
 copied=0
 for f in "${FILES[@]}"; do
@@ -91,6 +113,7 @@ WANT=[
     ("SessionStart", None, "device-sync-check.sh", "Device + branch + cross-device sync status (device-sync-protocol)"),
     ("PostToolUse", "Edit|Write", "component-change-detector.sh", "Flag edited reusable-component files for cross-repo propagation"),
     ("SessionEnd", None, "session-winddown.sh", "Auto safety-net: snapshot this repo's lane + report stranded component changes"),
+    ("SessionStart", None, "feature-review-refresh.sh", "Flag FEATURE-REVIEW.md staleness (feature-review)"),
 ]
 added=[]
 for evt,matcher,script,desc in WANT:
@@ -121,6 +144,8 @@ ensure_block() {
 }
 for f in "$TARGET/.claude/CLAUDE.md" "$TARGET/.codex/CODEX.md" "$TARGET/.codex/AGENTS.md" "$TARGET/CLAUDE.md"; do
   ensure_block "$f" "device-sync-and-handoff convention" "$SRC/.claude/CLAUDE.md"
+  ensure_block "$f" "feature-review convention" "$SRC/.claude/CLAUDE.md"
+  ensure_block "$f" "env-vault convention" "$SRC/.claude/CLAUDE.md"
 done
 
 log "DONE (copy-only — run sync-flush.sh to commit+push component paths). device.local.md untouched."
