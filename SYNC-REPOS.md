@@ -20,6 +20,7 @@ When adding new agents, skills, or system docs to `.claude/` and `.codex/`, also
 | HealthApps (umbrella) | `C:\App\HealthApps` | Health-app umbrella directory — sync deferred until user authorizes |
 | LivBeyond | `C:\App\HealthApps\LivBeyond` | Health metrics demo (LivBeyond client work) — sync deferred until user authorizes |
 | CDP | `C:\App\CDP` | Car dealership platform (private, single owner) |
+| CSP Seller-Pays | `C:\App\CSP\CSPSP` | OneStop classic-car listings, Seller-Pays model (private, single owner) |
 
 ## What to sync
 

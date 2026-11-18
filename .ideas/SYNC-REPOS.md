@@ -16,6 +16,7 @@ When adding new agents, skills, or system docs to `.claude/` and `.codex/`, and 
 | Dispatch Template | `C:\Dispatch\Template\All` | Dispatch template — all agents/skills/system_docs |
 | Brand-MarTech | `C:\App\Portfolios\Brand-MarTech` | Umbrella marketing portfolio (core site) |
 | CDP | `C:\App\CDP` | Car dealership platform (private, single owner) |
+| CSP Seller-Pays | `C:\App\CSP\CSPSP` | OneStop classic-car listings, Seller-Pays model (private, single owner) |
 
 ## What to sync
 

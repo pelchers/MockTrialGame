@@ -34,6 +34,7 @@ TARGETS=(
   "C:/App/HealthApps"
   "C:/App/HealthApps/LivBeyond"
   "C:/App/CDP"
+  "C:/App/CSP/CSPSP"
 )
 
 # --- ONLY these paths are ever committed (the reusable-component surface) --------

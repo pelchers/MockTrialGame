@@ -21,7 +21,7 @@ target's own `device.local.md` or project app files.
             "C:/Extensions/Markdown Mermaid Editor" "C:/coding/apps/campus" \
             "C:/App/Portfolios/Restaurant-MarTech" "C:/App/Portfolios/Brand-MarTech" \
             "C:/Tool/OutreachAI" "C:/Tool/Clients/CC/DualLeads" "C:/App/HealthApps" "C:/App/HealthApps/LivBeyond" \
-            "C:/App/CDP"; do
+            "C:/App/CDP" "C:/App/CSP/CSPSP"; do
      bash .claude/hooks/scripts/sync-component.sh "$t" "$(basename "$t")"
    done
    ```
